@@ -11,13 +11,17 @@
 ## Env checklist
 
 - `DATABASE_URL` is set
+- `DATABASE_URL` is set on Vercel
 - `DATABASE_URL` uses the Neon pooled connection string with `-pooler`
 - `DATABASE_URL` includes `sslmode=require`
 - `DATABASE_URL_UNPOOLED` is set
+- `DATABASE_URL_UNPOOLED` is set on Vercel
 - `DATABASE_URL_UNPOOLED` uses the Neon direct connection string without `-pooler`
 - `DATABASE_URL_UNPOOLED` includes `sslmode=require`
 - `NEXT_PUBLIC_APP_URL` is set to the production origin, for example `https://your-app.vercel.app`
+- `NEXT_PUBLIC_APP_URL` is set to the Vercel domain or custom domain
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` is set
+- Clerk keys are set on Vercel
 - `CLERK_SECRET_KEY` is set
 - Clerk keys are live production keys, not `pk_test_` or `sk_test_`
 - Clerk route env vars are set:
@@ -67,6 +71,7 @@ npx prisma migrate deploy
 - No `prisma migrate dev` command is run in Vercel
 - Production migrations are run separately with `prisma migrate deploy`
 - Production domain is known and reflected in `NEXT_PUBLIC_APP_URL`
+- Redeploy after any environment variable changes
 
 ## Post-deploy smoke test checklist
 

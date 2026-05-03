@@ -51,7 +51,7 @@ npm install
 2. Copy environment variables:
 
 ```bash
-cp .env.example .env.local
+cp .env.local.example .env.local
 ```
 
 3. Add your PostgreSQL connection string and Clerk keys to `.env.local`.
@@ -62,6 +62,35 @@ For Neon or Vercel Postgres:
 - `DATABASE_URL_UNPOOLED` should use the Neon direct connection string without `-pooler` and `sslmode=require`.
 
 For local development, Clerk test keys are expected and will show a browser warning from Clerk. That warning is normal in development. Before deploying, replace `pk_test_...` and `sk_test_...` with Clerk live production keys.
+
+## Environment variables
+
+Use the example files in the repo as safe templates:
+
+- `.env.local.example` for local development
+- `.env.vercel.example` for Vercel deployment
+
+Copy the local template like this:
+
+```bash
+cp .env.local.example .env.local
+```
+
+For Vercel, either copy values manually from `.env.vercel.example` into the Vercel dashboard or use it as the source template for bulk import.
+
+Do not commit real `.env`, `.env.local`, `.env.production`, or `.env.vercel` files with live secrets.
+
+| Variable | Required | Exposure | Purpose |
+| --- | --- | --- | --- |
+| `DATABASE_URL` | Yes | Server-only | Pooled Neon/Vercel connection string for application runtime |
+| `DATABASE_URL_UNPOOLED` | Yes | Server-only | Direct/unpooled connection string for Prisma migrations |
+| `CLERK_SECRET_KEY` | Yes | Server-only | Clerk backend secret |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Yes | Public | Clerk frontend publishable key |
+| `NEXT_PUBLIC_APP_URL` | Yes | Public | Local origin or deployed Vercel/custom domain |
+| `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | Yes | Public | Sign-in route |
+| `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | Yes | Public | Sign-up route |
+| `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` | Yes | Public | Post-login redirect |
+| `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` | Yes | Public | Post-signup redirect |
 
 4. Generate Prisma client and create or apply local migrations:
 
@@ -143,6 +172,8 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 ```
+
+You can use `.env.vercel.example` as the copy/paste template for this step.
 
 5. Run production migrations against the Neon production database.
 

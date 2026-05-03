@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { DM_Sans, Space_Grotesk } from "next/font/google";
+import { validateRuntimeEnv } from "@/lib/env";
 import "./globals.css";
 
 const bodyFont = DM_Sans({
@@ -23,12 +24,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  validateRuntimeEnv();
+
   return (
     <html
       lang="en"
       className={`${bodyFont.variable} ${displayFont.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full bg-[var(--background)] text-[var(--foreground)]">
+      <body
+        className="min-h-full bg-[var(--background)] text-[var(--foreground)]"
+        suppressHydrationWarning
+      >
         <ClerkProvider>{children}</ClerkProvider>
       </body>
     </html>

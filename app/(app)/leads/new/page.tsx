@@ -12,7 +12,7 @@ export default async function NewLeadPage() {
       <PageHeader
         eyebrow="Leads"
         title="Add a new lead"
-        description="Capture contact details, campaign attribution, and the next follow-up step in one form."
+        description="Capture contact details, lead source, and the next follow-up step so your team knows exactly what to do next."
       />
       <LeadForm campaigns={campaigns.map((campaign) => ({ id: campaign.id, name: campaign.name }))} />
     </div>

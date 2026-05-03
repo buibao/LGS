@@ -15,7 +15,7 @@ export default async function LeadsPage() {
       <PageHeader
         eyebrow="Leads"
         title="Lead pipeline"
-        description="Search, filter, and manage every incoming lead with status tracking and follow-up visibility."
+        description="Search, filter, and manage every incoming lead with clear follow-up visibility and booking progress."
         action={
           <Link href="/leads/new">
             <Button>Add Lead</Button>
@@ -35,12 +35,14 @@ export default async function LeadsPage() {
             followUpAt: lead.followUpAt?.toISOString() ?? null,
             createdAt: lead.createdAt.toISOString(),
             campaignName: lead.campaign?.name ?? null,
+            serviceInterest: lead.serviceInterest ?? null,
           }))}
         />
       ) : (
         <EmptyState
+          eyebrow="Leads"
           title="No leads yet"
-          description="Add your first lead to start tracking sources, follow-up actions, and conversion progress."
+          description="No leads yet. Add your first lead to start tracking follow-ups and bookings."
           action={
             <Link href="/leads/new">
               <Button>Add Lead</Button>

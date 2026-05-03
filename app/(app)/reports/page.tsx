@@ -1,7 +1,7 @@
+import { ReportCard } from "@/components/reports/report-card";
 import { PageHeader } from "@/components/ui/page-header";
 import { getCurrentWorkspace } from "@/lib/auth";
 import { generateWeeklyLeadReport } from "@/lib/report-generator";
-import { ReportCard } from "@/components/reports/report-card";
 
 export default async function ReportsPage() {
   const { organization } = await getCurrentWorkspace();
@@ -11,8 +11,8 @@ export default async function ReportsPage() {
     <div className="space-y-8">
       <PageHeader
         eyebrow="Reports"
-        title="Weekly AI-style summary"
-        description="This MVP uses deterministic local logic today, with a clear path to future OpenAI or Vercel AI SDK generated reporting."
+        title="Weekly Lead Performance Report"
+        description="Clear business reporting for lead volume, follow-up risk, and booking performance, even before AI-generated insights are enabled."
       />
       <ReportCard {...reportData} />
     </div>

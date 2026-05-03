@@ -1,22 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f2ea;
-  --foreground: #1f2937;
-  --card: #fffdf8;
-  --card-foreground: #1f2937;
-  --muted: #ece4d8;
-  --muted-foreground: #6b7280;
-  --border: #ded4c3;
+  --background: #f5f7fb;
+  --foreground: #142132;
+  --card: #ffffff;
+  --card-foreground: #142132;
+  --muted: #eef2f7;
+  --muted-foreground: #5f6f82;
+  --border: #dbe3ee;
   --input: #ffffff;
-  --primary: #0f766e;
-  --primary-foreground: #f9fffd;
-  --secondary: #f3ede3;
-  --secondary-foreground: #334155;
-  --accent: #f97316;
-  --accent-foreground: #fff7ed;
+  --primary: #0f5f73;
+  --primary-foreground: #f8fdff;
+  --secondary: #f5f8fc;
+  --secondary-foreground: #324255;
+  --accent: #d97706;
+  --accent-foreground: #fffaf2;
   --success: #166534;
   --danger: #b91c1c;
+  --ring: rgba(15, 95, 115, 0.22);
+  --sidebar: #f8fbff;
+  --sidebar-foreground: #142132;
 }
 
 @theme inline {
@@ -38,10 +41,15 @@
   --font-display: var(--font-display);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
 * {
@@ -61,7 +69,26 @@ h4 {
 
 .dashboard-shell {
   background-image:
-    radial-gradient(circle at top left, rgba(249, 115, 22, 0.14), transparent 28%),
-    radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 26%),
-    linear-gradient(180deg, rgba(255, 253, 248, 0.7), rgba(246, 242, 234, 0.9));
+    radial-gradient(circle at top left, rgba(15, 95, 115, 0.05), transparent 24%),
+    radial-gradient(circle at top right, rgba(217, 119, 6, 0.06), transparent 18%),
+    linear-gradient(180deg, #f7fafe 0%, #f3f6fb 100%);
+}
+
+.surface-panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.95));
+}
+
+.soft-grid {
+  background-image:
+    linear-gradient(rgba(219, 227, 238, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(219, 227, 238, 0.35) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: none;
 }

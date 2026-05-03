@@ -51,7 +51,7 @@ export function LeadDetailForm({
   return (
     <div className="space-y-4">
       <label className="space-y-2">
-        <span className="text-sm font-medium text-slate-700">Status</span>
+        <span className="text-sm font-medium text-slate-700">Lead status</span>
         <Select value={status} onChange={(event) => setStatus(event.target.value as LeadStatus)}>
           {Object.entries(leadStatusLabels).map(([value, label]) => (
             <option key={value} value={value}>
@@ -61,15 +61,17 @@ export function LeadDetailForm({
         </Select>
       </label>
       <label className="space-y-2">
-        <span className="text-sm font-medium text-slate-700">Follow-up at</span>
+        <span className="text-sm font-medium text-slate-700">Next follow-up</span>
         <Input type="datetime-local" value={followUpAt} onChange={(event) => setFollowUpAt(event.target.value)} />
+        <span className="text-xs leading-6 text-slate-500">Set the next promised contact so it shows up in the follow-up queue.</span>
       </label>
       <label className="space-y-2">
         <span className="text-sm font-medium text-slate-700">Notes</span>
         <Textarea value={notes} onChange={(event) => setNotes(event.target.value)} />
+        <span className="text-xs leading-6 text-slate-500">Keep notes practical: customer intent, timing, objections, and what to do next.</span>
       </label>
       {message ? <p className="text-sm text-[var(--primary)]">{message}</p> : null}
-      <Button onClick={save} disabled={saving}>
+      <Button className="w-full sm:w-auto" onClick={save} disabled={saving}>
         {saving ? "Updating..." : "Save changes"}
       </Button>
     </div>

@@ -16,6 +16,37 @@ export async function getDashboardRecentLeads(organizationId: string) {
   });
 }
 
+export async function getAttentionSummary(organizationId: string) {
+  const pendingLead = await db.lead.findFirst({
+    where: {
+      organizationId,
+      status: { in: [LeadStatus.NEW, LeadStatus.CONTACTED, LeadStatus.INTERESTED] },
+      followUpAt: { lte: new Date() },
+    },
+    orderBy: { followUpAt: "asc" },
+    select: {
+      id: true,
+      fullName: true,
+      followUpAt: true,
+      status: true,
+      sourceType: true,
+    },
+  });
+
+  const followUpNeeded = await db.lead.count({
+    where: {
+      organizationId,
+      status: { in: [LeadStatus.NEW, LeadStatus.CONTACTED, LeadStatus.INTERESTED] },
+      followUpAt: { lte: new Date() },
+    },
+  });
+
+  return {
+    followUpNeeded,
+    oldestPendingLead: pendingLead,
+  };
+}
+
 export async function getLeadsForOrganization(organizationId: string) {
   return db.lead.findMany({
     where: { organizationId },

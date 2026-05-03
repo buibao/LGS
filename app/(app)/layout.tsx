@@ -25,12 +25,12 @@ export default async function AppLayout({
   const { organization, membership } = workspace;
 
   return (
-    <div className="dashboard-shell min-h-screen p-4 md:p-6">
-      <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-[288px_minmax(0,1fr)]">
+    <div className="dashboard-shell min-h-screen p-3 md:p-6">
+      <div className="mx-auto grid max-w-[1480px] gap-4 md:grid-cols-[288px_minmax(0,1fr)] md:gap-5">
         <AppSidebar organizationName={organization.name} />
         <div className="space-y-4">
           <Topbar organizationName={organization.name} role={membership.role} />
-          <main className="rounded-[32px] border bg-white/72 p-5 shadow-[0_24px_80px_-36px_rgba(15,23,42,0.32)] backdrop-blur md:p-8">
+          <main className="surface-panel rounded-[32px] border p-5 shadow-[0_24px_80px_-36px_rgba(15,23,42,0.16)] md:p-8">
             {children}
           </main>
         </div>

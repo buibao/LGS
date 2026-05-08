@@ -21,7 +21,8 @@ export function PageHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-4 md:flex-row md:items-end md:justify-between", className)}>
+    <div className={cn("rounded-[28px] border border-[var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,251,255,0.9))] p-5 shadow-[0_20px_45px_-36px_rgba(15,23,42,0.18)] md:p-6", className)}>
+      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
       <div className="min-w-0 space-y-3">
         {breadcrumbs?.length ? (
           <nav className="flex flex-wrap items-center gap-1 text-xs font-medium text-[var(--muted-foreground)]" aria-label="Breadcrumb">
@@ -41,12 +42,13 @@ export function PageHeader({
         ) : null}
 
         <div className="space-y-1.5">
-          <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-950 md:text-[2rem]">{title}</h1>
-          {description ? <p className="max-w-3xl text-sm leading-7 text-[var(--muted-foreground)]">{description}</p> : null}
+          <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-950 md:text-[2.15rem]">{title}</h1>
+          {description ? <p className="max-w-3xl text-sm leading-7 text-[var(--muted-foreground)] md:text-[0.95rem]">{description}</p> : null}
         </div>
       </div>
 
       {actions ? <div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center">{actions}</div> : null}
+      </div>
     </div>
   );
 }

@@ -114,6 +114,19 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         header: tLabels("created"),
         cell: ({ row }) => formatDate(row.original.createdAt),
       },
+      {
+        id: "actions",
+        header: "",
+        cell: ({ row }) => (
+          <div className="flex justify-end">
+            <Link href={`/leads/${row.original.id}`}>
+              <Button size="sm" variant="outline">
+                {tLeadTable("openLead")}
+              </Button>
+            </Link>
+          </div>
+        ),
+      },
     ],
     [tLabels, tLeadTable],
   );

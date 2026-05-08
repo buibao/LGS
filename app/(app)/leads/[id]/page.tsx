@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
-import { CalendarClock, ClipboardList, FileText, PhoneCall } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { CalendarClock, ClipboardList, FileText, PhoneCall, Sparkles, UserRound } from "lucide-react";
 import { LeadDetailForm } from "@/components/leads/lead-detail-form";
+import { MetricCard } from "@/components/design-system/metric-card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionCard } from "@/components/ui/section-card";
@@ -13,6 +16,10 @@ export default async function LeadDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const tPage = await getTranslations("LeadDetailPage");
+  const tLabels = await getTranslations("Labels");
+  const tStatus = await getTranslations("LeadStatus");
+  const tSource = await getTranslations("LeadSource");
   const [{ organization }, { id }] = await Promise.all([getCurrentWorkspace(), params]);
   const lead = await getLeadById(organization.id, id);
 
@@ -20,37 +27,54 @@ export default async function LeadDetailPage({
     notFound();
   }
 
+  const suggestedAction =
+    lead.status === "NEW"
+      ? tPage("suggestedActionNew")
+      : lead.followUpAt
+        ? tPage("suggestedActionFollowUp")
+        : tPage("suggestedActionGeneral");
+
   return (
     <div className="space-y-8">
       <PageHeader
-        eyebrow="Lead detail"
+        eyebrow={tPage("eyebrow")}
         title={lead.fullName}
-        description="See who this lead is, what they want, where they came from, and what the team should do next."
+        description={tPage("description")}
+        action={
+          <div className="flex flex-wrap items-center gap-2">
+            <LeadStatusBadge status={lead.status} />
+            <SourceTypeBadge sourceType={lead.sourceType} />
+          </div>
+        }
       />
 
       <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
         <SectionCard
-          title="Lead profile summary"
-          description={`Captured on ${formatDate(lead.createdAt)}. Use this card to understand the customer context before reaching out.`}
+          title={tPage("summaryTitle")}
+          description={tPage("summaryDescription", { date: formatDate(lead.createdAt) })}
         >
-          <div className="grid gap-4 md:grid-cols-2">
-            <SummaryTile label="Lead status">
-              <LeadStatusBadge status={lead.status} />
-            </SummaryTile>
-            <SummaryTile label="Lead source">
-              <SourceTypeBadge sourceType={lead.sourceType} />
-            </SummaryTile>
-            <DetailItem label="Service interest" value={lead.serviceInterest ?? "General inquiry"} />
-            <DetailItem label="Campaign" value={lead.campaign?.name ?? "Not linked to a campaign"} />
-            <DetailItem label="Created" value={formatDateTime(lead.createdAt)} />
-            <DetailItem label="Last updated" value={timeAgo(lead.updatedAt)} />
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <MetricCard title={tLabels("status")} value={tStatus(lead.status)} description={tPage("statusHint")} />
+            <MetricCard title={tLabels("source")} value={tSource(lead.sourceType)} description={tPage("sourceHint")} />
+            <MetricCard title={tPage("serviceInterest")} value={lead.serviceInterest ?? tPage("generalInquiry")} description={tPage("serviceHint")} />
+          </div>
+
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <DetailTile label={tLabels("campaign")} value={lead.campaign?.name ?? tPage("noCampaign")} />
+            <DetailTile label={tLabels("created")} value={formatDateTime(lead.createdAt)} />
+            <DetailTile label={tPage("updatedLabel")} value={timeAgo(lead.updatedAt)} />
+            <DetailTile label={tPage("preferredContactLabel")} value={lead.preferredContactTime ?? tPage("noPreference")} />
           </div>
         </SectionCard>
 
-        <SectionCard title="Lead status control" description="Update the stage, timing, and notes so the dashboard stays reliable for the whole team.">
-          <div className="space-y-5">
-            <div className="rounded-2xl bg-[var(--secondary)]/60 p-4 text-sm leading-7 text-slate-600">
-              Best practice: every active lead should either have a next follow-up date or be clearly marked as booked, lost, or no response.
+        <SectionCard title={tPage("suggestedActionTitle")} description={tPage("suggestedActionDescription")}>
+          <div className="space-y-4">
+            <div className="rounded-[24px] border border-[var(--primary)]/10 bg-[var(--primary)]/[0.05] p-4">
+              <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                <Sparkles className="h-4 w-4 text-[var(--primary)]" />
+                {tPage("nextBestMove")}
+              </div>
+              <p className="mt-2 text-sm leading-7 text-slate-600">{suggestedAction}</p>
             </div>
             <LeadDetailForm
               leadId={lead.id}
@@ -62,45 +86,38 @@ export default async function LeadDetailPage({
         </SectionCard>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <SectionCard title="Contact information" description="Make it easy for staff to know how to reach the lead and what they are asking for.">
+      <div className="grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
+        <SectionCard title={tPage("contactTitle")} description={tPage("contactDescription")}>
           <div className="grid gap-4 sm:grid-cols-2">
-            <ContactTile icon={<PhoneCall className="h-4 w-4" />} label="Phone" value={lead.phone} />
-            <ContactTile icon={<FileText className="h-4 w-4" />} label="Email" value={lead.email ?? "Not provided"} />
-            <ContactTile icon={<ClipboardList className="h-4 w-4" />} label="Campaign" value={lead.campaign?.name ?? "No linked campaign"} />
-            <ContactTile
-              icon={<CalendarClock className="h-4 w-4" />}
-              label="Preferred contact time"
-              value={lead.preferredContactTime ?? "No preference shared"}
-            />
-            <ContactTile
-              icon={<CalendarClock className="h-4 w-4" />}
-              label="Next follow-up"
-              value={lead.followUpAt ? formatRelativeDate(lead.followUpAt) : "No follow-up scheduled"}
-            />
+            <ContactTile icon={<PhoneCall className="h-4 w-4" />} label={tLabels("phone")} value={lead.phone} />
+            <ContactTile icon={<FileText className="h-4 w-4" />} label={tLabels("email")} value={lead.email ?? tPage("notProvided")} />
+            <ContactTile icon={<ClipboardList className="h-4 w-4" />} label={tLabels("campaign")} value={lead.campaign?.name ?? tPage("noCampaign")} />
+            <ContactTile icon={<CalendarClock className="h-4 w-4" />} label={tPage("preferredContactLabel")} value={lead.preferredContactTime ?? tPage("noPreference")} />
+            <ContactTile icon={<CalendarClock className="h-4 w-4" />} label={tLabels("followUp")} value={lead.followUpAt ? formatRelativeDate(lead.followUpAt) : tPage("noFollowUp")} />
+            <ContactTile icon={<UserRound className="h-4 w-4" />} label={tPage("ownerContextLabel")} value={tPage("ownerContextValue")} />
           </div>
         </SectionCard>
 
-        <SectionCard title="Notes" description="Useful handoff context, customer intent, and conversation history.">
+        <SectionCard title={tLabels("notes")} description={tPage("notesDescription")}>
           <p className="text-sm leading-7 text-slate-700">
-            {lead.notes || "No notes yet. Add context to keep handoffs clean and help the next staff member respond with confidence."}
+            {lead.notes || tPage("noNotes")}
           </p>
         </SectionCard>
       </div>
 
-      <SectionCard title="Activity timeline" description="A lightweight CRM-style history of what has happened and what was scheduled next.">
+      <SectionCard title={tPage("timelineTitle")} description={tPage("timelineDescription")}>
         <div className="space-y-4">
           {lead.activities.length ? (
             lead.activities.map((activity) => (
-              <div key={activity.id} className="rounded-2xl border bg-[var(--secondary)]/45 p-4">
+              <div key={activity.id} className="rounded-[24px] border bg-[var(--secondary)]/45 p-4">
                 <p className="text-sm font-medium text-slate-900">{activity.message}</p>
                 <p className="mt-1 text-xs text-[var(--muted-foreground)]">
-                  {formatDateTime(activity.createdAt)} - {timeAgo(activity.createdAt)}
+                  {formatDateTime(activity.createdAt)} • {timeAgo(activity.createdAt)}
                 </p>
               </div>
             ))
           ) : (
-            <p className="text-sm text-[var(--muted-foreground)]">Timeline will populate as the team creates notes, follow-ups, and status changes.</p>
+            <EmptyState title={tPage("timelineEmptyTitle")} description={tPage("timelineEmptyDescription")} />
           )}
         </div>
       </SectionCard>
@@ -108,26 +125,11 @@ export default async function LeadDetailPage({
   );
 }
 
-function SummaryTile({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function DetailTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="space-y-2 rounded-2xl border bg-[var(--secondary)]/45 p-4">
-      <p className="text-sm font-medium text-slate-700">{label}</p>
-      <div>{children}</div>
-    </div>
-  );
-}
-
-function DetailItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="space-y-2 rounded-2xl border bg-[var(--secondary)]/45 p-4">
-      <p className="text-sm font-medium text-slate-700">{label}</p>
-      <p className="text-sm text-slate-600">{value}</p>
+    <div className="rounded-[22px] border bg-[var(--secondary)]/45 p-4">
+      <p className="text-sm font-medium text-slate-500">{label}</p>
+      <p className="mt-2 text-sm leading-7 text-slate-900">{value}</p>
     </div>
   );
 }
@@ -142,9 +144,9 @@ function ContactTile({
   value: string;
 }) {
   return (
-    <div className="rounded-2xl border bg-[var(--secondary)]/45 p-4">
+    <div className="rounded-[24px] border bg-white p-4 shadow-sm">
       <div className="flex items-center gap-2 text-sm font-medium text-slate-700">
-        <span className="rounded-xl bg-white p-2 text-[var(--primary)]">{icon}</span>
+        <span className="rounded-xl bg-[var(--secondary)] p-2 text-[var(--primary)]">{icon}</span>
         {label}
       </div>
       <p className="mt-3 text-sm leading-7 text-slate-600">{value}</p>

@@ -59,6 +59,23 @@
     "MANUAL": "Manual",
     "OTHER": "Other"
   },
+  "AppShell": {
+    "demoReady": "Demo ready",
+    "sidebarDescription": "Keep every inquiry, follow-up promise, and booked appointment visible for the whole front-desk team.",
+    "focusLabel": "Focus",
+    "focusValue": "Leads to bookings",
+    "priorityLabel": "Priority",
+    "priorityValue": "Response speed",
+    "navigationTitle": "Navigation",
+    "weeklyFocusTitle": "Weekly focus",
+    "weeklyFocusDescription": "Any lead waiting longer than one day risks a missed appointment. Protect the queue before it cools off.",
+    "automationTitle": "AI workflow layer",
+    "automationDescription": "This workspace is structured for future automations, summaries, and suggested next actions without changing your team's current process.",
+    "livePipeline": "Live pipeline",
+    "topbarDescription": "Track lead intake, follow-up pressure, and booking momentum from one clear operating view.",
+    "dailySnapshot": "Daily operating snapshot",
+    "aiReportingPreview": "AI reporting preview"
+  },
   "EmptyStates": {
     "noLeadsTitle": "No leads yet",
     "noLeadsDescription": "No leads yet. Add your first lead to start tracking follow-ups and bookings.",
@@ -86,6 +103,33 @@
     "validation.saveLeadFailed": "We couldn't save the lead right now. Please try again.",
     "validation.updateLeadFailed": "We couldn't update the lead right now. Please try again.",
     "validation.invalidCampaign": "That campaign link is no longer valid for this form."
+  },
+  "LeadsPage": {
+    "eyebrow": "Leads",
+    "title": "Lead pipeline",
+    "description": "Search, filter, and manage every incoming lead with clear follow-up visibility and booking progress.",
+    "focusTitle": "Work the queue with confidence",
+    "focusDescription": "This workspace is designed to help front-desk teams move quickly without losing customer context.",
+    "focusSearchTitle": "Search faster",
+    "focusSearchDescription": "Use one search bar to find names, phone numbers, emails, and service interest quickly.",
+    "focusFilterTitle": "Filter for action",
+    "focusFilterDescription": "Slice by status, source, and date window so the team can focus on the right conversations.",
+    "focusActionTitle": "Open and act",
+    "focusActionDescription": "Every row leads straight into the detail view for follow-up timing, notes, and handoff context.",
+    "stats": {
+      "activePipeline": "Active pipeline",
+      "activePipelineHint": "Leads still being worked by the team right now.",
+      "followUpNeeded": "Follow-up needed",
+      "followUpNeededAlert": "There are leads already due for action.",
+      "followUpNeededHealthy": "The due queue looks under control right now.",
+      "followUpNeededTrendAlert": "Needs attention",
+      "followUpNeededTrendHealthy": "Healthy queue"
+    }
+  },
+  "NewLeadPage": {
+    "eyebrow": "Leads",
+    "title": "Add a new lead",
+    "description": "Capture contact details, lead source, and the next follow-up step so your team knows exactly what to do next."
   },
   "LeadForm": {
     "pageTitle": "Add a new lead",
@@ -144,6 +188,39 @@
     "success": "Lead updated successfully.",
     "error": "We couldn't update the lead right now. Please try again."
   },
+  "LeadDetailPage": {
+    "eyebrow": "Lead detail",
+    "description": "See who this lead is, what they want, where they came from, and what the team should do next.",
+    "summaryTitle": "Lead profile summary",
+    "summaryDescription": "Captured on {date}. Use this card to understand the customer context before reaching out.",
+    "statusHint": "Current pipeline position for the team.",
+    "sourceHint": "Where this lead entered the workspace.",
+    "serviceInterest": "Service interest",
+    "serviceHint": "What the customer wants to discuss or book.",
+    "generalInquiry": "General inquiry",
+    "noCampaign": "Not linked to a campaign",
+    "updatedLabel": "Last updated",
+    "preferredContactLabel": "Preferred contact time",
+    "noPreference": "No preference shared",
+    "suggestedActionTitle": "Suggested next action",
+    "suggestedActionDescription": "Use this control area to keep the dashboard reliable and handoffs clear.",
+    "nextBestMove": "Next best move",
+    "suggestedActionNew": "Reach out quickly while the inquiry is still fresh, confirm the service need, and set a clear next follow-up time.",
+    "suggestedActionFollowUp": "Review the promised follow-up timing, keep the customer expectation clear, and update the status after the next touchpoint.",
+    "suggestedActionGeneral": "Keep this record current so the team always knows who owns the next step and what the customer needs next.",
+    "contactTitle": "Contact information",
+    "contactDescription": "Give the team immediate visibility into how to reach the lead and what context matters before replying.",
+    "notProvided": "Not provided",
+    "noFollowUp": "No follow-up scheduled",
+    "ownerContextLabel": "Recommended focus",
+    "ownerContextValue": "Protect response speed and keep the next promised action visible.",
+    "notesDescription": "Useful handoff context, customer intent, and conversation history.",
+    "noNotes": "No notes yet. Add context to keep handoffs clean and help the next staff member respond with confidence.",
+    "timelineTitle": "Activity timeline",
+    "timelineDescription": "A lightweight CRM-style history of what has happened and what was scheduled next.",
+    "timelineEmptyTitle": "No timeline activity yet",
+    "timelineEmptyDescription": "The timeline will populate as the team creates notes, follow-ups, and status changes."
+  },
   "LeadTable": {
     "workspaceTitle": "Lead workspace",
     "workspaceDescription": "Search, filter, and open lead records quickly so staff can take action without losing context.",
@@ -154,7 +231,8 @@
     "last30Days": "Last 30 days",
     "followUpDate": "Follow-up date",
     "notSet": "Not set",
-    "generalInquiry": "General inquiry"
+    "generalInquiry": "General inquiry",
+    "openLead": "Open"
   },
   "Dashboard": {
     "eyebrow": "Overview",
@@ -216,6 +294,37 @@
     "emptyAttentionDescription": "The follow-up queue looks healthy. Focus on moving new and interested leads toward booked appointments.",
     "chartsTitle": "Charts"
   },
+  "CampaignsPage": {
+    "eyebrow": "Campaigns",
+    "title": "Campaign performance",
+    "description": "Understand which campaigns and sources are creating qualified leads and booked appointments.",
+    "summary": {
+      "totalLeads": "Campaign leads",
+      "totalLeadsHint": "Total leads attributed to tracked campaigns.",
+      "bookedLeads": "Booked from campaigns",
+      "bookedLeadsHint": "Booked appointments tied to campaign-attributed leads.",
+      "bestCampaign": "Best campaign",
+      "bestCampaignHint": "Top current conversion rate: {rate}",
+      "bestCampaignEmpty": "No campaign has enough data to stand out yet."
+    },
+    "snapshotDescription": "Quick performance snapshot",
+    "budgetValue": "Budget placeholder: ${value}",
+    "budgetEmpty": "Budget placeholder: not entered yet.",
+    "tableTitle": "Campaign source performance",
+    "tableDescription": "Review all tracked campaigns, compare conversion rates, and decide where to shift effort or budget.",
+    "notAvailable": "N/A",
+    "notSet": "Not set",
+    "startTbd": "Start TBD",
+    "table": {
+      "campaign": "Campaign",
+      "sourceType": "Source type",
+      "leads": "Leads",
+      "booked": "Booked",
+      "conversionRate": "Conversion rate",
+      "budget": "Budget",
+      "activeDates": "Active dates"
+    }
+  },
   "Reports": {
     "pageEyebrow": "Reports",
     "pageTitle": "Weekly Lead Performance Report",
@@ -246,5 +355,65 @@
       "bookedAppointments": "Booked appointments",
       "followUpRisk": "Follow-up risk"
     }
+  },
+  "SettingsPage": {
+    "eyebrow": "Settings",
+    "title": "Business settings",
+    "description": "Manage the workspace profile, future team controls, notification placeholders, and integration readiness from one calm operating area.",
+    "placeholder": "Placeholder",
+    "comingSoon": "Coming soon",
+    "planned": "Planned",
+    "businessProfile": {
+      "title": "Business profile",
+      "description": "The core information that identifies this workspace for staff and future reporting.",
+      "businessName": "Business name",
+      "workspaceSlug": "Workspace slug",
+      "industryFit": "Industry fit",
+      "industryFitValue": "Local service business",
+      "currentRole": "Current role"
+    },
+    "publicCapture": {
+      "title": "Public capture link",
+      "description": "Use this no-login form link anywhere you collect demand so new inquiries land directly in the shared lead queue."
+    },
+    "team": {
+      "title": "Team members",
+      "description": "Invite flows and permission controls are planned so owners can coordinate front-desk staff and managers.",
+      "cardTitle": "Shared operating roles",
+      "cardBody": "Role visibility is already tracked. Next up are teammate invites, operational permissions, and clearer ownership of follow-up queues."
+    },
+    "notifications": {
+      "title": "Notification preferences",
+      "description": "Future controls for follow-up reminders, daily summaries, and overdue lead alerts.",
+      "dailySummary": "Daily lead summary",
+      "dailySummaryDescription": "Planned email summary for owners and managers.",
+      "followUpAlerts": "Overdue follow-up alerts",
+      "followUpAlertsDescription": "Planned reminders for leads due today or already late.",
+      "weeklyReports": "Weekly report delivery",
+      "weeklyReportsDescription": "Planned scheduled delivery of the weekly performance report."
+    },
+    "subscription": {
+      "title": "Subscription",
+      "description": "A clear placeholder for plan controls, billing history, and usage limits in a future release.",
+      "cardTitle": "Plan controls",
+      "cardBody": "Starter, Growth, and Custom plans will be managed here once billing is introduced."
+    },
+    "integrations": {
+      "title": "Integrations roadmap",
+      "description": "Intentional placeholders for the lead sources local businesses commonly rely on.",
+      "facebook": "Facebook Lead Ads",
+      "facebookDescription": "Capture Facebook inquiries directly into the shared lead queue.",
+      "tiktok": "TikTok Lead Generation",
+      "tiktokDescription": "Sync TikTok campaign leads and compare booking quality by source.",
+      "website": "Website Forms",
+      "websiteDescription": "Route website inquiries into the same workflow as paid campaigns.",
+      "zalo": "Zalo OA",
+      "zaloDescription": "Track conversations and inquiries from Zalo in the same booking pipeline."
+    }
+  },
+  "SettingsCapture": {
+    "copy": "Copy public capture URL",
+    "copied": "Copied",
+    "helper": "Share this link in Facebook, TikTok, Zalo, websites, or landing pages."
   }
 }

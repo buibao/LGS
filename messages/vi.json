@@ -59,6 +59,23 @@
     "MANUAL": "Nhap tay",
     "OTHER": "Khac"
   },
+  "AppShell": {
+    "demoReady": "San sang demo",
+    "sidebarDescription": "Giu moi nhu cau, lich cham soc da hua, va lich hen da dat hien ro cho toan bo doi ngu le tan.",
+    "focusLabel": "Muc tieu",
+    "focusValue": "Lead thanh lich hen",
+    "priorityLabel": "Uu tien",
+    "priorityValue": "Toc do phan hoi",
+    "navigationTitle": "Dieu huong",
+    "weeklyFocusTitle": "Trong tam tuan nay",
+    "weeklyFocusDescription": "Moi lead cho qua mot ngay deu tang nguy co mat lich hen. Bao ve hang doi truoc khi lead nguoi dan.",
+    "automationTitle": "Lop AI tuong lai",
+    "automationDescription": "Workspace nay da duoc sap xep san cho tu dong hoa, tom tat, va de xuat hanh dong tiep theo ma khong thay doi cach doi ngu dang van hanh.",
+    "livePipeline": "Pipeline dang chay",
+    "topbarDescription": "Theo doi luong lead vao, ap luc cham soc, va dong luc dat lich tu mot man hinh van hanh ro rang.",
+    "dailySnapshot": "Anh chup van hanh trong ngay",
+    "aiReportingPreview": "Bao cao AI ban xem truoc"
+  },
   "EmptyStates": {
     "noLeadsTitle": "Chua co lead",
     "noLeadsDescription": "Chua co lead nao. Hay them lead dau tien de bat dau theo doi lich cham soc va lich hen.",
@@ -87,11 +104,38 @@
     "validation.updateLeadFailed": "Khong the cap nhat lead luc nay. Vui long thu lai.",
     "validation.invalidCampaign": "Lien ket chien dich nay khong con hop le voi form nay."
   },
+  "LeadsPage": {
+    "eyebrow": "Lead",
+    "title": "Pipeline lead",
+    "description": "Tim kiem, loc, va quan ly moi lead den voi tam nhin ro rang ve cham soc va tien do dat lich.",
+    "focusTitle": "Xu ly hang doi mot cach tu tin",
+    "focusDescription": "Khong gian nay duoc thiet ke de doi ngu le tan lam viec nhanh ma van khong mat boi canh khach hang.",
+    "focusSearchTitle": "Tim nhanh hon",
+    "focusSearchDescription": "Dung mot thanh tim kiem de tra ten, so dien thoai, email, va nhu cau dich vu ngay lap tuc.",
+    "focusFilterTitle": "Loc de hanh dong",
+    "focusFilterDescription": "Chia theo trang thai, nguon, va khoang ngay de doi ngu tap trung dung cuoc tro chuyen.",
+    "focusActionTitle": "Mo va xu ly",
+    "focusActionDescription": "Moi dong deu dua thang vao trang chi tiet de cap nhat lich cham soc, ghi chu, va boi canh ban giao.",
+    "stats": {
+      "activePipeline": "Pipeline dang xu ly",
+      "activePipelineHint": "Nhung lead doi ngu van dang theo sat luc nay.",
+      "followUpNeeded": "Can cham soc",
+      "followUpNeededAlert": "Dang co lead den han can xu ly.",
+      "followUpNeededHealthy": "Hang doi den han dang on dinh luc nay.",
+      "followUpNeededTrendAlert": "Can chu y",
+      "followUpNeededTrendHealthy": "Hang doi on"
+    }
+  },
+  "NewLeadPage": {
+    "eyebrow": "Lead",
+    "title": "Them lead moi",
+    "description": "Thu thap thong tin lien he, nguon lead, va buoc cham soc tiep theo de doi ngu biet chinh xac can lam gi."
+  },
   "LeadForm": {
     "pageTitle": "Them lead moi",
     "pageDescription": "Thu thap thong tin lien he, nguon lead va buoc cham soc tiep theo de doi ngu biet can lam gi tiep theo.",
     "detailsTitle": "Thong tin lead",
-    "detailsDescription": "Ghi lai du ng canh de doi ngu co the cham soc nhanh hon, hieu ro nguon lead va day lead toi lich hen.",
+    "detailsDescription": "Ghi lai du boi canh de doi ngu co the cham soc nhanh hon, hieu ro nguon lead va day lead toi lich hen.",
     "summaryTitle": "Tao lead",
     "summaryDescription": "Luu lead va chuyen sang trang chi tiet de tiep tuc quan ly cham soc.",
     "contactSectionTitle": "Thong tin lien he",
@@ -144,6 +188,39 @@
     "success": "Da cap nhat lead thanh cong.",
     "error": "Khong the cap nhat lead luc nay. Vui long thu lai."
   },
+  "LeadDetailPage": {
+    "eyebrow": "Chi tiet lead",
+    "description": "Xem lead nay la ai, quan tam dieu gi, den tu dau, va doi ngu nen lam gi tiep theo.",
+    "summaryTitle": "Tong quan lead",
+    "summaryDescription": "Da ghi nhan vao {date}. Dung the nay de hieu boi canh khach hang truoc khi lien he.",
+    "statusHint": "Vi tri hien tai cua lead trong pipeline.",
+    "sourceHint": "Kenh ma lead da vao he thong.",
+    "serviceInterest": "Nhu cau dich vu",
+    "serviceHint": "Dieu khach hang muon tim hieu hoac dat lich.",
+    "generalInquiry": "Nhu cau chung",
+    "noCampaign": "Chua lien ket chien dich",
+    "updatedLabel": "Cap nhat gan nhat",
+    "preferredContactLabel": "Thoi gian lien he uu tien",
+    "noPreference": "Chua chia se uu tien",
+    "suggestedActionTitle": "Hanh dong de xuat",
+    "suggestedActionDescription": "Dung khu vuc nay de giu dashboard dang tin cay va ban giao ro rang.",
+    "nextBestMove": "Buoc tot nhat tiep theo",
+    "suggestedActionNew": "Lien he som khi nhu cau van con moi, xac nhan nhu cau dich vu, va dat mot moc cham soc tiep theo ro rang.",
+    "suggestedActionFollowUp": "Kiem tra lai moc cham soc da hua, giu ky vong cua khach ro rang, va cap nhat trang thai sau lan lien he tiep theo.",
+    "suggestedActionGeneral": "Giu ho so nay luon moi de doi ngu luon biet ai so huu buoc tiep theo va khach hang can gi tiep.",
+    "contactTitle": "Thong tin lien he",
+    "contactDescription": "Cho doi ngu thay ngay cach lien he lead va boi canh quan trong truoc khi phan hoi.",
+    "notProvided": "Chua cung cap",
+    "noFollowUp": "Chua dat lich cham soc",
+    "ownerContextLabel": "Trong tam khuyen nghi",
+    "ownerContextValue": "Bao ve toc do phan hoi va giu hanh dong tiep theo hien ro.",
+    "notesDescription": "Boi canh de ban giao, y dinh khach hang, va lich su tro chuyen huu ich.",
+    "noNotes": "Chua co ghi chu. Hay them boi canh de viec ban giao sach se va nguoi tiep theo co the phan hoi tu tin.",
+    "timelineTitle": "Dong thoi gian hoat dong",
+    "timelineDescription": "Lich su CRM gon nhe ve dieu da xay ra va dieu gi da duoc len lich tiep theo.",
+    "timelineEmptyTitle": "Chua co hoat dong timeline",
+    "timelineEmptyDescription": "Timeline se day dan khi doi ngu them ghi chu, moc cham soc, va thay doi trang thai."
+  },
   "LeadTable": {
     "workspaceTitle": "Khong gian lead",
     "workspaceDescription": "Tim kiem, loc va mo ho so lead nhanh de doi ngu hanh dong ma khong mat boi canh.",
@@ -154,7 +231,8 @@
     "last30Days": "30 ngay qua",
     "followUpDate": "Ngay cham soc",
     "notSet": "Chua dat",
-    "generalInquiry": "Nhu cau chung"
+    "generalInquiry": "Nhu cau chung",
+    "openLead": "Mo"
   },
   "Dashboard": {
     "eyebrow": "Tong quan",
@@ -216,6 +294,37 @@
     "emptyAttentionDescription": "Hang doi cham soc dang on. Hay tap trung chuyen lead moi va quan tam thanh lich hen.",
     "chartsTitle": "Bieu do"
   },
+  "CampaignsPage": {
+    "eyebrow": "Chien dich",
+    "title": "Hieu suat chien dich",
+    "description": "Hieu ro chien dich va nguon nao dang tao ra lead chat luong va lich hen da dat.",
+    "summary": {
+      "totalLeads": "Lead tu chien dich",
+      "totalLeadsHint": "Tong lead duoc gan vao cac chien dich dang theo doi.",
+      "bookedLeads": "Lich hen tu chien dich",
+      "bookedLeadsHint": "So lich hen den tu cac lead co gan chien dich.",
+      "bestCampaign": "Chien dich tot nhat",
+      "bestCampaignHint": "Ty le chuyen doi cao nhat hien tai: {rate}",
+      "bestCampaignEmpty": "Chua co chien dich nao du du lieu de noi bat."
+    },
+    "snapshotDescription": "Anh chup nhanh hieu suat",
+    "budgetValue": "Ngan sach tam tinh: ${value}",
+    "budgetEmpty": "Ngan sach tam tinh: chua nhap.",
+    "tableTitle": "Hieu suat nguon chien dich",
+    "tableDescription": "Ra soat toan bo chien dich, so sanh ty le chuyen doi, va quyet dinh nen chuyen no luc hay ngan sach ve dau.",
+    "notAvailable": "Chua co",
+    "notSet": "Chua dat",
+    "startTbd": "Chua ro ngay bat dau",
+    "table": {
+      "campaign": "Chien dich",
+      "sourceType": "Loai nguon",
+      "leads": "Lead",
+      "booked": "Da dat lich",
+      "conversionRate": "Ty le chuyen doi",
+      "budget": "Ngan sach",
+      "activeDates": "Thoi gian chay"
+    }
+  },
   "Reports": {
     "pageEyebrow": "Bao cao",
     "pageTitle": "Bao cao hieu suat lead hang tuan",
@@ -246,5 +355,65 @@
       "bookedAppointments": "Lich hen da dat",
       "followUpRisk": "Rui ro cham soc"
     }
+  },
+  "SettingsPage": {
+    "eyebrow": "Cai dat",
+    "title": "Cai dat doanh nghiep",
+    "description": "Quan ly ho so workspace, khuon cho phep doi ngu, tuy chon thong bao, va do san sang tich hop trong mot khu van hanh gon gang.",
+    "placeholder": "Cho buoc tiep theo",
+    "comingSoon": "Sap co",
+    "planned": "Da len ke hoach",
+    "businessProfile": {
+      "title": "Ho so doanh nghiep",
+      "description": "Thong tin cot loi xac dinh workspace cho doi ngu va bao cao ve sau.",
+      "businessName": "Ten doanh nghiep",
+      "workspaceSlug": "Slug workspace",
+      "industryFit": "Nhom phu hop",
+      "industryFitValue": "Doanh nghiep dich vu dia phuong",
+      "currentRole": "Vai tro hien tai"
+    },
+    "publicCapture": {
+      "title": "Link form cong khai",
+      "description": "Dung link form khong can dang nhap nay o moi diem thu lead de nhu cau moi roi thang vao hang doi chung."
+    },
+    "team": {
+      "title": "Thanh vien doi ngu",
+      "description": "Luot moi thanh vien va phan quyen dang duoc len ke hoach de chu doanh nghiep phoi hop le tan va quan ly.",
+      "cardTitle": "Vai tro van hanh chung",
+      "cardBody": "He thong da nhin thay vai tro. Buoc tiep theo la moi thanh vien, quyen van hanh, va lam ro ai so huu hang doi cham soc."
+    },
+    "notifications": {
+      "title": "Tuy chon thong bao",
+      "description": "Khuon cho nhac cham soc, tong ket hang ngay, va canh bao lead qua han trong tuong lai.",
+      "dailySummary": "Tong ket lead hang ngay",
+      "dailySummaryDescription": "Tom tat email du kien cho chu doanh nghiep va quan ly.",
+      "followUpAlerts": "Canh bao cham soc qua han",
+      "followUpAlertsDescription": "Nhac viec du kien cho lead den han hom nay hoac da tre.",
+      "weeklyReports": "Gui bao cao hang tuan",
+      "weeklyReportsDescription": "Lich gui dinh ky du kien cho bao cao hieu suat hang tuan."
+    },
+    "subscription": {
+      "title": "Goi su dung",
+      "description": "Khu placeholder ro rang cho goi, lich su thanh toan, va gioi han su dung o phien ban sau.",
+      "cardTitle": "Dieu khien goi",
+      "cardBody": "Goi Starter, Growth, va Custom se duoc quan ly tai day khi tinh nang billing duoc bo sung."
+    },
+    "integrations": {
+      "title": "Lo trinh tich hop",
+      "description": "Nhung placeholder co chu y cho cac nguon lead ma doanh nghiep dia phuong thuong su dung.",
+      "facebook": "Facebook Lead Ads",
+      "facebookDescription": "Dua lead tu Facebook vao hang doi chung ngay lap tuc.",
+      "tiktok": "TikTok Lead Generation",
+      "tiktokDescription": "Dong bo lead TikTok va so sanh chat luong dat lich theo tung nguon.",
+      "website": "Website Forms",
+      "websiteDescription": "Dua lead website vao cung quy trinh cham soc nhu cac chien dich tra phi.",
+      "zalo": "Zalo OA",
+      "zaloDescription": "Theo doi hoi thoai va nhu cau tu Zalo trong cung mot pipeline dat lich."
+    }
+  },
+  "SettingsCapture": {
+    "copy": "Sao chep link form cong khai",
+    "copied": "Da sao chep",
+    "helper": "Chia se link nay tren Facebook, TikTok, Zalo, website, hoac landing page."
   }
 }

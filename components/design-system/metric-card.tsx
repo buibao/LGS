@@ -25,13 +25,13 @@ export function MetricCard({
   const TrendIcon = trend?.direction === "down" ? TrendingDown : TrendingUp;
 
   return (
-    <Card className={cn("rounded-[24px] border border-[var(--border)] bg-white shadow-sm", className)}>
+    <Card className={cn("rounded-[28px] border border-[var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(249,251,255,0.94))]", className)}>
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-2.5">
             <p className="text-sm font-medium text-[var(--muted-foreground)]">{title}</p>
             <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
-            {description ? <p className="max-w-[26ch] text-sm leading-6 text-[var(--muted-foreground)]">{description}</p> : null}
+            {description ? <p className="max-w-[28ch] text-sm leading-6 text-[var(--muted-foreground)]">{description}</p> : null}
           </div>
           {icon ? (
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--secondary)] p-3 text-[var(--primary)] shadow-sm">

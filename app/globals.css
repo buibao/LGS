@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f7fb;
+  --background: #f4f7fb;
   --foreground: #142132;
   --card: #ffffff;
   --card-foreground: #142132;
-  --muted: #eef2f7;
+  --muted: #eef3f8;
   --muted-foreground: #5f6f82;
-  --border: #dbe3ee;
+  --border: #dae4ef;
   --input: #ffffff;
   --primary: #0f5f73;
   --primary-foreground: #f8fdff;
@@ -69,13 +69,13 @@ h4 {
 
 .dashboard-shell {
   background-image:
-    radial-gradient(circle at top left, rgba(15, 95, 115, 0.05), transparent 24%),
-    radial-gradient(circle at top right, rgba(217, 119, 6, 0.06), transparent 18%),
-    linear-gradient(180deg, #f7fafe 0%, #f3f6fb 100%);
+    radial-gradient(circle at top left, rgba(15, 95, 115, 0.06), transparent 25%),
+    radial-gradient(circle at 86% 0%, rgba(217, 119, 6, 0.05), transparent 16%),
+    linear-gradient(180deg, #f8fbff 0%, #f2f6fb 100%);
 }
 
 .surface-panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.95));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 255, 0.94));
 }
 
 .soft-grid {

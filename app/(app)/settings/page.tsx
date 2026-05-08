@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+import { BellRing, CreditCard, PlugZap, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionCard } from "@/components/ui/section-card";
@@ -6,66 +8,67 @@ import { getAppUrl } from "@/lib/app-url";
 import { CaptureUrlCopy } from "@/components/settings/capture-url-copy";
 
 export default async function SettingsPage() {
+  const tPage = await getTranslations("SettingsPage");
   const { organization, membership } = await getCurrentWorkspace();
   const captureUrl = `${getAppUrl()}/capture/${organization.slug}`;
 
   return (
     <div className="space-y-8">
       <PageHeader
-        eyebrow="Settings"
-        title="Business settings"
-        description="A planned settings workspace for profile details, team controls, notifications, subscription management, and future integrations."
+        eyebrow={tPage("eyebrow")}
+        title={tPage("title")}
+        description={tPage("description")}
       />
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <SectionCard title="Business profile" description="The core information that identifies this workspace for staff and future reporting.">
+      <div className="grid gap-4 xl:grid-cols-[1fr_1fr]">
+        <SectionCard title={tPage("businessProfile.title")} description={tPage("businessProfile.description")}>
           <div className="grid gap-4 sm:grid-cols-2">
-            <SettingTile label="Business name" value={organization.name} />
-            <SettingTile label="Workspace slug" value={organization.slug} />
-            <SettingTile label="Industry fit" value="Local service business" />
-            <SettingTile label="Current role" value={membership.role} />
+            <SettingTile label={tPage("businessProfile.businessName")} value={organization.name} />
+            <SettingTile label={tPage("businessProfile.workspaceSlug")} value={organization.slug} />
+            <SettingTile label={tPage("businessProfile.industryFit")} value={tPage("businessProfile.industryFitValue")} />
+            <SettingTile label={tPage("businessProfile.currentRole")} value={membership.role} />
           </div>
         </SectionCard>
 
-        <SectionCard title="Team members" description="Invite flows and permission controls are planned so owners can coordinate front-desk staff and managers.">
-          <div className="space-y-3 text-sm leading-7 text-slate-600">
-            <p>Role visibility is already tracked in the workspace.</p>
-            <p>Planned next: invite teammates, assign operational roles, and keep lead follow-up accountability visible.</p>
-            <Badge variant="neutral">Placeholder for next milestone</Badge>
-          </div>
-        </SectionCard>
-
-        <SectionCard title="Notification preferences" description="Future controls for follow-up reminders, daily summaries, and overdue lead alerts.">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <PreferenceTile label="Daily lead summary" description="Planned email summary for owners and managers." />
-            <PreferenceTile label="Overdue follow-up alerts" description="Planned reminders for leads due today or already late." />
-            <PreferenceTile label="Booked appointment updates" description="Planned notifications when a lead moves into booked status." />
-            <PreferenceTile label="Weekly report delivery" description="Planned scheduled delivery of the weekly performance report." />
-          </div>
-        </SectionCard>
-
-        <SectionCard title="Subscription" description="A clear placeholder for plan controls, billing history, and usage limits in a future release.">
-          <div className="space-y-3 text-sm leading-7 text-slate-600">
-            <p>Current plan: Demo workspace</p>
-            <p>Starter, Growth, and Custom plans will be managed here once billing is introduced.</p>
-            <Badge variant="warning">Coming soon</Badge>
-          </div>
-        </SectionCard>
-
-        <SectionCard
-          title="Public capture link"
-          description="Use this no-login form link anywhere you collect demand so new inquiries land directly in the shared lead queue."
-        >
+        <SectionCard title={tPage("publicCapture.title")} description={tPage("publicCapture.description")}>
           <CaptureUrlCopy url={captureUrl} />
         </SectionCard>
       </div>
 
-      <SectionCard title="Integrations roadmap" description="Intentional placeholders for the lead sources local businesses commonly rely on.">
+      <div className="grid gap-4 lg:grid-cols-3">
+        <SectionCard title={tPage("team.title")} description={tPage("team.description")}>
+          <PlaceholderFeature
+            icon={<Users className="h-4 w-4" />}
+            title={tPage("team.cardTitle")}
+            body={tPage("team.cardBody")}
+            badge={tPage("placeholder")}
+          />
+        </SectionCard>
+
+        <SectionCard title={tPage("notifications.title")} description={tPage("notifications.description")}>
+          <div className="space-y-3">
+            <PreferenceTile title={tPage("notifications.dailySummary")} description={tPage("notifications.dailySummaryDescription")} />
+            <PreferenceTile title={tPage("notifications.followUpAlerts")} description={tPage("notifications.followUpAlertsDescription")} />
+            <PreferenceTile title={tPage("notifications.weeklyReports")} description={tPage("notifications.weeklyReportsDescription")} />
+          </div>
+        </SectionCard>
+
+        <SectionCard title={tPage("subscription.title")} description={tPage("subscription.description")}>
+          <PlaceholderFeature
+            icon={<CreditCard className="h-4 w-4" />}
+            title={tPage("subscription.cardTitle")}
+            body={tPage("subscription.cardBody")}
+            badge={tPage("comingSoon")}
+          />
+        </SectionCard>
+      </div>
+
+      <SectionCard title={tPage("integrations.title")} description={tPage("integrations.description")}>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <IntegrationTile name="Facebook Lead Ads" description="Capture Facebook inquiries directly into the lead queue." />
-          <IntegrationTile name="TikTok Lead Generation" description="Sync TikTok campaign leads and compare booking quality by source." />
-          <IntegrationTile name="Website Forms" description="Route website inquiries into the same follow-up workflow as paid campaigns." />
-          <IntegrationTile name="Zalo OA" description="Track conversations and inquiries from Zalo into a shared booking pipeline." />
+          <IntegrationTile name={tPage("integrations.facebook")} description={tPage("integrations.facebookDescription")} badge={tPage("planned")} />
+          <IntegrationTile name={tPage("integrations.tiktok")} description={tPage("integrations.tiktokDescription")} badge={tPage("planned")} />
+          <IntegrationTile name={tPage("integrations.website")} description={tPage("integrations.websiteDescription")} badge={tPage("planned")} />
+          <IntegrationTile name={tPage("integrations.zalo")} description={tPage("integrations.zaloDescription")} badge={tPage("planned")} />
         </div>
       </SectionCard>
     </div>
@@ -74,7 +77,7 @@ export default async function SettingsPage() {
 
 function SettingTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border bg-[var(--secondary)]/45 p-4">
+    <div className="rounded-[22px] border bg-[var(--secondary)]/45 p-4">
       <p className="text-sm font-medium text-slate-500">{label}</p>
       <p className="mt-2 text-sm leading-7 text-slate-900">{value}</p>
     </div>
@@ -82,16 +85,44 @@ function SettingTile({ label, value }: { label: string; value: string }) {
 }
 
 function PreferenceTile({
-  label,
+  title,
   description,
 }: {
-  label: string;
+  title: string;
   description: string;
 }) {
   return (
-    <div className="rounded-2xl border bg-[var(--secondary)]/45 p-4">
-      <p className="text-sm font-semibold text-slate-900">{label}</p>
+    <div className="rounded-[22px] border bg-[var(--secondary)]/45 p-4">
+      <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+        <BellRing className="h-4 w-4 text-[var(--primary)]" />
+        {title}
+      </div>
       <p className="mt-2 text-sm leading-7 text-slate-600">{description}</p>
+    </div>
+  );
+}
+
+function PlaceholderFeature({
+  icon,
+  title,
+  body,
+  badge,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  body: string;
+  badge: string;
+}) {
+  return (
+    <div className="rounded-[24px] border bg-[var(--secondary)]/45 p-4">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+          <span className="rounded-xl bg-white p-2 text-[var(--primary)]">{icon}</span>
+          {title}
+        </div>
+        <Badge variant="neutral">{badge}</Badge>
+      </div>
+      <p className="mt-3 text-sm leading-7 text-slate-600">{body}</p>
     </div>
   );
 }
@@ -99,15 +130,20 @@ function PreferenceTile({
 function IntegrationTile({
   name,
   description,
+  badge,
 }: {
   name: string;
   description: string;
+  badge: string;
 }) {
   return (
-    <div className="rounded-[24px] border bg-white p-5">
+    <div className="rounded-[24px] border bg-white p-5 shadow-sm">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-sm font-semibold text-slate-950">{name}</p>
-        <Badge variant="neutral">Planned</Badge>
+        <div className="flex items-center gap-2 text-sm font-semibold text-slate-950">
+          <PlugZap className="h-4 w-4 text-[var(--primary)]" />
+          {name}
+        </div>
+        <Badge variant="neutral">{badge}</Badge>
       </div>
       <p className="mt-3 text-sm leading-7 text-slate-600">{description}</p>
     </div>

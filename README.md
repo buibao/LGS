@@ -95,6 +95,8 @@ Recommended usage by environment:
 
 ## Demo Clerk Override
 
+Real production deployments should use `pk_live_...` and `sk_live_...` Clerk keys.
+
 Production validation stays strict by default and will reject `pk_test_` and `sk_test_` Clerk keys.
 
 If you need a temporary demo deployment in production, you can explicitly opt in with:

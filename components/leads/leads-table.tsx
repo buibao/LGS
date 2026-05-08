@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { RotateCcw, Search, SlidersHorizontal } from "lucide-react";
 import {
   ColumnDef,
@@ -11,6 +11,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { LeadStatus, SourceType } from "@prisma/client";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
 import { Input } from "@/components/ui/input";
@@ -34,6 +35,8 @@ type LeadRow = {
 };
 
 export function LeadsTable({ rows }: { rows: LeadRow[] }) {
+  const tActions = useTranslations("Actions");
+  const tFilters = useTranslations("Filters");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [sourceFilter, setSourceFilter] = useState("ALL");
@@ -140,7 +143,7 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
             Reset filters
           </Button>
           <Link href="/leads/new">
-            <Button size="sm">Add Lead</Button>
+            <Button size="sm">{tActions("addLead")}</Button>
           </Link>
         </div>
       }
@@ -158,10 +161,15 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         <div className="grid gap-3 rounded-[24px] border bg-[var(--secondary)]/35 p-4 md:grid-cols-[1.6fr_repeat(3,minmax(0,1fr))]">
           <label className="relative">
             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <Input className="pl-9" placeholder="Search name, phone, email, interest" value={search} onChange={(event) => setSearch(event.target.value)} />
+            <Input
+              className="pl-9"
+              placeholder={`${tActions("search")} name, phone, email, interest`}
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
           </label>
           <Select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)}>
-            <option value="ALL">All statuses</option>
+            <option value="ALL">{tFilters("allStatuses")}</option>
             {Object.entries(leadStatusLabels).map(([value, label]) => (
               <option key={value} value={value}>
                 {label}
@@ -169,7 +177,7 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
             ))}
           </Select>
           <Select value={sourceFilter} onChange={(event) => setSourceFilter(event.target.value)}>
-            <option value="ALL">All sources</option>
+            <option value="ALL">{tFilters("allSources")}</option>
             {Object.entries(sourceTypeLabels).map(([value, label]) => (
               <option key={value} value={value}>
                 {label}
@@ -179,7 +187,7 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
           <div className="flex items-center gap-2">
             <SlidersHorizontal className="h-4 w-4 text-slate-400" />
             <Select value={dateRange} onChange={(event) => setDateRange(event.target.value)}>
-              <option value="ALL">All dates</option>
+              <option value="ALL">{tFilters("allDates")}</option>
               <option value="7">Last 7 days</option>
               <option value="30">Last 30 days</option>
             </Select>

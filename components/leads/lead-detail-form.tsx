@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { LeadStatus } from "@prisma/client";
+import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
@@ -20,6 +21,7 @@ export function LeadDetailForm({
   defaultFollowUpAt: string;
   defaultNotes: string;
 }) {
+  const tActions = useTranslations("Actions");
   const router = useRouter();
   const [status, setStatus] = useState(defaultStatus);
   const [followUpAt, setFollowUpAt] = useState(defaultFollowUpAt);
@@ -72,7 +74,7 @@ export function LeadDetailForm({
       </label>
       {message ? <p className="text-sm text-[var(--primary)]">{message}</p> : null}
       <Button className="w-full sm:w-auto" onClick={save} disabled={saving}>
-        {saving ? "Updating..." : "Save changes"}
+        {saving ? "Updating..." : tActions("save")}
       </Button>
     </div>
   );

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { LeadStatus, SourceType } from "@prisma/client";
+import { Link } from "@/i18n/navigation";
 import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
 import { SectionCard } from "@/components/ui/section-card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";

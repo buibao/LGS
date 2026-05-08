@@ -1,28 +1,30 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ArrowUpRight, BarChart3, Megaphone, Settings, Sparkles, Users } from "lucide-react";
+import { Link, usePathname } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const navigation = [
-  { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
-  { href: "/leads", label: "Leads", icon: Users },
-  { href: "/campaigns", label: "Campaigns", icon: Megaphone },
-  { href: "/reports", label: "Reports", icon: Sparkles },
-  { href: "/settings", label: "Settings", icon: Settings },
+  { href: "/dashboard", label: "dashboard", icon: BarChart3 },
+  { href: "/leads", label: "leads", icon: Users },
+  { href: "/campaigns", label: "campaigns", icon: Megaphone },
+  { href: "/reports", label: "reports", icon: Sparkles },
+  { href: "/settings", label: "settings", icon: Settings },
 ];
 
 export function AppSidebar({ organizationName }: { organizationName: string }) {
   const pathname = usePathname();
+  const tCommon = useTranslations("Common");
+  const tNav = useTranslations("Navigation");
 
   return (
     <aside className="surface-panel w-full rounded-[30px] border p-4 text-[var(--sidebar-foreground)] shadow-[0_20px_50px_-36px_rgba(15,23,42,0.16)] md:sticky md:top-6 md:w-72 md:self-start">
       <div className="rounded-[24px] border bg-white p-5">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold tracking-[0.24em] uppercase text-[var(--primary)]">LeadOps AI</p>
+            <p className="text-xs font-semibold tracking-[0.24em] uppercase text-[var(--primary)]">{tCommon("appName")}</p>
             <h2 className="mt-2 text-2xl font-semibold leading-tight text-slate-950">{organizationName}</h2>
           </div>
           <Badge variant="info" className="shrink-0">
@@ -62,7 +64,7 @@ export function AppSidebar({ organizationName }: { organizationName: string }) {
             >
               <div className="flex items-center gap-3">
                 <Icon className="h-4 w-4" />
-                {item.label}
+                {tNav(item.label)}
               </div>
               <ArrowUpRight className={cn("h-4 w-4 transition", active ? "opacity-100" : "opacity-0 group-hover:opacity-60")} />
             </Link>

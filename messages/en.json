@@ -1,0 +1,57 @@
+{
+  "Common": {
+    "appName": "LeadOps AI",
+    "loading": "Loading",
+    "error": "Error",
+    "emptyState": "No data available"
+  },
+  "Navigation": {
+    "dashboard": "Dashboard",
+    "leads": "Leads",
+    "campaigns": "Campaigns",
+    "reports": "Reports",
+    "settings": "Settings",
+    "language": "Language",
+    "english": "English",
+    "vietnamese": "Vietnamese"
+  },
+  "Actions": {
+    "addLead": "Add Lead",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "filter": "Filter"
+  },
+  "Labels": {
+    "status": "Status",
+    "source": "Source"
+  },
+  "Filters": {
+    "allStatuses": "All statuses",
+    "allSources": "All sources",
+    "allDates": "All dates"
+  },
+  "LeadStatus": {
+    "NEW": "New",
+    "CONTACTED": "Contacted",
+    "INTERESTED": "Interested",
+    "BOOKED": "Booked",
+    "NO_RESPONSE": "No Response",
+    "LOST": "Lost"
+  },
+  "LeadSource": {
+    "FACEBOOK": "Facebook",
+    "TIKTOK": "TikTok",
+    "ORGANIC": "Organic",
+    "REFERRAL": "Referral",
+    "WEBSITE": "Website",
+    "MANUAL": "Manual",
+    "OTHER": "Other"
+  },
+  "EmptyStates": {
+    "noLeadsTitle": "No leads yet",
+    "noLeadsDescription": "No leads yet. Add your first lead to start tracking follow-ups and bookings.",
+    "noCampaignsTitle": "No campaigns yet",
+    "noCampaignsDescription": "No campaigns yet. Add campaigns when you want to compare lead quality, booked appointments, and source performance more clearly."
+  }
+}

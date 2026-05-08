@@ -1,5 +1,9 @@
+"use client";
+
 import { CalendarDays, Building2 } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { Badge } from "@/components/ui/badge";
 
 export function Topbar({
@@ -9,6 +13,8 @@ export function Topbar({
   organizationName: string;
   role: string;
 }) {
+  const tCommon = useTranslations("Common");
+
   return (
     <header className="surface-panel flex flex-col gap-4 rounded-[30px] border px-5 py-4 shadow-[0_18px_45px_-36px_rgba(15,23,42,0.18)] md:flex-row md:items-center md:justify-between md:px-6">
       <div className="flex items-start gap-3">
@@ -16,7 +22,7 @@ export function Topbar({
           <Building2 className="h-5 w-5" />
         </div>
         <div>
-          <p className="text-xs font-semibold tracking-[0.24em] text-[var(--primary)] uppercase">Workspace</p>
+          <p className="text-xs font-semibold tracking-[0.24em] text-[var(--primary)] uppercase">{tCommon("appName")}</p>
           <div className="mt-1 flex flex-wrap items-center gap-2">
             <h2 className="text-xl font-semibold text-slate-950">{organizationName}</h2>
             <Badge variant="info">{role}</Badge>
@@ -30,6 +36,7 @@ export function Topbar({
           <CalendarDays className="h-4 w-4 text-[var(--primary)]" />
           Daily operating snapshot
         </div>
+        <LanguageSwitcher />
         <Badge variant="warning">AI reporting preview</Badge>
         <UserButton />
       </div>

@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { CalendarClock, MessageSquareText, UserRoundPlus } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LeadStatus, SourceType } from "@prisma/client";
 import { useForm } from "react-hook-form";
+import { Link, useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SectionCard } from "@/components/ui/section-card";
@@ -20,6 +20,7 @@ export function LeadForm({
 }: {
   campaigns: Array<{ id: string; name: string }>;
 }) {
+  const tActions = useTranslations("Actions");
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const form = useForm<LeadInput>({
@@ -147,11 +148,11 @@ export function LeadForm({
           {serverError ? <p className="text-sm text-rose-600">{serverError}</p> : null}
           <div className="flex flex-col gap-3">
             <Button className="w-full" disabled={form.formState.isSubmitting} type="submit">
-              {form.formState.isSubmitting ? "Saving..." : "Create Lead"}
+              {form.formState.isSubmitting ? "Saving..." : tActions("addLead")}
             </Button>
             <Link href="/leads">
               <Button className="w-full" variant="outline" type="button">
-                Cancel
+                {tActions("cancel")}
               </Button>
             </Link>
           </div>

@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { PageHeader } from "@/components/ui/page-header";
@@ -7,6 +8,8 @@ import { getCurrentWorkspace } from "@/lib/auth";
 import { getLeadsForOrganization } from "@/lib/data";
 
 export default async function LeadsPage() {
+  const tActions = await getTranslations("Actions");
+  const tEmpty = await getTranslations("EmptyStates");
   const { organization } = await getCurrentWorkspace();
   const leads = await getLeadsForOrganization(organization.id);
 
@@ -18,7 +21,7 @@ export default async function LeadsPage() {
         description="Search, filter, and manage every incoming lead with clear follow-up visibility and booking progress."
         action={
           <Link href="/leads/new">
-            <Button>Add Lead</Button>
+            <Button>{tActions("addLead")}</Button>
           </Link>
         }
       />
@@ -41,11 +44,11 @@ export default async function LeadsPage() {
       ) : (
         <EmptyState
           eyebrow="Leads"
-          title="No leads yet"
-          description="No leads yet. Add your first lead to start tracking follow-ups and bookings."
+          title={tEmpty("noLeadsTitle")}
+          description={tEmpty("noLeadsDescription")}
           action={
             <Link href="/leads/new">
-              <Button>Add Lead</Button>
+              <Button>{tActions("addLead")}</Button>
             </Link>
           }
         />

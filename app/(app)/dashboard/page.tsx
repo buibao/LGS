@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { CalendarClock, CalendarRange, CheckCircle2, Target, TrendingUp, Users } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { DashboardCharts } from "@/components/dashboard/charts";
 import { OverviewCards } from "@/components/dashboard/overview-cards";
 import { RecentLeadsTable } from "@/components/dashboard/recent-leads-table";

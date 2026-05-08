@@ -1,0 +1,57 @@
+{
+  "Common": {
+    "appName": "LeadOps AI",
+    "loading": "Dang tai",
+    "error": "Loi",
+    "emptyState": "Chua co du lieu"
+  },
+  "Navigation": {
+    "dashboard": "Tong quan",
+    "leads": "Khach hang tiem nang",
+    "campaigns": "Chien dich",
+    "reports": "Bao cao",
+    "settings": "Cai dat",
+    "language": "Ngon ngu",
+    "english": "Tieng Anh",
+    "vietnamese": "Tieng Viet"
+  },
+  "Actions": {
+    "addLead": "Them lead",
+    "save": "Luu",
+    "cancel": "Huy",
+    "search": "Tim kiem",
+    "filter": "Loc"
+  },
+  "Labels": {
+    "status": "Trang thai",
+    "source": "Nguon"
+  },
+  "Filters": {
+    "allStatuses": "Tat ca trang thai",
+    "allSources": "Tat ca nguon",
+    "allDates": "Tat ca ngay"
+  },
+  "LeadStatus": {
+    "NEW": "Moi",
+    "CONTACTED": "Da lien he",
+    "INTERESTED": "Quan tam",
+    "BOOKED": "Da dat lich",
+    "NO_RESPONSE": "Khong phan hoi",
+    "LOST": "Mat lead"
+  },
+  "LeadSource": {
+    "FACEBOOK": "Facebook",
+    "TIKTOK": "TikTok",
+    "ORGANIC": "Tu nhien",
+    "REFERRAL": "Gioi thieu",
+    "WEBSITE": "Website",
+    "MANUAL": "Nhap tay",
+    "OTHER": "Khac"
+  },
+  "EmptyStates": {
+    "noLeadsTitle": "Chua co lead",
+    "noLeadsDescription": "Chua co lead nao. Hay them lead dau tien de bat dau theo doi lich cham soc va lich hen.",
+    "noCampaignsTitle": "Chua co chien dich",
+    "noCampaignsDescription": "Chua co chien dich nao. Hay them chien dich khi ban muon so sanh chat luong lead, lich hen da chot va hieu qua nguon."
+  }
+}

@@ -68,6 +68,8 @@ Safe templates are included in the repo:
 
 - `.env.example`
 - `.env.local.example`
+- `.env.preview.example`
+- `.env.production.example`
 - `.env.vercel.example`
 
 Use `.env.local.example` for local development and `.env.vercel.example` as the copy source for Vercel project settings.
@@ -88,7 +90,20 @@ Recommended usage by environment:
 
 - Local: set `NEXT_PUBLIC_APP_URL=http://localhost:3000`
 - Preview: you can leave `NEXT_PUBLIC_APP_URL` unset and let Vercel preview URLs resolve automatically
-- Production: set `NEXT_PUBLIC_APP_URL` when you want a stable Vercel production domain or custom domain
+- First Vercel production deploy: `NEXT_PUBLIC_APP_URL` can be omitted until the initial Vercel domain exists
+- Final production setup: set `NEXT_PUBLIC_APP_URL` after your stable Vercel domain or custom domain is known
+
+## Demo Clerk Override
+
+Production validation stays strict by default and will reject `pk_test_` and `sk_test_` Clerk keys.
+
+If you need a temporary demo deployment in production, you can explicitly opt in with:
+
+```env
+ALLOW_TEST_CLERK_KEYS_IN_PRODUCTION=true
+```
+
+Use this only for short-lived demo deployments. Remove it and switch back to live Clerk keys before any real production launch.
 
 ## Prisma and Database Notes
 
@@ -121,8 +136,8 @@ Create a Neon or Vercel Postgres database.
 
 Set:
 
-- `DATABASE_URL` to the pooled connection string
-- `DATABASE_URL_UNPOOLED` to the unpooled or direct connection string
+- `DATABASE_URL` to the pooled Neon/Vercel Postgres connection string
+- `DATABASE_URL_UNPOOLED` to the unpooled or direct Neon/Vercel Postgres connection string
 
 ### C. Set Vercel environment variables
 
@@ -136,7 +151,8 @@ Add these variables in Vercel for both Preview and Production:
 `NEXT_PUBLIC_APP_URL` handling:
 
 - Preview deployments: optional
-- Production deployments: recommended for a stable canonical origin
+- First production deploy: optional if the final domain is not known yet
+- Production after domain setup: recommended for a stable canonical origin
 - If omitted, the app falls back to Vercel-provided deployment URLs
 
 ### D. Run the production migration
@@ -144,6 +160,8 @@ Add these variables in Vercel for both Preview and Production:
 ```bash
 npx prisma migrate deploy
 ```
+
+Run this before or immediately after the first production deploy, depending on your release workflow. The important part is that the production database migration completes before you rely on the live app.
 
 ### E. Deploy
 
@@ -159,9 +177,9 @@ Deploy either by importing the GitHub repo into Vercel or by using the optional 
 6. Confirm the build command is `npm run build`.
 7. Leave the output directory empty so Vercel uses the default.
 8. Add the required environment variables for Preview and Production.
-   `NEXT_PUBLIC_APP_URL` is optional for Preview and recommended for Production.
+   `NEXT_PUBLIC_APP_URL` is optional for Preview and can be omitted for the first Production deploy if the final domain is not known yet.
 9. Deploy.
-10. Run `npx prisma migrate deploy` against the production database if you have not already done so from your release workflow.
+10. Run `npx prisma migrate deploy` against the production database before or immediately after the first production deploy.
 
 ## Optional Vercel CLI
 

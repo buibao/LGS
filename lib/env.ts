@@ -5,6 +5,10 @@ const REQUIRED_PRODUCTION_ENV_VARS = [
   "DATABASE_URL",
 ] as const;
 
+function allowTestClerkKeysInProduction() {
+  return process.env.ALLOW_TEST_CLERK_KEYS_IN_PRODUCTION === "true";
+}
+
 function isTestClerkKey(value: string | undefined) {
   return TEST_CLERK_KEY_PREFIXES.some((prefix) => value?.startsWith(prefix));
 }
@@ -32,6 +36,13 @@ export function validateRuntimeEnv() {
   const secretKey = process.env.CLERK_SECRET_KEY;
 
   if (isTestClerkKey(publishableKey) || isTestClerkKey(secretKey)) {
+    if (allowTestClerkKeysInProduction()) {
+      console.warn(
+        "ALLOW_TEST_CLERK_KEYS_IN_PRODUCTION=true is enabled. Test Clerk keys are being allowed in production for a temporary demo deployment.",
+      );
+      return;
+    }
+
     throw new Error(
       "Production Clerk deployments must use live keys. Replace pk_test_/sk_test_ with your Clerk production instance keys before deploying.",
     );

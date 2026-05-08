@@ -1,223 +1,229 @@
 # LeadOps AI
 
-LeadOps AI is a lightweight SaaS MVP for local service businesses to capture leads, track campaign sources, manage follow-ups, and review weekly performance from one dashboard.
+LeadOps AI is a Next.js App Router app for capturing leads, tracking campaign sources, managing follow-ups, and reviewing performance in one dashboard.
 
 ## Stack
 
 - Next.js App Router
 - TypeScript
-- Tailwind CSS
-- Clerk authentication
-- PostgreSQL
-- Prisma ORM
-- Zod
-- React Hook Form
-- TanStack Table
-- Recharts
+- Prisma
+- PostgreSQL via Neon or Vercel Postgres
+- Clerk
+- Tailwind CSS and shadcn/ui
+- Vercel
 
-## Features
+## Local Setup
 
-- Public landing page at `/`
-- Clerk-protected app routes
-- Workspace-aware data model with `Organization` and `Membership`
-- Lead management with manual lead entry
-- Campaign and source tracking
-- Basic CRM-style status pipeline
-- Dashboard analytics
-- Deterministic AI-style weekly report placeholder
-- Settings placeholders for workspace, team, and subscription
-
-## Routes
-
-- `/`
-- `/dashboard`
-- `/leads`
-- `/leads/new`
-- `/leads/[id]`
-- `/campaigns`
-- `/reports`
-- `/settings`
-- `/sign-in/[[...sign-in]]`
-- `/sign-up/[[...sign-up]]`
-
-## Setup
-
-1. Install dependencies:
+1. Install dependencies.
 
 ```bash
 npm install
 ```
 
-2. Copy environment variables:
+2. Copy the local environment template.
 
 ```bash
 cp .env.local.example .env.local
 ```
 
-3. Add your PostgreSQL connection string and Clerk keys to `.env.local`.
+3. Fill in your local values.
 
-For Neon or Vercel Postgres:
+Required variables:
 
-- `DATABASE_URL` should use the Neon pooled connection string with `-pooler` and `sslmode=require`.
-- `DATABASE_URL_UNPOOLED` should use the Neon direct connection string without `-pooler` and `sslmode=require`.
+- `DATABASE_URL`
+- `DATABASE_URL_UNPOOLED`
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+- `CLERK_SECRET_KEY`
+- `NEXT_PUBLIC_APP_URL`
 
-For local development, Clerk test keys are expected and will show a browser warning from Clerk. That warning is normal in development. Before deploying, replace `pk_test_...` and `sk_test_...` with Clerk live production keys.
+Notes:
 
-## Environment variables
+- `DATABASE_URL` is the pooled Neon/Vercel Postgres connection string used by the running app.
+- `DATABASE_URL_UNPOOLED` is the direct or unpooled connection string used for Prisma migrations.
+- `NEXT_PUBLIC_APP_URL` should be `http://localhost:3000` in local development.
+- Do not commit `.env.local`, `.env.production`, or any file containing real credentials.
 
-Use the example files in the repo as safe templates:
-
-- `.env.local.example` for local development
-- `.env.vercel.example` for Vercel deployment
-
-Copy the local template like this:
-
-```bash
-cp .env.local.example .env.local
-```
-
-For Vercel, either copy values manually from `.env.vercel.example` into the Vercel dashboard or use it as the source template for bulk import.
-
-Do not commit real `.env`, `.env.local`, `.env.production`, or `.env.vercel` files with live secrets.
-
-| Variable | Required | Exposure | Purpose |
-| --- | --- | --- | --- |
-| `DATABASE_URL` | Yes | Server-only | Pooled Neon/Vercel connection string for application runtime |
-| `DATABASE_URL_UNPOOLED` | Yes | Server-only | Direct/unpooled connection string for Prisma migrations |
-| `CLERK_SECRET_KEY` | Yes | Server-only | Clerk backend secret |
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Yes | Public | Clerk frontend publishable key |
-| `NEXT_PUBLIC_APP_URL` | Yes | Public | Local origin or deployed Vercel/custom domain |
-| `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | Yes | Public | Sign-in route |
-| `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | Yes | Public | Sign-up route |
-| `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` | Yes | Public | Post-login redirect |
-| `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` | Yes | Public | Post-signup redirect |
-
-4. Generate Prisma client and create or apply local migrations:
+4. Generate Prisma Client and run local migrations.
 
 ```bash
 npm run db:generate
-npx prisma migrate dev
+npm run db:migrate
 ```
 
-5. Seed demo data:
+5. Seed local data if needed.
 
 ```bash
 npm run db:seed
 ```
 
-6. Start the app:
+6. Start the app.
 
 ```bash
 npm run dev
 ```
 
-## Seeded demo data
+## Environment Templates
 
-The seed script creates:
+Safe templates are included in the repo:
 
-- 1 demo organization
-- 3 campaigns
-- 20 leads with mixed statuses and sources
-- Timeline activities for each lead
+- `.env.example`
+- `.env.local.example`
+- `.env.vercel.example`
 
-If a newly signed-in Clerk user has no membership yet, the app automatically attaches that user to the earliest available organization. This makes the seeded demo workspace visible immediately after login.
+Use `.env.local.example` for local development and `.env.vercel.example` as the copy source for Vercel project settings.
 
-## AI reporting note
+## App URL Resolution
 
-`lib/report-generator.ts` uses deterministic summary logic for now and includes a TODO to replace it later with OpenAI or Vercel AI SDK powered report generation.
+The app now resolves its base URL from a centralized utility in [lib/app-url.ts](/d:/LGS/lib/app-url.ts).
 
-## Deployment
+Resolution order:
 
-This project is designed for Vercel deployment. Configure the same environment variables from `.env.example` in Vercel, connect a PostgreSQL database, and run the Prisma commands during your deployment workflow or database setup phase.
+- `NEXT_PUBLIC_APP_URL` when you want an explicit canonical origin
+- `NEXT_PUBLIC_VERCEL_URL` when available
+- `VERCEL_URL` on Vercel server runtime
+- Browser `window.location.origin` when running in the client
+- `http://localhost:3000` as the final local fallback
 
-Do not deploy with Clerk test keys. The app will now fail fast in production if `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` or `CLERK_SECRET_KEY` still use `pk_test_` or `sk_test_`.
+Recommended usage by environment:
 
-## Prisma Migration Guidance
+- Local: set `NEXT_PUBLIC_APP_URL=http://localhost:3000`
+- Preview: you can leave `NEXT_PUBLIC_APP_URL` unset and let Vercel preview URLs resolve automatically
+- Production: set `NEXT_PUBLIC_APP_URL` when you want a stable Vercel production domain or custom domain
 
-- Use `npx prisma migrate dev` only for local development.
-- Use `npx prisma migrate deploy` for production and staging databases.
-- Do not run `prisma migrate dev` in production.
-- Prisma uses `DATABASE_URL_UNPOOLED` for direct schema operations when needed, while the app runtime should use the pooled `DATABASE_URL`.
+## Prisma and Database Notes
 
-## Neon + Vercel Deployment
+The Prisma datasource is configured for hosted Postgres deployments:
 
-1. Create a Neon project and database.
+- `url = env("DATABASE_URL")`
+- `directUrl = env("DATABASE_URL_UNPOOLED")`
 
-2. Copy the Neon pooled connection string into `DATABASE_URL`.
+Use these commands correctly:
 
-Requirements:
+- `prisma migrate dev` is for local development.
+- `prisma migrate deploy` is for production and staging.
 
-- Use the pooled string that includes `-pooler`
-- Include `sslmode=require`
+Do not run `prisma migrate dev` in Vercel production.
 
-3. Copy the Neon direct connection string into `DATABASE_URL_UNPOOLED`.
+## Vercel Deployment
 
-Requirements:
+GitHub import is the recommended deployment path.
 
-- Use the direct string without `-pooler`
-- Include `sslmode=require`
-
-Vercel and Neon may automatically provide `DATABASE_URL` and `DATABASE_URL_UNPOOLED` when the database integration is connected.
-
-4. Add these environment variables in Vercel:
+### A. Local checks
 
 ```bash
-DATABASE_URL=postgresql://USER:PASSWORD@EP-POOLER-REGION-pooler.neon.tech/leadops_ai?sslmode=require
-DATABASE_URL_UNPOOLED=postgresql://USER:PASSWORD@EP-DIRECT-REGION.neon.tech/leadops_ai?sslmode=require
-NEXT_PUBLIC_APP_URL=https://your-project.vercel.app
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_live_...
-CLERK_SECRET_KEY=sk_live_...
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+npm install
+npm run build
 ```
 
-You can use `.env.vercel.example` as the copy/paste template for this step.
+### B. Create a database
 
-5. Run production migrations against the Neon production database.
+Create a Neon or Vercel Postgres database.
 
-Use this command for production and staging:
+Set:
+
+- `DATABASE_URL` to the pooled connection string
+- `DATABASE_URL_UNPOOLED` to the unpooled or direct connection string
+
+### C. Set Vercel environment variables
+
+Add these variables in Vercel for both Preview and Production:
+
+- `DATABASE_URL`
+- `DATABASE_URL_UNPOOLED`
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+- `CLERK_SECRET_KEY`
+
+`NEXT_PUBLIC_APP_URL` handling:
+
+- Preview deployments: optional
+- Production deployments: recommended for a stable canonical origin
+- If omitted, the app falls back to Vercel-provided deployment URLs
+
+### D. Run the production migration
 
 ```bash
 npx prisma migrate deploy
 ```
 
-If you have not created your initial migrations yet, create them locally first:
+### E. Deploy
+
+Deploy either by importing the GitHub repo into Vercel or by using the optional Vercel CLI flow below.
+
+## GitHub to Vercel
+
+1. Push the repository to GitHub.
+2. In Vercel, click `Add New...` -> `Project`.
+3. Import the GitHub repository.
+4. Confirm the framework preset is `Next.js`.
+5. Confirm the install command is `npm install`.
+6. Confirm the build command is `npm run build`.
+7. Leave the output directory empty so Vercel uses the default.
+8. Add the required environment variables for Preview and Production.
+   `NEXT_PUBLIC_APP_URL` is optional for Preview and recommended for Production.
+9. Deploy.
+10. Run `npx prisma migrate deploy` against the production database if you have not already done so from your release workflow.
+
+## Optional Vercel CLI
+
+GitHub import is still the recommended path, but local CLI deploy is supported.
+
+Install:
 
 ```bash
-npx prisma migrate dev --name init
+npm i -g vercel
 ```
 
-Commit the generated `prisma/migrations` folder before deploying.
+Login:
 
-6. Push the project to GitHub.
+```bash
+vercel login
+```
 
-7. Import the GitHub repository into Vercel.
+Link:
 
-8. Deploy on Vercel.
+```bash
+vercel link
+```
 
-The repo already runs:
+Pull env:
 
-- `postinstall`: `prisma generate`
-- `build`: `prisma generate && next build`
+```bash
+vercel env pull .env.local
+```
 
-9. After deployment, smoke test these routes:
+Preview deploy:
+
+```bash
+vercel
+```
+
+Production deploy:
+
+```bash
+vercel --prod
+```
+
+If you deploy with the CLI, still run production migrations with:
+
+```bash
+npx prisma migrate deploy
+```
+
+## Auth Route Notes
+
+Current public routes:
 
 - `/`
 - `/sign-in`
+- `/sign-up`
+- `/capture/[orgSlug]` and `/capture/[orgSlug]/success` if those routes are added later
+
+Current protected routes:
+
 - `/dashboard`
 - `/leads`
 - `/campaigns`
 - `/reports`
 - `/settings`
 
-## Deployment Notes
-
-- Public routes are currently `/`, `/sign-in(.*)`, and `/sign-up(.*)`.
-- Protected routes include `/dashboard`, `/leads`, `/campaigns`, `/reports`, and `/settings`.
-- No `/capture/[orgSlug]` routes currently exist in this repo, so no extra Clerk public-route exemptions are required.
-- The app does not use local filesystem storage for persistent data.
-- The app does not depend on `localhost` in production runtime paths. The `localhost` references in this repo are example environment values and local database setup messaging only.
-- No background jobs are started inside Vercel request handlers.
-- Prisma schema changes should be applied manually with `prisma migrate deploy` as part of deployment operations, not automatically during the Vercel build step.
+No `/capture/[orgSlug]` route currently exists in this repo, but the Clerk middleware is configured so capture routes remain public if introduced.

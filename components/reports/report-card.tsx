@@ -1,6 +1,8 @@
 import { AlertCircle, ArrowRight, Sparkles, TrendingUp } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { ActionPanel } from "@/components/design-system/action-panel";
 import { EmptyState } from "@/components/design-system/empty-state";
+import { InsightCard } from "@/components/design-system/insight-card";
 import { Badge } from "@/components/ui/badge";
 import { SectionCard } from "@/components/ui/section-card";
 
@@ -36,13 +38,12 @@ export async function ReportCard({
           <Metric label={tReports("metrics.bestSource")} value={bestSource ?? tReports("notAvailable")} />
           <Metric label={tReports("metrics.bookedAppointments")} value={bookedLeads.toString()} />
           <Metric label={tReports("metrics.followUpRisk")} value={followUpNeeded.toString()} />
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-7 text-amber-900">
-            <div className="mb-2 flex items-center gap-2 font-semibold">
-              <AlertCircle className="h-4 w-4" />
-              {tReports("suggestedAction")}
-            </div>
-            {suggestedActionsLine ?? tReports("fallbackSuggestedAction")}
-          </div>
+          <ActionPanel
+            label={tReports("suggestedAction")}
+            description={suggestedActionsLine ?? tReports("fallbackSuggestedAction")}
+            icon={<AlertCircle className="h-4 w-4" />}
+            tone="accent"
+          />
         </div>
       </SectionCard>
 
@@ -54,27 +55,25 @@ export async function ReportCard({
         <div className="space-y-5">
           {weeklyLeads > 0 ? (
             <div className="grid gap-3 md:grid-cols-2">
-              <Insight title={tReports("bestSource")} text={bestSourceLine ?? tReports("fallbackBestSource")} />
-              <Insight title={tReports("followUpRisk")} text={followUpLine ?? tReports("fallbackFollowUpRisk")} />
-              <Insight
+              <InsightCard title={tReports("bestSource")} description={bestSourceLine ?? tReports("fallbackBestSource")} tone="info" />
+              <InsightCard title={tReports("followUpRisk")} description={followUpLine ?? tReports("fallbackFollowUpRisk")} tone="warning" />
+              <InsightCard
                 title={tReports("bookingPerformance")}
-                text={bookingLine ? tReports("bookingPerformanceWithCount", { count: bookingLine }) : tReports("fallbackBookingPerformance")}
+                description={bookingLine ? tReports("bookingPerformanceWithCount", { count: bookingLine }) : tReports("fallbackBookingPerformance")}
+                tone="success"
               />
-              <Insight title={tReports("suggestedAction")} text={suggestedActionsLine ?? tReports("fallbackSuggestedActionDetailed")} />
+              <InsightCard title={tReports("suggestedAction")} description={suggestedActionsLine ?? tReports("fallbackSuggestedActionDetailed")} />
             </div>
           ) : (
             <EmptyState title={tEmpty("noReportTitle")} description={tEmpty("noReportDescription")} />
           )}
 
-          <div className="rounded-2xl bg-slate-950 p-5 text-white">
-            <div className="flex items-center gap-2 text-sm font-medium text-white/80">
-              <TrendingUp className="h-4 w-4 text-emerald-300" />
-              {tReports("readout")}
-            </div>
-            <p className="mt-3 text-sm leading-7 text-white/88">
-              {suggestedActionsLine ?? tReports("fallbackReadout")}
-            </p>
-          </div>
+          <ActionPanel
+            label={tReports("readout")}
+            description={suggestedActionsLine ?? tReports("fallbackReadout")}
+            icon={<TrendingUp className="h-4 w-4" />}
+            tone="dark"
+          />
 
           <div className="rounded-2xl border bg-white p-5">
             <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900">
@@ -90,15 +89,6 @@ export async function ReportCard({
           </div>
         </div>
       </SectionCard>
-    </div>
-  );
-}
-
-function Insight({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-2xl border bg-[var(--secondary)]/45 p-4">
-      <p className="text-sm font-semibold text-slate-900">{title}</p>
-      <p className="mt-2 text-sm leading-7 text-slate-600">{text}</p>
     </div>
   );
 }

@@ -13,7 +13,7 @@ export function AppShell({
 }) {
   return (
     <div className="dashboard-shell min-h-screen px-3 py-3 md:px-5 md:py-5 xl:px-6 xl:py-6">
-      <div className="mx-auto grid max-w-[1520px] gap-4 md:grid-cols-[304px_minmax(0,1fr)] xl:gap-6">
+      <div className="mx-auto grid max-w-[1540px] gap-4 md:grid-cols-[304px_minmax(0,1fr)] xl:gap-6">
         <div className="hidden md:block">
           <AppSidebar organizationName={organizationName} />
         </div>

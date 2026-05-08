@@ -1,5 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { BellRing, CreditCard, PlugZap, Users } from "lucide-react";
+import { ActionPanel } from "@/components/design-system/action-panel";
+import { InsightCard } from "@/components/design-system/insight-card";
 import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionCard } from "@/components/ui/section-card";
@@ -23,10 +25,10 @@ export default async function SettingsPage() {
       <div className="grid gap-4 xl:grid-cols-[1fr_1fr]">
         <SectionCard title={tPage("businessProfile.title")} description={tPage("businessProfile.description")}>
           <div className="grid gap-4 sm:grid-cols-2">
-            <SettingTile label={tPage("businessProfile.businessName")} value={organization.name} />
-            <SettingTile label={tPage("businessProfile.workspaceSlug")} value={organization.slug} />
-            <SettingTile label={tPage("businessProfile.industryFit")} value={tPage("businessProfile.industryFitValue")} />
-            <SettingTile label={tPage("businessProfile.currentRole")} value={membership.role} />
+            <InsightCard title={tPage("businessProfile.businessName")} description={organization.name} />
+            <InsightCard title={tPage("businessProfile.workspaceSlug")} description={organization.slug} />
+            <InsightCard title={tPage("businessProfile.industryFit")} description={tPage("businessProfile.industryFitValue")} />
+            <InsightCard title={tPage("businessProfile.currentRole")} description={membership.role} />
           </div>
         </SectionCard>
 
@@ -37,11 +39,12 @@ export default async function SettingsPage() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         <SectionCard title={tPage("team.title")} description={tPage("team.description")}>
-          <PlaceholderFeature
+          <ActionPanel
             icon={<Users className="h-4 w-4" />}
+            label={tPage("placeholder")}
             title={tPage("team.cardTitle")}
-            body={tPage("team.cardBody")}
-            badge={tPage("placeholder")}
+            description={tPage("team.cardBody")}
+            tone="neutral"
           />
         </SectionCard>
 
@@ -54,11 +57,12 @@ export default async function SettingsPage() {
         </SectionCard>
 
         <SectionCard title={tPage("subscription.title")} description={tPage("subscription.description")}>
-          <PlaceholderFeature
+          <ActionPanel
             icon={<CreditCard className="h-4 w-4" />}
+            label={tPage("comingSoon")}
             title={tPage("subscription.cardTitle")}
-            body={tPage("subscription.cardBody")}
-            badge={tPage("comingSoon")}
+            description={tPage("subscription.cardBody")}
+            tone="neutral"
           />
         </SectionCard>
       </div>
@@ -71,15 +75,6 @@ export default async function SettingsPage() {
           <IntegrationTile name={tPage("integrations.zalo")} description={tPage("integrations.zaloDescription")} badge={tPage("planned")} />
         </div>
       </SectionCard>
-    </div>
-  );
-}
-
-function SettingTile({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-[22px] border bg-[var(--secondary)]/45 p-4">
-      <p className="text-sm font-medium text-slate-500">{label}</p>
-      <p className="mt-2 text-sm leading-7 text-slate-900">{value}</p>
     </div>
   );
 }
@@ -102,30 +97,6 @@ function PreferenceTile({
   );
 }
 
-function PlaceholderFeature({
-  icon,
-  title,
-  body,
-  badge,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  body: string;
-  badge: string;
-}) {
-  return (
-    <div className="rounded-[24px] border bg-[var(--secondary)]/45 p-4">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-          <span className="rounded-xl bg-white p-2 text-[var(--primary)]">{icon}</span>
-          {title}
-        </div>
-        <Badge variant="neutral">{badge}</Badge>
-      </div>
-      <p className="mt-3 text-sm leading-7 text-slate-600">{body}</p>
-    </div>
-  );
-}
 
 function IntegrationTile({
   name,

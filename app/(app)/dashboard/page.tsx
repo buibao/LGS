@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { CalendarClock, CalendarRange, CheckCircle2, Target, TrendingUp, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { ActionPanel } from "@/components/design-system/action-panel";
+import { InsightCard } from "@/components/design-system/insight-card";
 import { DashboardCharts } from "@/components/dashboard/charts";
 import { OverviewCards } from "@/components/dashboard/overview-cards";
 import { RecentLeadsTable } from "@/components/dashboard/recent-leads-table";
@@ -100,15 +102,17 @@ export default async function DashboardPage() {
         }
       >
         <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr_1fr]">
-          <AttentionTile
-            label={tDashboard("attention.followUpNeededLabel")}
+          <InsightCard
+            title={tDashboard("attention.followUpNeededLabel")}
             value={attentionSummary.followUpNeeded.toString()}
-            text={tDashboard("attention.followUpNeededText")}
+            description={tDashboard("attention.followUpNeededText")}
+            icon={<CalendarClock className="h-4 w-4" />}
+            tone={attentionSummary.followUpNeeded > 0 ? "warning" : "default"}
           />
-          <AttentionTile
-            label={tDashboard("attention.oldestPendingLabel")}
+          <InsightCard
+            title={tDashboard("attention.oldestPendingLabel")}
             value={attentionSummary.oldestPendingLead?.fullName ?? tDashboard("attention.noneDue")}
-            text={
+            description={
               attentionSummary.oldestPendingLead?.followUpAt
                 ? tDashboard("attention.oldestPendingText", {
                     age: timeAgo(attentionSummary.oldestPendingLead.followUpAt),
@@ -116,18 +120,20 @@ export default async function DashboardPage() {
                   })
                 : tDashboard("attention.noOverdueText")
             }
+            icon={<CheckCircle2 className="h-4 w-4" />}
+            tone={attentionSummary.oldestPendingLead ? "info" : "default"}
           />
-          <div className="rounded-[24px] border bg-slate-950 p-5 text-white">
-            <div className="flex items-center gap-2 text-sm font-semibold text-white/80">
-              <CheckCircle2 className="h-4 w-4 text-emerald-300" />
-              {tDashboard("attention.suggestedAction")}
-            </div>
-            <p className="mt-3 text-sm leading-7 text-white/85">
-              {attentionSummary.followUpNeeded > 0
+          <ActionPanel
+            label={tDashboard("attention.suggestedAction")}
+            title={tDashboard("reviewLeadQueue")}
+            description={
+              attentionSummary.followUpNeeded > 0
                 ? tDashboard("attention.suggestedActionAlert")
-                : tDashboard("attention.suggestedActionHealthy")}
-            </p>
-          </div>
+                : tDashboard("attention.suggestedActionHealthy")
+            }
+            icon={<CheckCircle2 className="h-4 w-4" />}
+            tone="dark"
+          />
         </div>
       </SectionCard>
 
@@ -144,24 +150,6 @@ export default async function DashboardPage() {
       />
 
       <RecentLeadsTable leads={recentLeads} />
-    </div>
-  );
-}
-
-function AttentionTile({
-  label,
-  value,
-  text,
-}: {
-  label: string;
-  value: string;
-  text: string;
-}) {
-  return (
-    <div className="rounded-[24px] border bg-[var(--secondary)]/50 p-5">
-      <p className="text-sm font-medium text-slate-500">{label}</p>
-      <p className="mt-3 text-2xl font-semibold text-slate-950">{value}</p>
-      <p className="mt-2 text-sm leading-7 text-slate-600">{text}</p>
     </div>
   );
 }

@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { CalendarClock, ClipboardList, FileText, PhoneCall, Sparkles, UserRound } from "lucide-react";
-import { LeadDetailForm } from "@/components/leads/lead-detail-form";
+import { ActionPanel } from "@/components/design-system/action-panel";
+import { InsightCard } from "@/components/design-system/insight-card";
 import { MetricCard } from "@/components/design-system/metric-card";
+import { LeadDetailForm } from "@/components/leads/lead-detail-form";
 import { EmptyState } from "@/components/ui/empty-state";
 import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
 import { PageHeader } from "@/components/ui/page-header";
@@ -69,13 +71,12 @@ export default async function LeadDetailPage({
 
         <SectionCard title={tPage("suggestedActionTitle")} description={tPage("suggestedActionDescription")}>
           <div className="space-y-4">
-            <div className="rounded-[24px] border border-[var(--primary)]/10 bg-[var(--primary)]/[0.05] p-4">
-              <div className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-                <Sparkles className="h-4 w-4 text-[var(--primary)]" />
-                {tPage("nextBestMove")}
-              </div>
-              <p className="mt-2 text-sm leading-7 text-slate-600">{suggestedAction}</p>
-            </div>
+            <ActionPanel
+              label={tPage("nextBestMove")}
+              description={suggestedAction}
+              icon={<Sparkles className="h-4 w-4" />}
+              tone="accent"
+            />
             <LeadDetailForm
               leadId={lead.id}
               defaultStatus={lead.status}
@@ -112,7 +113,7 @@ export default async function LeadDetailPage({
               <div key={activity.id} className="rounded-[24px] border bg-[var(--secondary)]/45 p-4">
                 <p className="text-sm font-medium text-slate-900">{activity.message}</p>
                 <p className="mt-1 text-xs text-[var(--muted-foreground)]">
-                  {formatDateTime(activity.createdAt)} • {timeAgo(activity.createdAt)}
+                  {formatDateTime(activity.createdAt)} | {timeAgo(activity.createdAt)}
                 </p>
               </div>
             ))
@@ -143,13 +144,5 @@ function ContactTile({
   label: string;
   value: string;
 }) {
-  return (
-    <div className="rounded-[24px] border bg-white p-4 shadow-sm">
-      <div className="flex items-center gap-2 text-sm font-medium text-slate-700">
-        <span className="rounded-xl bg-[var(--secondary)] p-2 text-[var(--primary)]">{icon}</span>
-        {label}
-      </div>
-      <p className="mt-3 text-sm leading-7 text-slate-600">{value}</p>
-    </div>
-  );
+  return <InsightCard title={label} description={value} icon={icon} />;
 }

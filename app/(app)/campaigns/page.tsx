@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { BarChart3, Coins, Trophy } from "lucide-react";
+import { InsightCard } from "@/components/design-system/insight-card";
 import { MetricCard } from "@/components/design-system/metric-card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { SourceTypeBadge } from "@/components/ui/entity-badges";
@@ -54,8 +55,8 @@ export default async function CampaignsPage() {
                   <span className="text-sm font-semibold text-slate-500">{formatPercent(campaign.conversionRate)}</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
-                  <MiniMetric label={tPage("table.leads")} value={campaign.leadCount.toString()} />
-                  <MiniMetric label={tPage("table.booked")} value={campaign.bookedLeads.toString()} />
+                  <InsightCard title={tPage("table.leads")} value={campaign.leadCount.toString()} description={tPage("snapshotDescription")} className="p-0" />
+                  <InsightCard title={tPage("table.booked")} value={campaign.bookedLeads.toString()} description={tPage("table.conversionRate")} className="p-0" />
                 </div>
                 <p className="text-sm leading-7 text-slate-600">
                   {campaign.budget ? tPage("budgetValue", { value: campaign.budget.toFixed(2) }) : tPage("budgetEmpty")}
@@ -109,15 +110,6 @@ export default async function CampaignsPage() {
           description={tEmpty("noCampaignsDescription")}
         />
       )}
-    </div>
-  );
-}
-
-function MiniMetric({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl border bg-[var(--secondary)]/45 p-4">
-      <p className="text-sm text-slate-500">{label}</p>
-      <p className="mt-2 text-xl font-semibold text-slate-950">{value}</p>
     </div>
   );
 }

@@ -91,18 +91,20 @@
     "noChartDataDescription": "Start capturing leads to unlock trend, source, and pipeline visuals."
   },
   "Validation": {
-    "validation.fullNameRequired": "Enter the lead's full name.",
-    "validation.phoneRequired": "Enter a phone number with at least 8 digits.",
-    "validation.emailInvalid": "Enter a valid email address.",
-    "validation.shortTextTooLong": "Keep this answer under 120 characters.",
-    "validation.notesTooLong": "Keep notes under 2000 characters.",
-    "validation.selectStatus": "Choose a lead status.",
-    "validation.selectSource": "Choose a lead source.",
-    "validation.honeypotInvalid": "This submission could not be processed.",
-    "validation.leadNotFound": "This lead could not be found.",
-    "validation.saveLeadFailed": "We couldn't save the lead right now. Please try again.",
-    "validation.updateLeadFailed": "We couldn't update the lead right now. Please try again.",
-    "validation.invalidCampaign": "That campaign link is no longer valid for this form."
+    "validation": {
+      "fullNameRequired": "Enter the lead's full name.",
+      "phoneRequired": "Enter a phone number with at least 8 digits.",
+      "emailInvalid": "Enter a valid email address.",
+      "shortTextTooLong": "Keep this answer under 120 characters.",
+      "notesTooLong": "Keep notes under 2000 characters.",
+      "selectStatus": "Choose a lead status.",
+      "selectSource": "Choose a lead source.",
+      "honeypotInvalid": "This submission could not be processed.",
+      "leadNotFound": "This lead could not be found.",
+      "saveLeadFailed": "We couldn't save the lead right now. Please try again.",
+      "updateLeadFailed": "We couldn't update the lead right now. Please try again.",
+      "invalidCampaign": "That campaign link is no longer valid for this form."
+    }
   },
   "LeadsPage": {
     "eyebrow": "Leads",
@@ -415,5 +417,205 @@
     "copy": "Copy public capture URL",
     "copied": "Copied",
     "helper": "Share this link in Facebook, TikTok, Zalo, websites, or landing pages."
+  },
+  "Landing": {
+    "header": {
+      "tagline": "Lead management for local service businesses",
+      "openDashboard": "Open Dashboard",
+      "signIn": "Sign in",
+      "getStarted": "Get started"
+    },
+    "hero": {
+      "badge": "Built for spas, clinics, dental, beauty, education, and local service teams",
+      "title": "Turn social media leads into booked appointments",
+      "subtitle": "LeadOps AI helps local businesses track leads, follow-ups, campaigns, and weekly performance in one dashboard.",
+      "primaryCta": "View Dashboard Demo",
+      "secondaryCta": "See how it works",
+      "tags": {
+        "followUp": "Follow-up visibility",
+        "campaigns": "Campaign performance clarity",
+        "reports": "Weekly reporting readiness"
+      },
+      "highlights": {
+        "sources": {
+          "title": "All lead sources",
+          "text": "Facebook, TikTok, website forms, referrals, and manual entry in one place."
+        },
+        "followUp": {
+          "title": "Actionable follow-up",
+          "text": "Staff can see which leads need attention today before they go cold."
+        },
+        "conversion": {
+          "title": "Simple conversion view",
+          "text": "Owners can track booked appointments without digging through spreadsheets."
+        }
+      },
+      "mockup": {
+        "title": "Dashboard preview",
+        "subtitle": "A calm daily operating view for lead intake, follow-up pressure, and booking momentum.",
+        "demoBadge": "Demo workspace",
+        "attentionTitle": "What needs attention",
+        "attentionText": "Leads need follow-up today. The oldest pending inquiry came from Facebook two days ago.",
+        "sourcesTitle": "Top sources",
+        "recentLeadsTitle": "Recent leads",
+        "recentLeadsBadge": "Compact table",
+        "kpi": {
+          "totalLeads": "Total leads",
+          "bookedAppointments": "Booked appointments",
+          "followUpNeeded": "Follow-up needed",
+          "conversionRate": "Conversion rate"
+        },
+        "sources": {
+          "facebook": "Facebook Lead Ads",
+          "website": "Website Forms",
+          "referral": "Referrals"
+        },
+        "interests": {
+          "dental": "Teeth whitening",
+          "beauty": "Skin treatment",
+          "education": "English course"
+        },
+        "status": {
+          "booked": "Booked",
+          "followUp": "Follow-up today",
+          "new": "New"
+        }
+      }
+    },
+    "pain": {
+      "eyebrow": "Pain points",
+      "title": "The lead process breaks down before the booking happens",
+      "title1": "Leads are scattered",
+      "text1": "Leads are scattered across inboxes, forms, and spreadsheets, so nobody has one clear view of what came in.",
+      "title2": "Follow-up gets missed",
+      "text2": "Staff forget to follow up when messages are split across channels or handed off between team members.",
+      "title3": "Campaign visibility is weak",
+      "text3": "Owners cannot see which campaign works, so ad budget gets spent without clear lead quality tracking.",
+      "title4": "Lead quality stays unclear",
+      "text4": "New inquiry volume can look healthy even when actual appointments are not increasing."
+    },
+    "features": {
+      "eyebrow": "Features",
+      "title": "Everything your team needs to move leads toward booked appointments",
+      "cards": {
+        "tracking": {
+          "title": "Lead Tracking",
+          "text": "Capture Facebook, TikTok, website, referral, and manual leads in one place."
+        },
+        "followUp": {
+          "title": "Follow-up Reminders",
+          "text": "Keep overdue and due-today follow-ups visible so promising leads do not go cold."
+        },
+        "insights": {
+          "title": "Campaign Source Insights",
+          "text": "Compare which channels produce the most leads and the best booking outcomes."
+        },
+        "reports": {
+          "title": "Weekly AI-style Reports",
+          "text": "Summarize lead performance with business-friendly reporting that is ready for future AI upgrades."
+        },
+        "conversion": {
+          "title": "Appointment Conversion Overview",
+          "text": "Watch the path from inquiry to booked appointment with simple performance metrics."
+        },
+        "workflow": {
+          "title": "Team-ready CRM Workflow",
+          "text": "Leave clear notes, status updates, and next steps so staff can pick up where others left off."
+        }
+      }
+    },
+    "how": {
+      "eyebrow": "How it works",
+      "title": "A simple workflow for busy local service teams",
+      "steps": {
+        "capture": {
+          "title": "Capture leads",
+          "text": "Bring in inquiries from ads, website forms, referrals, or manual entry."
+        },
+        "followUp": {
+          "title": "Track follow-up",
+          "text": "Assign a clear status and next follow-up date so nobody forgets the lead."
+        },
+        "convert": {
+          "title": "Convert to bookings",
+          "text": "Move qualified leads into booked appointments and keep notes organized."
+        },
+        "review": {
+          "title": "Review weekly performance",
+          "text": "See what sources, campaigns, and staff actions are driving better results."
+        }
+      }
+    },
+    "useCases": {
+      "eyebrow": "Use cases",
+      "title": "Designed for local businesses that live on speed and follow-up discipline",
+      "cards": {
+        "spa": {
+          "title": "Spa",
+          "text": "Track treatment inquiries, consultation requests, and repeat follow-up opportunities without losing context."
+        },
+        "dental": {
+          "title": "Dental clinic",
+          "text": "Keep whitening, braces, and consultation leads moving toward scheduled visits with cleaner status control."
+        },
+        "clinic": {
+          "title": "Clinic / beauty center",
+          "text": "Give staff one operating view for incoming messages, consultation requests, and booked appointment visibility."
+        },
+        "education": {
+          "title": "Education center",
+          "text": "Manage course inquiries, parent follow-up, and conversion from lead to consultation or enrollment call."
+        }
+      }
+    },
+    "pricing": {
+      "eyebrow": "Pricing",
+      "title": "Simple plan placeholders for early sales conversations",
+      "comingSoon": "Coming soon",
+      "starter": {
+        "title": "Starter",
+        "text": "For owner-operated businesses getting visibility on new leads and follow-up basics."
+      },
+      "growth": {
+        "title": "Growth",
+        "text": "For teams that need stronger campaign tracking, more users, and reporting clarity."
+      },
+      "custom": {
+        "title": "Custom",
+        "text": "For multi-location or higher-volume teams that need tailored onboarding and workflows."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Common questions from local service teams",
+      "items": {
+        "crm": {
+          "question": "Is this a CRM?",
+          "answer": "Yes. LeadOps AI is a lightweight lead-focused CRM designed around follow-up discipline, campaign visibility, and booked appointments."
+        },
+        "integration": {
+          "question": "Can I use it without Facebook or TikTok integration?",
+          "answer": "Yes. You can still capture and manage leads manually, from forms, referrals, or any other source."
+        },
+        "team": {
+          "question": "Can my team use it?",
+          "answer": "Yes. The product is structured for owners, front-desk staff, and managers to work from one shared lead queue."
+        },
+        "language": {
+          "question": "Does it support Vietnamese and English?",
+          "answer": "Yes. The interface supports both Vietnamese and English."
+        },
+        "ai": {
+          "question": "Is AI reporting available now?",
+          "answer": "The reporting layout is ready today, and richer AI-generated reporting is planned for a future release."
+        }
+      }
+    },
+    "footer": {
+      "description": "LeadOps AI helps local service businesses turn scattered inquiries into a cleaner booking workflow.",
+      "demoLink": "View dashboard demo",
+      "howItWorksLink": "How it works",
+      "faqLink": "FAQ"
+    }
   }
 }

@@ -25,18 +25,18 @@ function FieldShell({
 }) {
   return (
     <label className={cn("space-y-2.5", className)}>
-      <span className="flex items-center gap-1.5 text-sm font-medium text-slate-700">
+      <span className="flex items-center gap-1.5 text-[0.95rem] font-semibold text-slate-700">
         {label}
         {required ? <span className="text-rose-600">*</span> : null}
       </span>
       {children}
       {error ? (
-        <span className="flex items-start gap-2 text-sm text-rose-600">
+        <span className="flex items-start gap-2 text-[0.92rem] leading-6 text-rose-600">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
           {error}
         </span>
       ) : helperText ? (
-        <span className="block text-xs leading-6 text-slate-500">{helperText}</span>
+        <span className="block text-[0.82rem] leading-6 text-slate-500">{helperText}</span>
       ) : null}
     </label>
   );

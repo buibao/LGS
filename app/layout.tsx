@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { DM_Sans, Space_Grotesk } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
+import { getLocale } from "next-intl/server";
 import { validateRuntimeEnv } from "@/lib/env";
 import "./globals.css";
 
-const bodyFont = DM_Sans({
+const appFont = Be_Vietnam_Pro({
   variable: "--font-body",
-  subsets: ["latin"],
-});
-
-const displayFont = Space_Grotesk({
-  variable: "--font-display",
-  subsets: ["latin"],
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -19,17 +17,18 @@ export const metadata: Metadata = {
   description: "Turn social media leads into booked appointments.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   validateRuntimeEnv();
+  const locale = await getLocale();
 
   return (
     <html
-      lang="en"
-      className={`${bodyFont.variable} ${displayFont.variable} h-full antialiased`}
+      lang={locale}
+      className={`${appFont.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body

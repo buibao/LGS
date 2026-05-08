@@ -1,419 +1,621 @@
 {
   "Common": {
     "appName": "LeadOps AI",
-    "loading": "Dang tai",
-    "error": "Loi",
-    "emptyState": "Chua co du lieu"
+    "loading": "Đang tải",
+    "error": "Lỗi",
+    "emptyState": "Chưa có dữ liệu"
   },
   "Navigation": {
-    "dashboard": "Tong quan",
-    "leads": "Khach hang tiem nang",
-    "campaigns": "Chien dich",
-    "reports": "Bao cao",
-    "settings": "Cai dat",
-    "language": "Ngon ngu",
-    "english": "Tieng Anh",
-    "vietnamese": "Tieng Viet"
+    "dashboard": "Tổng quan",
+    "leads": "Khách tiềm năng",
+    "campaigns": "Chiến dịch",
+    "reports": "Báo cáo",
+    "settings": "Cài đặt",
+    "language": "Ngôn ngữ",
+    "english": "Tiếng Anh",
+    "vietnamese": "Tiếng Việt"
   },
   "Actions": {
-    "addLead": "Them lead",
-    "save": "Luu",
-    "cancel": "Huy",
-    "search": "Tim kiem",
-    "filter": "Loc",
-    "clearFilters": "Xoa bo loc",
-    "createLead": "Tao lead",
-    "updateLead": "Cap nhat lead"
+    "addLead": "Thêm khách tiềm năng",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "search": "Tìm kiếm",
+    "filter": "Lọc",
+    "clearFilters": "Xóa bộ lọc",
+    "createLead": "Tạo khách tiềm năng",
+    "updateLead": "Cập nhật khách tiềm năng"
   },
   "Labels": {
-    "status": "Trang thai",
-    "source": "Nguon",
+    "status": "Trạng thái",
+    "source": "Nguồn khách",
     "email": "Email",
-    "phone": "So dien thoai",
-    "notes": "Ghi chu",
-    "campaign": "Chien dich",
-    "followUp": "Cham soc tiep theo",
-    "created": "Tao luc",
-    "interest": "Nhu cau",
-    "name": "Ten"
+    "phone": "Số điện thoại",
+    "notes": "Ghi chú",
+    "campaign": "Chiến dịch",
+    "followUp": "Chăm sóc lại",
+    "created": "Đã tạo",
+    "interest": "Nhu cầu",
+    "name": "Tên"
   },
   "Filters": {
-    "allStatuses": "Tat ca trang thai",
-    "allSources": "Tat ca nguon",
-    "allDates": "Tat ca ngay"
+    "allStatuses": "Tất cả trạng thái",
+    "allSources": "Tất cả nguồn",
+    "allDates": "Tất cả ngày"
   },
   "LeadStatus": {
-    "NEW": "Moi",
-    "CONTACTED": "Da lien he",
-    "INTERESTED": "Quan tam",
-    "BOOKED": "Da dat lich",
-    "NO_RESPONSE": "Khong phan hoi",
-    "LOST": "Mat lead"
+    "NEW": "Mới",
+    "CONTACTED": "Đã liên hệ",
+    "INTERESTED": "Đang quan tâm",
+    "BOOKED": "Đã đặt lịch",
+    "NO_RESPONSE": "Không phản hồi",
+    "LOST": "Đã mất"
   },
   "LeadSource": {
     "FACEBOOK": "Facebook",
     "TIKTOK": "TikTok",
-    "ORGANIC": "Tu nhien",
-    "REFERRAL": "Gioi thieu",
+    "ORGANIC": "Tự nhiên",
+    "REFERRAL": "Giới thiệu",
     "WEBSITE": "Website",
-    "MANUAL": "Nhap tay",
-    "OTHER": "Khac"
+    "MANUAL": "Nhập tay",
+    "OTHER": "Khác"
   },
   "AppShell": {
-    "demoReady": "San sang demo",
-    "sidebarDescription": "Giu moi nhu cau, lich cham soc da hua, va lich hen da dat hien ro cho toan bo doi ngu le tan.",
-    "focusLabel": "Muc tieu",
-    "focusValue": "Lead thanh lich hen",
-    "priorityLabel": "Uu tien",
-    "priorityValue": "Toc do phan hoi",
-    "navigationTitle": "Dieu huong",
-    "weeklyFocusTitle": "Trong tam tuan nay",
-    "weeklyFocusDescription": "Moi lead cho qua mot ngay deu tang nguy co mat lich hen. Bao ve hang doi truoc khi lead nguoi dan.",
-    "automationTitle": "Lop AI tuong lai",
-    "automationDescription": "Workspace nay da duoc sap xep san cho tu dong hoa, tom tat, va de xuat hanh dong tiep theo ma khong thay doi cach doi ngu dang van hanh.",
-    "livePipeline": "Pipeline dang chay",
-    "topbarDescription": "Theo doi luong lead vao, ap luc cham soc, va dong luc dat lich tu mot man hinh van hanh ro rang.",
-    "dailySnapshot": "Anh chup van hanh trong ngay",
-    "aiReportingPreview": "Bao cao AI ban xem truoc"
+    "demoReady": "Sẵn sàng demo",
+    "sidebarDescription": "Giữ mọi nhu cầu tư vấn, lời hẹn chăm sóc lại và lịch hẹn đã đặt hiển thị rõ ràng cho toàn bộ đội ngũ lễ tân.",
+    "focusLabel": "Trọng tâm",
+    "focusValue": "Từ khách tiềm năng đến lịch hẹn",
+    "priorityLabel": "Ưu tiên",
+    "priorityValue": "Tốc độ phản hồi",
+    "navigationTitle": "Điều hướng",
+    "weeklyFocusTitle": "Trọng tâm tuần này",
+    "weeklyFocusDescription": "Mỗi khách tiềm năng chờ quá một ngày đều có nguy cơ mất lịch hẹn. Hãy xử lý hàng đợi trước khi nhu cầu nguội dần.",
+    "automationTitle": "Lớp quy trình AI",
+    "automationDescription": "Workspace này đã được cấu trúc sẵn cho các tự động hóa, tóm tắt và gợi ý hành động tiếp theo trong tương lai mà không làm thay đổi quy trình hiện tại của đội ngũ.",
+    "livePipeline": "Pipeline đang hoạt động",
+    "topbarDescription": "Theo dõi lượng khách tiềm năng mới, áp lực chăm sóc lại và đà đặt lịch từ một màn hình vận hành rõ ràng.",
+    "dailySnapshot": "Tổng quan vận hành trong ngày",
+    "aiReportingPreview": "Xem trước báo cáo AI"
   },
   "EmptyStates": {
-    "noLeadsTitle": "Chua co lead",
-    "noLeadsDescription": "Chua co lead nao. Hay them lead dau tien de bat dau theo doi lich cham soc va lich hen.",
-    "noCampaignsTitle": "Chua co chien dich",
-    "noCampaignsDescription": "Chua co chien dich nao. Hay them chien dich khi ban muon so sanh chat luong lead, lich hen da chot va hieu qua nguon.",
-    "noFilteredLeadsTitle": "Khong tim thay lead phu hop",
-    "noFilteredLeadsDescription": "Khong co lead nao khop voi bo loc hien tai. Hay xoa bo loc hoac dieu chinh tim kiem de mo rong ket qua.",
-    "noRecentLeadsTitle": "Chua co lead moi",
-    "noRecentLeadsDescription": "Lead moi se xuat hien tai day ngay khi duoc tao vao he thong.",
-    "noReportTitle": "Chua co du lieu bao cao",
-    "noReportDescription": "Khi co hoat dong lead trong tuan, tong ket hieu suat se hien thi tai day.",
-    "noChartDataTitle": "Chua co du lieu bieu do",
-    "noChartDataDescription": "Hay bat dau ghi nhan lead de mo khoa bieu do xu huong, nguon va pipeline."
+    "noLeadsTitle": "Chưa có khách tiềm năng",
+    "noLeadsDescription": "Chưa có khách tiềm năng nào. Hãy thêm khách tiềm năng đầu tiên để bắt đầu theo dõi chăm sóc lại và lịch hẹn.",
+    "noCampaignsTitle": "Chưa có chiến dịch",
+    "noCampaignsDescription": "Chưa có chiến dịch nào. Hãy thêm chiến dịch khi bạn muốn so sánh chất lượng khách tiềm năng, lịch hẹn đã đặt và hiệu quả từng nguồn rõ ràng hơn.",
+    "noFilteredLeadsTitle": "Không tìm thấy khách tiềm năng phù hợp",
+    "noFilteredLeadsDescription": "Không có khách tiềm năng nào khớp với bộ lọc hiện tại. Hãy xóa bộ lọc hoặc điều chỉnh tìm kiếm để mở rộng kết quả.",
+    "noRecentLeadsTitle": "Chưa có khách tiềm năng gần đây",
+    "noRecentLeadsDescription": "Khách tiềm năng mới sẽ xuất hiện tại đây ngay khi được đưa vào pipeline.",
+    "noReportTitle": "Chưa có dữ liệu báo cáo",
+    "noReportDescription": "Khi có hoạt động khách tiềm năng trong tuần này, phần tổng kết hiệu suất sẽ xuất hiện tại đây.",
+    "noChartDataTitle": "Chưa có dữ liệu biểu đồ",
+    "noChartDataDescription": "Hãy bắt đầu ghi nhận khách tiềm năng để mở khóa biểu đồ xu hướng, nguồn khách và pipeline."
   },
   "Validation": {
-    "validation.fullNameRequired": "Vui long nhap ho ten day du cua lead.",
-    "validation.phoneRequired": "Vui long nhap so dien thoai co it nhat 8 chu so.",
-    "validation.emailInvalid": "Vui long nhap dia chi email hop le.",
-    "validation.shortTextTooLong": "Noi dung nay can ngan hon 120 ky tu.",
-    "validation.notesTooLong": "Ghi chu can ngan hon 2000 ky tu.",
-    "validation.selectStatus": "Vui long chon trang thai lead.",
-    "validation.selectSource": "Vui long chon nguon lead.",
-    "validation.honeypotInvalid": "Khong the xu ly gui du lieu nay.",
-    "validation.leadNotFound": "Khong tim thay lead nay.",
-    "validation.saveLeadFailed": "Khong the luu lead luc nay. Vui long thu lai.",
-    "validation.updateLeadFailed": "Khong the cap nhat lead luc nay. Vui long thu lai.",
-    "validation.invalidCampaign": "Lien ket chien dich nay khong con hop le voi form nay."
+    "validation": {
+      "fullNameRequired": "Vui lòng nhập họ tên đầy đủ của khách tiềm năng.",
+      "phoneRequired": "Vui lòng nhập số điện thoại có ít nhất 8 chữ số.",
+      "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ.",
+      "shortTextTooLong": "Nội dung này cần ngắn hơn 120 ký tự.",
+      "notesTooLong": "Ghi chú cần ngắn hơn 2000 ký tự.",
+      "selectStatus": "Vui lòng chọn trạng thái khách tiềm năng.",
+      "selectSource": "Vui lòng chọn nguồn khách.",
+      "honeypotInvalid": "Không thể xử lý lượt gửi dữ liệu này.",
+      "leadNotFound": "Không tìm thấy khách tiềm năng này.",
+      "saveLeadFailed": "Hiện chưa thể lưu khách tiềm năng. Vui lòng thử lại.",
+      "updateLeadFailed": "Hiện chưa thể cập nhật khách tiềm năng. Vui lòng thử lại.",
+      "invalidCampaign": "Liên kết chiến dịch này không còn hợp lệ với form này."
+    }
   },
   "LeadsPage": {
-    "eyebrow": "Lead",
-    "title": "Pipeline lead",
-    "description": "Tim kiem, loc, va quan ly moi lead den voi tam nhin ro rang ve cham soc va tien do dat lich.",
-    "focusTitle": "Xu ly hang doi mot cach tu tin",
-    "focusDescription": "Khong gian nay duoc thiet ke de doi ngu le tan lam viec nhanh ma van khong mat boi canh khach hang.",
-    "focusSearchTitle": "Tim nhanh hon",
-    "focusSearchDescription": "Dung mot thanh tim kiem de tra ten, so dien thoai, email, va nhu cau dich vu ngay lap tuc.",
-    "focusFilterTitle": "Loc de hanh dong",
-    "focusFilterDescription": "Chia theo trang thai, nguon, va khoang ngay de doi ngu tap trung dung cuoc tro chuyen.",
-    "focusActionTitle": "Mo va xu ly",
-    "focusActionDescription": "Moi dong deu dua thang vao trang chi tiet de cap nhat lich cham soc, ghi chu, va boi canh ban giao.",
+    "eyebrow": "Khách tiềm năng",
+    "title": "Pipeline khách tiềm năng",
+    "description": "Tìm kiếm, lọc và quản lý mọi khách tiềm năng mới với tầm nhìn rõ ràng về chăm sóc lại và tiến độ đặt lịch.",
+    "focusTitle": "Xử lý hàng đợi một cách tự tin",
+    "focusDescription": "Workspace này được thiết kế để giúp đội ngũ lễ tân xử lý nhanh mà vẫn không mất bối cảnh khách hàng.",
+    "focusSearchTitle": "Tìm kiếm nhanh hơn",
+    "focusSearchDescription": "Dùng một thanh tìm kiếm để tra cứu tên, số điện thoại, email và nhu cầu dịch vụ một cách nhanh chóng.",
+    "focusFilterTitle": "Lọc để hành động",
+    "focusFilterDescription": "Lọc theo trạng thái, nguồn khách và khoảng ngày để đội ngũ tập trung vào đúng cuộc trò chuyện.",
+    "focusActionTitle": "Mở và xử lý",
+    "focusActionDescription": "Mỗi dòng dẫn thẳng vào trang chi tiết để xem thời điểm chăm sóc lại, ghi chú và bối cảnh bàn giao.",
     "stats": {
-      "activePipeline": "Pipeline dang xu ly",
-      "activePipelineHint": "Nhung lead doi ngu van dang theo sat luc nay.",
-      "followUpNeeded": "Can cham soc",
-      "followUpNeededAlert": "Dang co lead den han can xu ly.",
-      "followUpNeededHealthy": "Hang doi den han dang on dinh luc nay.",
-      "followUpNeededTrendAlert": "Can chu y",
-      "followUpNeededTrendHealthy": "Hang doi on"
+      "activePipeline": "Pipeline đang xử lý",
+      "activePipelineHint": "Những khách tiềm năng đội ngũ vẫn đang theo sát hiện tại.",
+      "followUpNeeded": "Cần chăm sóc lại",
+      "followUpNeededAlert": "Đang có khách tiềm năng đến hạn cần xử lý.",
+      "followUpNeededHealthy": "Hàng đợi đến hạn hiện đang trong tầm kiểm soát.",
+      "followUpNeededTrendAlert": "Cần chú ý",
+      "followUpNeededTrendHealthy": "Hàng đợi ổn định"
     }
   },
   "NewLeadPage": {
-    "eyebrow": "Lead",
-    "title": "Them lead moi",
-    "description": "Thu thap thong tin lien he, nguon lead, va buoc cham soc tiep theo de doi ngu biet chinh xac can lam gi."
+    "eyebrow": "Khách tiềm năng",
+    "title": "Thêm khách tiềm năng mới",
+    "description": "Thu thập thông tin liên hệ, nguồn khách và bước chăm sóc tiếp theo để đội ngũ biết chính xác cần làm gì."
   },
   "LeadForm": {
-    "pageTitle": "Them lead moi",
-    "pageDescription": "Thu thap thong tin lien he, nguon lead va buoc cham soc tiep theo de doi ngu biet can lam gi tiep theo.",
-    "detailsTitle": "Thong tin lead",
-    "detailsDescription": "Ghi lai du boi canh de doi ngu co the cham soc nhanh hon, hieu ro nguon lead va day lead toi lich hen.",
-    "summaryTitle": "Tao lead",
-    "summaryDescription": "Luu lead va chuyen sang trang chi tiet de tiep tuc quan ly cham soc.",
-    "contactSectionTitle": "Thong tin lien he",
-    "contactSectionDescription": "Giup doi ngu nhan ra khach hang va lien he lai mot cach tu tin.",
-    "leadSectionTitle": "Chi tiet lead",
-    "leadSectionDescription": "Luu lai boi canh de bao cao va buoc cham soc tiep theo huu ich hon.",
-    "sourceSectionTitle": "Nguon va chien dich",
-    "sourceSectionDescription": "Giu attribution sach de chu doanh nghiep thay ro kenh va chien dich nao dang thuc su hieu qua.",
-    "followUpSectionTitle": "Cham soc tiep theo",
-    "followUpSectionDescription": "Dat hanh dong tiep theo da hua de hang doi luon dang tin cay.",
-    "notesSectionTitle": "Ghi chu",
-    "notesSectionDescription": "Them phan hoi, thoi diem, dau hieu ngan sach hoac bat ky thong tin nao huu ich cho viec ban giao.",
-    "fullNameLabel": "Ho va ten",
-    "fullNamePlaceholder": "Tran Thi Mai",
-    "fullNameHelp": "Dung ten ma doi ngu co the nhan ra ngay lap tuc.",
-    "phoneLabel": "So dien thoai",
+    "pageTitle": "Thêm khách tiềm năng mới",
+    "pageDescription": "Thu thập thông tin liên hệ, nguồn khách và bước chăm sóc tiếp theo để đội ngũ biết chính xác cần làm gì tiếp theo.",
+    "detailsTitle": "Thông tin khách tiềm năng",
+    "detailsDescription": "Ghi nhận đủ bối cảnh để đội ngũ có thể chăm sóc nhanh hơn, hiểu rõ nguồn khách và đưa khách tiềm năng tiến gần hơn đến lịch hẹn.",
+    "summaryTitle": "Tạo khách tiềm năng",
+    "summaryDescription": "Lưu khách tiềm năng và tiếp tục sang trang chi tiết để quản lý chăm sóc lại.",
+    "contactSectionTitle": "Thông tin liên hệ",
+    "contactSectionDescription": "Giúp đội ngũ dễ nhận diện khách hàng và liên hệ lại một cách tự tin.",
+    "leadSectionTitle": "Chi tiết khách tiềm năng",
+    "leadSectionDescription": "Ghi lại bối cảnh để báo cáo và bước chăm sóc tiếp theo trở nên hữu ích hơn.",
+    "sourceSectionTitle": "Nguồn và chiến dịch",
+    "sourceSectionDescription": "Giữ attribution rõ ràng để chủ doanh nghiệp thấy kênh và chiến dịch nào đang thật sự hiệu quả.",
+    "followUpSectionTitle": "Chăm sóc lại",
+    "followUpSectionDescription": "Đặt hành động tiếp theo đã hứa để hàng đợi luôn đáng tin cậy.",
+    "notesSectionTitle": "Ghi chú",
+    "notesSectionDescription": "Thêm phản hồi, thời điểm phù hợp, tín hiệu ngân sách hoặc bất kỳ thông tin hữu ích nào cho việc bàn giao.",
+    "fullNameLabel": "Họ và tên",
+    "fullNamePlaceholder": "Trần Thị Mai",
+    "fullNameHelp": "Dùng tên mà đội ngũ có thể nhận ra ngay lập tức.",
+    "phoneLabel": "Số điện thoại",
     "phonePlaceholder": "+84 90 123 4567",
-    "phoneHelp": "So chinh de goi lai hoac nhan tin cham soc.",
+    "phoneHelp": "Số chính để gọi lại hoặc nhắn tin chăm sóc.",
     "emailLabel": "Email",
     "emailPlaceholder": "mai@example.com",
-    "emailHelp": "Tuy chon, nhung huu ich cho xac nhan va cham soc.",
-    "serviceInterestLabel": "Nhu cau dich vu",
-    "serviceInterestPlaceholder": "Tam trang, cham soc da, khoa hoc tieng Anh...",
-    "serviceInterestHelp": "Khach hang muon dat lich hoac tim hieu dieu gi?",
-    "preferredContactTimeLabel": "Thoi gian lien he uu tien",
-    "preferredContactTimePlaceholder": "Buoi chieu trong tuan, sau 6 gio, cuoi tuan...",
-    "preferredContactTimeHelp": "Tuy chon thoi gian khach hang muon duoc lien he.",
-    "sourceLabel": "Nguon lead",
-    "sourceHelp": "Chon dung nguon de bao cao chien dich co y nghia hon.",
-    "campaignLabel": "Chien dich",
-    "campaignHelp": "Tuy chon neu ban muon gan lead voi mot chuong trinh hoac nhom quang cao cu the.",
-    "noCampaign": "Khong co chien dich",
-    "statusLabel": "Trang thai pipeline",
-    "statusHelp": "Bat dau voi trang thai phu hop nhat voi cuoc tro chuyen hien tai.",
-    "followUpLabel": "Lan cham soc tiep theo",
-    "followUpHelp": "Dat hanh dong tiep theo de hien trong hang doi dashboard.",
-    "notesLabel": "Ghi chu",
-    "notesPlaceholder": "Boi canh tu cuoc tro chuyen, thoi diem mong muon, dau hieu ngan sach...",
-    "notesHelp": "Them dau hieu ngan sach, thoi diem mong muon, lo ngai hoac boi canh ban giao.",
-    "summaryBody": "Mot lead duoc gan nhan ro rang giup chu doanh nghiep hieu kenh nao dang tao ra co hoi dat lich thuc su thay vi chi tang so luong tin nhan.",
-    "saving": "Dang luu..."
+    "emailHelp": "Không bắt buộc, nhưng hữu ích cho xác nhận và chăm sóc sau đó.",
+    "serviceInterestLabel": "Nhu cầu dịch vụ",
+    "serviceInterestPlaceholder": "Tẩy trắng răng, chăm sóc da, khóa học tiếng Anh...",
+    "serviceInterestHelp": "Khách hàng muốn đặt lịch hoặc tìm hiểu điều gì?",
+    "preferredContactTimeLabel": "Thời gian liên hệ ưu tiên",
+    "preferredContactTimePlaceholder": "Buổi chiều trong tuần, sau 18:00, cuối tuần...",
+    "preferredContactTimeHelp": "Thời gian khách hàng muốn được liên hệ, nếu có.",
+    "sourceLabel": "Nguồn khách",
+    "sourceHelp": "Chọn đúng nguồn để báo cáo chiến dịch có ý nghĩa hơn.",
+    "campaignLabel": "Chiến dịch",
+    "campaignHelp": "Không bắt buộc, dùng khi bạn muốn gắn khách tiềm năng với một chương trình hoặc nhóm quảng cáo cụ thể.",
+    "noCampaign": "Không có chiến dịch",
+    "statusLabel": "Trạng thái pipeline",
+    "statusHelp": "Bắt đầu với trạng thái phù hợp nhất với cuộc trò chuyện hiện tại.",
+    "followUpLabel": "Lần chăm sóc tiếp theo",
+    "followUpHelp": "Đặt hành động tiếp theo đã hứa để hiển thị trong hàng đợi dashboard.",
+    "notesLabel": "Ghi chú",
+    "notesPlaceholder": "Bối cảnh từ cuộc trò chuyện, thời gian mong muốn, tín hiệu ngân sách...",
+    "notesHelp": "Thêm dấu hiệu ngân sách, thời điểm mong muốn, băn khoăn hoặc bối cảnh bàn giao.",
+    "summaryBody": "Một khách tiềm năng được gắn nhãn rõ ràng giúp chủ doanh nghiệp hiểu kênh nào đang tạo ra cơ hội đặt lịch thật sự, thay vì chỉ tăng số lượng tin nhắn.",
+    "saving": "Đang lưu..."
   },
   "LeadDetailForm": {
-    "statusLabel": "Trang thai lead",
-    "followUpLabel": "Lan cham soc tiep theo",
-    "followUpHelp": "Dat moc lien he da hua de lead hien dung trong hang doi cham soc.",
-    "notesLabel": "Ghi chu",
-    "notesHelp": "Ghi chu ngan gon va thuc te: nhu cau, thoi diem, lo ngai va buoc tiep theo.",
-    "updating": "Dang cap nhat...",
-    "success": "Da cap nhat lead thanh cong.",
-    "error": "Khong the cap nhat lead luc nay. Vui long thu lai."
+    "statusLabel": "Trạng thái khách tiềm năng",
+    "followUpLabel": "Lần chăm sóc tiếp theo",
+    "followUpHelp": "Đặt mốc liên hệ đã hứa để khách tiềm năng hiển thị đúng trong hàng đợi chăm sóc lại.",
+    "notesLabel": "Ghi chú",
+    "notesHelp": "Giữ ghi chú thực tế: nhu cầu, thời điểm, băn khoăn và bước tiếp theo.",
+    "updating": "Đang cập nhật...",
+    "success": "Đã cập nhật khách tiềm năng thành công.",
+    "error": "Hiện chưa thể cập nhật khách tiềm năng. Vui lòng thử lại."
   },
   "LeadDetailPage": {
-    "eyebrow": "Chi tiet lead",
-    "description": "Xem lead nay la ai, quan tam dieu gi, den tu dau, va doi ngu nen lam gi tiep theo.",
-    "summaryTitle": "Tong quan lead",
-    "summaryDescription": "Da ghi nhan vao {date}. Dung the nay de hieu boi canh khach hang truoc khi lien he.",
-    "statusHint": "Vi tri hien tai cua lead trong pipeline.",
-    "sourceHint": "Kenh ma lead da vao he thong.",
-    "serviceInterest": "Nhu cau dich vu",
-    "serviceHint": "Dieu khach hang muon tim hieu hoac dat lich.",
-    "generalInquiry": "Nhu cau chung",
-    "noCampaign": "Chua lien ket chien dich",
-    "updatedLabel": "Cap nhat gan nhat",
-    "preferredContactLabel": "Thoi gian lien he uu tien",
-    "noPreference": "Chua chia se uu tien",
-    "suggestedActionTitle": "Hanh dong de xuat",
-    "suggestedActionDescription": "Dung khu vuc nay de giu dashboard dang tin cay va ban giao ro rang.",
-    "nextBestMove": "Buoc tot nhat tiep theo",
-    "suggestedActionNew": "Lien he som khi nhu cau van con moi, xac nhan nhu cau dich vu, va dat mot moc cham soc tiep theo ro rang.",
-    "suggestedActionFollowUp": "Kiem tra lai moc cham soc da hua, giu ky vong cua khach ro rang, va cap nhat trang thai sau lan lien he tiep theo.",
-    "suggestedActionGeneral": "Giu ho so nay luon moi de doi ngu luon biet ai so huu buoc tiep theo va khach hang can gi tiep.",
-    "contactTitle": "Thong tin lien he",
-    "contactDescription": "Cho doi ngu thay ngay cach lien he lead va boi canh quan trong truoc khi phan hoi.",
-    "notProvided": "Chua cung cap",
-    "noFollowUp": "Chua dat lich cham soc",
-    "ownerContextLabel": "Trong tam khuyen nghi",
-    "ownerContextValue": "Bao ve toc do phan hoi va giu hanh dong tiep theo hien ro.",
-    "notesDescription": "Boi canh de ban giao, y dinh khach hang, va lich su tro chuyen huu ich.",
-    "noNotes": "Chua co ghi chu. Hay them boi canh de viec ban giao sach se va nguoi tiep theo co the phan hoi tu tin.",
-    "timelineTitle": "Dong thoi gian hoat dong",
-    "timelineDescription": "Lich su CRM gon nhe ve dieu da xay ra va dieu gi da duoc len lich tiep theo.",
-    "timelineEmptyTitle": "Chua co hoat dong timeline",
-    "timelineEmptyDescription": "Timeline se day dan khi doi ngu them ghi chu, moc cham soc, va thay doi trang thai."
+    "eyebrow": "Chi tiết khách tiềm năng",
+    "description": "Xem khách tiềm năng này là ai, họ cần gì, đến từ đâu và đội ngũ nên làm gì tiếp theo.",
+    "summaryTitle": "Tổng quan hồ sơ khách tiềm năng",
+    "summaryDescription": "Được ghi nhận vào {date}. Dùng thẻ này để hiểu bối cảnh khách hàng trước khi liên hệ.",
+    "statusHint": "Vị trí hiện tại của khách tiềm năng trong pipeline.",
+    "sourceHint": "Nơi khách tiềm năng đi vào workspace.",
+    "serviceInterest": "Nhu cầu dịch vụ",
+    "serviceHint": "Điều khách hàng muốn trao đổi hoặc đặt lịch.",
+    "generalInquiry": "Nhu cầu chung",
+    "noCampaign": "Chưa liên kết với chiến dịch",
+    "updatedLabel": "Cập nhật gần nhất",
+    "preferredContactLabel": "Thời gian liên hệ ưu tiên",
+    "noPreference": "Chưa chia sẻ thời gian ưu tiên",
+    "suggestedActionTitle": "Hành động đề xuất",
+    "suggestedActionDescription": "Dùng khu vực điều khiển này để giữ dashboard đáng tin cậy và bàn giao rõ ràng.",
+    "nextBestMove": "Bước tốt nhất tiếp theo",
+    "suggestedActionNew": "Liên hệ nhanh khi nhu cầu còn mới, xác nhận dịch vụ khách quan tâm và đặt mốc chăm sóc tiếp theo rõ ràng.",
+    "suggestedActionFollowUp": "Kiểm tra lại thời điểm chăm sóc đã hứa, giữ kỳ vọng khách hàng rõ ràng và cập nhật trạng thái sau lần liên hệ tiếp theo.",
+    "suggestedActionGeneral": "Giữ hồ sơ này luôn mới để đội ngũ biết ai phụ trách bước tiếp theo và khách hàng cần gì.",
+    "contactTitle": "Thông tin liên hệ",
+    "contactDescription": "Cho đội ngũ thấy ngay cách liên hệ khách tiềm năng và bối cảnh quan trọng trước khi phản hồi.",
+    "notProvided": "Chưa cung cấp",
+    "noFollowUp": "Chưa đặt lịch chăm sóc lại",
+    "ownerContextLabel": "Trọng tâm khuyến nghị",
+    "ownerContextValue": "Bảo vệ tốc độ phản hồi và giữ hành động tiếp theo luôn rõ ràng.",
+    "notesDescription": "Bối cảnh bàn giao, ý định khách hàng và lịch sử trò chuyện hữu ích.",
+    "noNotes": "Chưa có ghi chú. Hãy thêm bối cảnh để việc bàn giao rõ ràng và nhân sự tiếp theo có thể phản hồi tự tin.",
+    "timelineTitle": "Dòng thời gian hoạt động",
+    "timelineDescription": "Lịch sử CRM gọn nhẹ về những gì đã xảy ra và điều gì đã được lên lịch tiếp theo.",
+    "timelineEmptyTitle": "Chưa có hoạt động timeline",
+    "timelineEmptyDescription": "Timeline sẽ được cập nhật khi đội ngũ tạo ghi chú, đặt mốc chăm sóc lại và thay đổi trạng thái."
   },
   "LeadTable": {
-    "workspaceTitle": "Khong gian lead",
-    "workspaceDescription": "Tim kiem, loc va mo ho so lead nhanh de doi ngu hanh dong ma khong mat boi canh.",
-    "resultsSummary": "Dang hien {visible} / {total} lead",
-    "reviewHint": "Mo tung dong de xem thong tin lien he, lich cham soc va ghi chu.",
-    "searchPlaceholder": "Tim ten, so dien thoai, email, nhu cau",
-    "last7Days": "7 ngay qua",
-    "last30Days": "30 ngay qua",
-    "followUpDate": "Ngay cham soc",
-    "notSet": "Chua dat",
-    "generalInquiry": "Nhu cau chung",
-    "openLead": "Mo"
+    "workspaceTitle": "Không gian khách tiềm năng",
+    "workspaceDescription": "Tìm kiếm, lọc và mở hồ sơ khách tiềm năng nhanh chóng để nhân sự có thể hành động mà không mất bối cảnh.",
+    "resultsSummary": "Đang hiển thị {visible} / {total} khách tiềm năng",
+    "reviewHint": "Mở bất kỳ dòng nào để xem thông tin liên hệ, thời điểm chăm sóc lại và ghi chú.",
+    "searchPlaceholder": "Tìm tên, số điện thoại, email, nhu cầu",
+    "last7Days": "7 ngày qua",
+    "last30Days": "30 ngày qua",
+    "followUpDate": "Ngày chăm sóc lại",
+    "notSet": "Chưa đặt",
+    "generalInquiry": "Nhu cầu chung",
+    "openLead": "Mở"
   },
   "Dashboard": {
-    "eyebrow": "Tong quan",
-    "pageTitle": "Tong quan lead hom nay",
-    "pageDescription": "Theo doi lead moi, lich cham soc va lich hen da dat trong cung mot noi.",
-    "attentionTitle": "Can uu tien xu ly",
-    "attentionDescription": "Tom tat hanh dong ngan gon de doi ngu biet can lam gi tiep theo ma khong can dao qua toan bo danh sach lead.",
-    "reviewLeadQueue": "Xem hang doi lead",
-    "viewAllLeads": "Xem tat ca lead",
-    "recentLeadsTitle": "Lead gan day",
-    "recentLeadsDescription": "Nhung lead moi vao he thong gan day, du thong tin de biet ai can cham soc tiep theo.",
-    "leadsByDayTitle": "Lead theo ngay",
-    "leadsByDayDescription": "Goc nhin nhanh ve so luong lead moi tung ngay de chu doanh nghiep nhan ra su thay doi dong luc trong tuan.",
-    "leadsBySourceTitle": "Lead theo nguon",
-    "leadsBySourceDescription": "Xem kenh nao dang dua nhieu lead nhat vao he thong.",
-    "statusDistributionTitle": "Phan bo trang thai lead",
-    "statusDistributionDescription": "Hieu ro ty trong lead moi, dang xu ly, da dat lich va co nguy co mat.",
-    "notScheduled": "Chua len lich",
+    "eyebrow": "Tổng quan",
+    "pageTitle": "Tổng quan khách tiềm năng hôm nay",
+    "pageDescription": "Theo dõi khách tiềm năng mới, chăm sóc lại và lịch hẹn đã đặt trong cùng một nơi.",
+    "attentionTitle": "Điều cần ưu tiên",
+    "attentionDescription": "Tóm tắt hành động ngắn gọn để nhân sự biết cần làm gì tiếp theo mà không phải rà toàn bộ danh sách khách tiềm năng.",
+    "reviewLeadQueue": "Xem hàng đợi khách tiềm năng",
+    "viewAllLeads": "Xem tất cả khách tiềm năng",
+    "recentLeadsTitle": "Khách tiềm năng gần đây",
+    "recentLeadsDescription": "Những khách tiềm năng mới nhất đi vào pipeline, kèm đủ bối cảnh để biết ai cần được chăm sóc tiếp theo.",
+    "leadsByDayTitle": "Khách tiềm năng theo ngày",
+    "leadsByDayDescription": "Góc nhìn nhanh về số lượng khách tiềm năng mỗi ngày để chủ doanh nghiệp nhận ra thay đổi về đà tăng trưởng trong tuần.",
+    "leadsBySourceTitle": "Khách tiềm năng theo nguồn",
+    "leadsBySourceDescription": "Xem kênh nào đang đưa nhiều khách tiềm năng nhất vào workspace.",
+    "statusDistributionTitle": "Phân bổ trạng thái khách tiềm năng",
+    "statusDistributionDescription": "Hiểu pipeline đang có bao nhiêu khách mới, đang xử lý, đã đặt lịch hoặc có nguy cơ mất.",
+    "notScheduled": "Chưa lên lịch",
     "attention": {
-      "followUpNeededLabel": "Lead can cham soc",
-      "followUpNeededText": "Moi lead doi qua lau deu co nguy co lo mat lich hen hoac tro thanh cuoc tro chuyen lanh.",
-      "oldestPendingLabel": "Lead cham soc ton dong lau nhat",
-      "noneDue": "Khong co",
-      "oldestPendingText": "{age} qua qua nguon {source}",
-      "noOverdueText": "Hien tai khong co lead nao qua han cham soc trong hang doi.",
-      "suggestedAction": "Hanh dong de xuat",
-      "suggestedActionAlert": "Hay goi hoac nhan tin cho lead qua han lau nhat truoc, sau do don sach phan con lai trong hang doi cham soc qua han truoc khi lead moi tiep tuc do vao.",
-      "suggestedActionHealthy": "Hang doi cham soc dang on. Hay tap trung chuyen lead moi va lead quan tam thanh lich hen."
+      "followUpNeededLabel": "Khách tiềm năng cần chăm sóc lại",
+      "followUpNeededText": "Mỗi khách tiềm năng chờ quá lâu đều có nguy cơ mất lịch hẹn hoặc trở thành cuộc trò chuyện nguội.",
+      "oldestPendingLabel": "Khách tiềm năng chờ chăm sóc lâu nhất",
+      "noneDue": "Không có",
+      "oldestPendingText": "{age} qua nguồn {source}",
+      "noOverdueText": "Hiện không có khách tiềm năng nào quá hạn chăm sóc trong hàng đợi.",
+      "suggestedAction": "Hành động đề xuất",
+      "suggestedActionAlert": "Hãy gọi hoặc nhắn tin cho khách tiềm năng quá hạn lâu nhất trước, sau đó xử lý phần còn lại trong hàng đợi chăm sóc quá hạn trước khi nhu cầu mới tiếp tục đổ vào.",
+      "suggestedActionHealthy": "Hàng đợi chăm sóc lại đang ổn. Hãy tập trung chuyển khách mới và khách đang quan tâm thành lịch hẹn đã đặt."
     },
     "metrics": {
       "totalLeads": {
-        "label": "Tong so lead",
-        "hint": "Tat ca nhu cau dang duoc theo doi trong workspace nay.",
-        "trend": "Do ro pipeline"
+        "label": "Tổng khách tiềm năng",
+        "hint": "Tất cả nhu cầu đang được theo dõi trong workspace này.",
+        "trend": "Độ rõ của pipeline"
       },
       "newLeads": {
-        "label": "Lead moi",
-        "hint": "Co hoi moi can duoc lien he nhanh.",
-        "trend": "Bao ve toc do phan hoi dau tien"
+        "label": "Khách tiềm năng mới",
+        "hint": "Cơ hội mới cần được liên hệ nhanh.",
+        "trend": "Bảo vệ phản hồi đầu tiên"
       },
       "followUpNeeded": {
-        "label": "Can cham soc",
-        "hint": "Lead den han hom nay hoac da qua han cham soc.",
-        "alertTrend": "Can chu y",
-        "healthyTrend": "Dang on"
+        "label": "Cần chăm sóc lại",
+        "hint": "Khách tiềm năng đến hạn hôm nay hoặc đã quá hạn chăm sóc.",
+        "alertTrend": "Cần chú ý",
+        "healthyTrend": "Trong tầm kiểm soát"
       },
       "bookedAppointments": {
-        "label": "Lich hen da dat",
-        "hint": "Nhung lead da chuyen thanh lich hen xac nhan.",
-        "trend": "Tien do dat lich"
+        "label": "Lịch hẹn đã đặt",
+        "hint": "Khách tiềm năng đã chuyển thành lịch hẹn xác nhận.",
+        "trend": "Tiến độ đặt lịch"
       },
       "conversionRate": {
-        "label": "Ty le chuyen doi",
-        "hint": "Ty le lich hen da dat tren tong so lead dang theo doi.",
-        "trend": "Hieu qua ban hang"
+        "label": "Tỷ lệ chuyển đổi",
+        "hint": "Tỷ lệ lịch hẹn đã đặt trên tổng số khách tiềm năng đang theo dõi.",
+        "trend": "Hiệu quả bán hàng"
       }
     },
-    "emptyAttentionTitle": "Khong co lead can xu ly gap",
-    "emptyAttentionDescription": "Hang doi cham soc dang on. Hay tap trung chuyen lead moi va quan tam thanh lich hen.",
-    "chartsTitle": "Bieu do"
+    "emptyAttentionTitle": "Không có chăm sóc lại khẩn cấp",
+    "emptyAttentionDescription": "Hàng đợi chăm sóc lại đang ổn. Hãy tập trung chuyển khách mới và khách đang quan tâm thành lịch hẹn đã đặt.",
+    "chartsTitle": "Biểu đồ"
   },
   "CampaignsPage": {
-    "eyebrow": "Chien dich",
-    "title": "Hieu suat chien dich",
-    "description": "Hieu ro chien dich va nguon nao dang tao ra lead chat luong va lich hen da dat.",
+    "eyebrow": "Chiến dịch",
+    "title": "Hiệu suất chiến dịch",
+    "description": "Hiểu chiến dịch và nguồn nào đang tạo ra khách tiềm năng đủ chất lượng và lịch hẹn đã đặt.",
     "summary": {
-      "totalLeads": "Lead tu chien dich",
-      "totalLeadsHint": "Tong lead duoc gan vao cac chien dich dang theo doi.",
-      "bookedLeads": "Lich hen tu chien dich",
-      "bookedLeadsHint": "So lich hen den tu cac lead co gan chien dich.",
-      "bestCampaign": "Chien dich tot nhat",
-      "bestCampaignHint": "Ty le chuyen doi cao nhat hien tai: {rate}",
-      "bestCampaignEmpty": "Chua co chien dich nao du du lieu de noi bat."
+      "totalLeads": "Khách tiềm năng từ chiến dịch",
+      "totalLeadsHint": "Tổng số khách tiềm năng được gắn với các chiến dịch đang theo dõi.",
+      "bookedLeads": "Lịch hẹn từ chiến dịch",
+      "bookedLeadsHint": "Số lịch hẹn đã đặt đến từ khách tiềm năng có gắn chiến dịch.",
+      "bestCampaign": "Chiến dịch tốt nhất",
+      "bestCampaignHint": "Tỷ lệ chuyển đổi cao nhất hiện tại: {rate}",
+      "bestCampaignEmpty": "Chưa có chiến dịch nào đủ dữ liệu để nổi bật."
     },
-    "snapshotDescription": "Anh chup nhanh hieu suat",
-    "budgetValue": "Ngan sach tam tinh: ${value}",
-    "budgetEmpty": "Ngan sach tam tinh: chua nhap.",
-    "tableTitle": "Hieu suat nguon chien dich",
-    "tableDescription": "Ra soat toan bo chien dich, so sanh ty le chuyen doi, va quyet dinh nen chuyen no luc hay ngan sach ve dau.",
-    "notAvailable": "Chua co",
-    "notSet": "Chua dat",
-    "startTbd": "Chua ro ngay bat dau",
+    "snapshotDescription": "Tổng quan hiệu suất nhanh",
+    "budgetValue": "Ngân sách tạm tính: ${value}",
+    "budgetEmpty": "Ngân sách tạm tính: chưa nhập.",
+    "tableTitle": "Hiệu suất nguồn chiến dịch",
+    "tableDescription": "Rà soát toàn bộ chiến dịch, so sánh tỷ lệ chuyển đổi và quyết định nên chuyển nỗ lực hoặc ngân sách về đâu.",
+    "notAvailable": "Chưa có",
+    "notSet": "Chưa đặt",
+    "startTbd": "Chưa rõ ngày bắt đầu",
     "table": {
-      "campaign": "Chien dich",
-      "sourceType": "Loai nguon",
-      "leads": "Lead",
-      "booked": "Da dat lich",
-      "conversionRate": "Ty le chuyen doi",
-      "budget": "Ngan sach",
-      "activeDates": "Thoi gian chay"
+      "campaign": "Chiến dịch",
+      "sourceType": "Loại nguồn",
+      "leads": "Khách tiềm năng",
+      "booked": "Đã đặt lịch",
+      "conversionRate": "Tỷ lệ chuyển đổi",
+      "budget": "Ngân sách",
+      "activeDates": "Thời gian chạy"
     }
   },
   "Reports": {
-    "pageEyebrow": "Bao cao",
-    "pageTitle": "Bao cao hieu suat lead hang tuan",
-    "pageDescription": "Bao cao kinh doanh ro rang ve luong lead, rui ro cham soc va hieu suat dat lich ngay ca truoc khi co insight do AI tao.",
-    "summaryTitle": "Tong ket nhanh",
-    "summaryDescription": "Tong ket van hanh ngan gon cho chu doanh nghiep muon thay nhanh dong lead, hieu suat dat lich va rui ro cham soc.",
-    "fullReportTitle": "Bao cao hieu suat lead hang tuan",
-    "fullReportDescription": "Bao cao co quy tac ro rang de demo hom nay, san sang de nang cap thanh bao cao AI o phien ban sau.",
-    "businessSummary": "Tong ket kinh doanh",
-    "suggestedAction": "Hanh dong de xuat",
-    "bestSource": "Nguon tot nhat",
-    "bookingPerformance": "Hieu suat dat lich",
-    "followUpRisk": "Rui ro cham soc",
-    "fullReport": "Bao cao day du",
-    "readout": "Tong ket LeadOps AI",
-    "futureAi": "Bao cao do AI tao se co trong phien ban sau.",
-    "notAvailable": "Chua co",
-    "fallbackBestSource": "Chua co nguon dan dau ro rang. Hay tiep tuc thu nghiem cac kenh mang ve nhung nhu cau chat luong.",
-    "fallbackFollowUpRisk": "Tuan nay chua ghi nhan rui ro cham soc dang lo ngai.",
-    "fallbackBookingPerformance": "Tuan nay chua ghi nhan lich hen nao duoc dat.",
-    "bookingPerformanceWithCount": "Tuan nay da ghi nhan {count} lich hen duoc dat.",
-    "fallbackSuggestedAction": "Hay de y cac phan hoi cham va bao ve toc do cham soc.",
-    "fallbackSuggestedActionDetailed": "Tang toc do phan hoi cho lead moi va ra soat nhung giai doan lead dang bi dung lai.",
-    "fallbackReadout": "Hay uu tien toc do phan hoi va kenh tot nhat trong khi cac lead qua han cham soc van con co the cuu lai.",
+    "pageEyebrow": "Báo cáo",
+    "pageTitle": "Báo cáo hiệu suất khách tiềm năng hằng tuần",
+    "pageDescription": "Báo cáo kinh doanh rõ ràng về lượng khách tiềm năng, rủi ro chăm sóc lại và hiệu suất đặt lịch, ngay cả trước khi bật insight do AI tạo.",
+    "summaryTitle": "Tóm tắt điều hành",
+    "summaryDescription": "Tóm tắt vận hành nhanh cho chủ doanh nghiệp muốn nắm hướng đi của luồng khách tiềm năng, hiệu suất đặt lịch và rủi ro chăm sóc lại.",
+    "fullReportTitle": "Báo cáo hiệu suất khách tiềm năng hằng tuần",
+    "fullReportDescription": "Báo cáo theo quy tắc rõ ràng để dùng demo hiện tại, được thiết kế để trở thành báo cáo do AI tạo trong bản phát hành tương lai.",
+    "businessSummary": "Tóm tắt kinh doanh",
+    "suggestedAction": "Hành động đề xuất",
+    "bestSource": "Nguồn tốt nhất",
+    "bookingPerformance": "Hiệu suất đặt lịch",
+    "followUpRisk": "Rủi ro chăm sóc lại",
+    "fullReport": "Báo cáo đầy đủ",
+    "readout": "Tổng kết LeadOps AI",
+    "futureAi": "Báo cáo do AI tạo sẽ có trong phiên bản tương lai.",
+    "notAvailable": "Chưa có",
+    "fallbackBestSource": "Chưa có nguồn dẫn đầu rõ ràng. Hãy tiếp tục thử nghiệm các kênh mang về nhu cầu đủ chất lượng.",
+    "fallbackFollowUpRisk": "Tuần này chưa phát hiện rủi ro chăm sóc lại đáng chú ý.",
+    "fallbackBookingPerformance": "Tuần này chưa ghi nhận lịch hẹn nào.",
+    "bookingPerformanceWithCount": "Tuần này đã ghi nhận {count} lịch hẹn đã đặt.",
+    "fallbackSuggestedAction": "Hãy theo dõi các phản hồi chậm và bảo vệ tốc độ chăm sóc lại.",
+    "fallbackSuggestedActionDetailed": "Tăng tốc phản hồi cho khách tiềm năng mới và rà soát những giai đoạn mà khách đang bị chững lại.",
+    "fallbackReadout": "Ưu tiên tốc độ phản hồi và nguồn hiệu quả nhất trong khi các lượt chăm sóc quá hạn vẫn còn có thể cứu lại.",
     "metrics": {
-      "totalLeads": "Tong so lead tuan nay",
-      "bestSource": "Nguon tot nhat",
-      "bookedAppointments": "Lich hen da dat",
-      "followUpRisk": "Rui ro cham soc"
+      "totalLeads": "Tổng khách tiềm năng tuần này",
+      "bestSource": "Nguồn tốt nhất",
+      "bookedAppointments": "Lịch hẹn đã đặt",
+      "followUpRisk": "Rủi ro chăm sóc lại"
     }
   },
   "SettingsPage": {
-    "eyebrow": "Cai dat",
-    "title": "Cai dat doanh nghiep",
-    "description": "Quan ly ho so workspace, khuon cho phep doi ngu, tuy chon thong bao, va do san sang tich hop trong mot khu van hanh gon gang.",
-    "placeholder": "Cho buoc tiep theo",
-    "comingSoon": "Sap co",
-    "planned": "Da len ke hoach",
+    "eyebrow": "Cài đặt",
+    "title": "Cài đặt doanh nghiệp",
+    "description": "Quản lý hồ sơ workspace, các quyền đội ngũ trong tương lai, tùy chọn thông báo và mức độ sẵn sàng tích hợp từ một khu vận hành gọn gàng.",
+    "placeholder": "Phần giữ chỗ",
+    "comingSoon": "Sắp có",
+    "planned": "Đã lên kế hoạch",
     "businessProfile": {
-      "title": "Ho so doanh nghiep",
-      "description": "Thong tin cot loi xac dinh workspace cho doi ngu va bao cao ve sau.",
-      "businessName": "Ten doanh nghiep",
+      "title": "Hồ sơ doanh nghiệp",
+      "description": "Thông tin cốt lõi giúp định danh workspace này cho nhân sự và báo cáo trong tương lai.",
+      "businessName": "Tên doanh nghiệp",
       "workspaceSlug": "Slug workspace",
-      "industryFit": "Nhom phu hop",
-      "industryFitValue": "Doanh nghiep dich vu dia phuong",
-      "currentRole": "Vai tro hien tai"
+      "industryFit": "Nhóm ngành phù hợp",
+      "industryFitValue": "Doanh nghiệp dịch vụ địa phương",
+      "currentRole": "Vai trò hiện tại"
     },
     "publicCapture": {
-      "title": "Link form cong khai",
-      "description": "Dung link form khong can dang nhap nay o moi diem thu lead de nhu cau moi roi thang vao hang doi chung."
+      "title": "Link form công khai",
+      "description": "Dùng link form không cần đăng nhập này ở mọi điểm thu nhu cầu để khách tiềm năng mới đi thẳng vào hàng đợi chung."
     },
     "team": {
-      "title": "Thanh vien doi ngu",
-      "description": "Luot moi thanh vien va phan quyen dang duoc len ke hoach de chu doanh nghiep phoi hop le tan va quan ly.",
-      "cardTitle": "Vai tro van hanh chung",
-      "cardBody": "He thong da nhin thay vai tro. Buoc tiep theo la moi thanh vien, quyen van hanh, va lam ro ai so huu hang doi cham soc."
+      "title": "Thành viên đội ngũ",
+      "description": "Luồng mời thành viên và kiểm soát quyền đang được lên kế hoạch để chủ doanh nghiệp phối hợp lễ tân và quản lý.",
+      "cardTitle": "Vai trò vận hành chung",
+      "cardBody": "Hệ thống đã theo dõi khả năng hiển thị vai trò. Tiếp theo là mời đồng đội, quyền vận hành và làm rõ ai phụ trách từng hàng đợi chăm sóc."
     },
     "notifications": {
-      "title": "Tuy chon thong bao",
-      "description": "Khuon cho nhac cham soc, tong ket hang ngay, va canh bao lead qua han trong tuong lai.",
-      "dailySummary": "Tong ket lead hang ngay",
-      "dailySummaryDescription": "Tom tat email du kien cho chu doanh nghiep va quan ly.",
-      "followUpAlerts": "Canh bao cham soc qua han",
-      "followUpAlertsDescription": "Nhac viec du kien cho lead den han hom nay hoac da tre.",
-      "weeklyReports": "Gui bao cao hang tuan",
-      "weeklyReportsDescription": "Lich gui dinh ky du kien cho bao cao hieu suat hang tuan."
+      "title": "Tùy chọn thông báo",
+      "description": "Các điều khiển trong tương lai cho nhắc chăm sóc lại, tổng kết hằng ngày và cảnh báo khách tiềm năng quá hạn.",
+      "dailySummary": "Tổng kết khách tiềm năng hằng ngày",
+      "dailySummaryDescription": "Email tổng kết dự kiến cho chủ doanh nghiệp và quản lý.",
+      "followUpAlerts": "Cảnh báo chăm sóc lại quá hạn",
+      "followUpAlertsDescription": "Nhắc việc dự kiến cho khách tiềm năng đến hạn hôm nay hoặc đã trễ.",
+      "weeklyReports": "Gửi báo cáo hằng tuần",
+      "weeklyReportsDescription": "Lịch gửi định kỳ dự kiến cho báo cáo hiệu suất hằng tuần."
     },
     "subscription": {
-      "title": "Goi su dung",
-      "description": "Khu placeholder ro rang cho goi, lich su thanh toan, va gioi han su dung o phien ban sau.",
-      "cardTitle": "Dieu khien goi",
-      "cardBody": "Goi Starter, Growth, va Custom se duoc quan ly tai day khi tinh nang billing duoc bo sung."
+      "title": "Gói sử dụng",
+      "description": "Phần giữ chỗ rõ ràng cho quản lý gói, lịch sử thanh toán và giới hạn sử dụng trong bản phát hành tương lai.",
+      "cardTitle": "Điều khiển gói",
+      "cardBody": "Các gói Starter, Growth và Custom sẽ được quản lý tại đây sau khi tính năng thanh toán được bổ sung."
     },
     "integrations": {
-      "title": "Lo trinh tich hop",
-      "description": "Nhung placeholder co chu y cho cac nguon lead ma doanh nghiep dia phuong thuong su dung.",
+      "title": "Lộ trình tích hợp",
+      "description": "Các phần giữ chỗ có chủ đích cho những nguồn khách mà doanh nghiệp địa phương thường sử dụng.",
       "facebook": "Facebook Lead Ads",
-      "facebookDescription": "Dua lead tu Facebook vao hang doi chung ngay lap tuc.",
+      "facebookDescription": "Đưa nhu cầu từ Facebook trực tiếp vào hàng đợi khách tiềm năng chung.",
       "tiktok": "TikTok Lead Generation",
-      "tiktokDescription": "Dong bo lead TikTok va so sanh chat luong dat lich theo tung nguon.",
+      "tiktokDescription": "Đồng bộ khách tiềm năng từ chiến dịch TikTok và so sánh chất lượng đặt lịch theo nguồn.",
       "website": "Website Forms",
-      "websiteDescription": "Dua lead website vao cung quy trinh cham soc nhu cac chien dich tra phi.",
+      "websiteDescription": "Đưa nhu cầu từ website vào cùng quy trình chăm sóc như các chiến dịch trả phí.",
       "zalo": "Zalo OA",
-      "zaloDescription": "Theo doi hoi thoai va nhu cau tu Zalo trong cung mot pipeline dat lich."
+      "zaloDescription": "Theo dõi hội thoại và nhu cầu từ Zalo trong cùng pipeline đặt lịch."
     }
   },
   "SettingsCapture": {
-    "copy": "Sao chep link form cong khai",
-    "copied": "Da sao chep",
-    "helper": "Chia se link nay tren Facebook, TikTok, Zalo, website, hoac landing page."
+    "copy": "Sao chép link form công khai",
+    "copied": "Đã sao chép",
+    "helper": "Chia sẻ link này trên Facebook, TikTok, Zalo, website hoặc landing page."
+  },
+  "Landing": {
+    "header": {
+      "tagline": "Quản lý khách tiềm năng cho doanh nghiệp dịch vụ địa phương",
+      "openDashboard": "Mở dashboard",
+      "signIn": "Đăng nhập",
+      "getStarted": "Bắt đầu"
+    },
+    "hero": {
+      "badge": "Dành cho spa, phòng khám, nha khoa, thẩm mỹ, giáo dục và đội ngũ dịch vụ địa phương",
+      "title": "Biến khách tiềm năng từ mạng xã hội thành lịch hẹn",
+      "subtitle": "LeadOps AI giúp doanh nghiệp địa phương theo dõi khách tiềm năng, chăm sóc lại, chiến dịch và hiệu suất hằng tuần trong một dashboard duy nhất.",
+      "primaryCta": "Xem demo dashboard",
+      "secondaryCta": "Xem cách hoạt động",
+      "tags": {
+        "followUp": "Hiển thị rõ nhu cầu cần chăm sóc lại",
+        "campaigns": "Rõ hiệu quả chiến dịch",
+        "reports": "Sẵn sàng cho báo cáo hằng tuần"
+      },
+      "highlights": {
+        "sources": {
+          "title": "Tất cả nguồn khách trong một nơi",
+          "text": "Facebook, TikTok, form website, giới thiệu và nhập tay đều được theo dõi chung."
+        },
+        "followUp": {
+          "title": "Chăm sóc lại có hành động",
+          "text": "Nhân sự thấy ngay khách tiềm năng nào cần xử lý hôm nay trước khi nhu cầu nguội dần."
+        },
+        "conversion": {
+          "title": "Góc nhìn chuyển đổi đơn giản",
+          "text": "Chủ doanh nghiệp theo dõi lịch hẹn đã đặt mà không cần đào qua bảng tính."
+        }
+      },
+      "mockup": {
+        "title": "Xem trước dashboard",
+        "subtitle": "Một màn hình vận hành gọn gàng cho lượng khách tiềm năng mới, áp lực chăm sóc lại và đà đặt lịch.",
+        "demoBadge": "Workspace demo",
+        "attentionTitle": "Điều cần ưu tiên",
+        "attentionText": "Có khách tiềm năng cần được chăm sóc lại hôm nay. Nhu cầu chờ lâu nhất đến từ Facebook cách đây 2 ngày.",
+        "sourcesTitle": "Nguồn nổi bật",
+        "recentLeadsTitle": "Khách tiềm năng gần đây",
+        "recentLeadsBadge": "Bảng gọn",
+        "kpi": {
+          "totalLeads": "Tổng khách tiềm năng",
+          "bookedAppointments": "Lịch hẹn đã đặt",
+          "followUpNeeded": "Cần chăm sóc lại",
+          "conversionRate": "Tỷ lệ chuyển đổi"
+        },
+        "sources": {
+          "facebook": "Facebook Lead Ads",
+          "website": "Website Forms",
+          "referral": "Giới thiệu"
+        },
+        "interests": {
+          "dental": "Tẩy trắng răng",
+          "beauty": "Chăm sóc da",
+          "education": "Khóa học tiếng Anh"
+        },
+        "status": {
+          "booked": "Đã đặt lịch",
+          "followUp": "Chăm sóc lại hôm nay",
+          "new": "Mới"
+        }
+      }
+    },
+    "pain": {
+      "eyebrow": "Vấn đề thường gặp",
+      "title": "Quy trình xử lý khách tiềm năng thường đứt gãy trước khi thành lịch hẹn",
+      "title1": "Khách tiềm năng nằm rải rác",
+      "text1": "Khách tiềm năng nằm rải rác trong inbox, form và bảng tính nên không ai có một góc nhìn rõ ràng về nhu cầu mới vào.",
+      "title2": "Dễ bỏ sót chăm sóc lại",
+      "text2": "Nhân sự dễ quên chăm sóc lại khi tin nhắn bị chia qua nhiều kênh hoặc bàn giao giữa nhiều người.",
+      "title3": "Khó thấy chiến dịch nào hiệu quả",
+      "text3": "Chủ doanh nghiệp không biết chiến dịch nào đang hiệu quả nên ngân sách quảng cáo bị chi mà không rõ chất lượng khách tiềm năng.",
+      "title4": "Chất lượng khách tiềm năng khó đánh giá",
+      "text4": "Số lượng nhu cầu mới có thể trông khỏe, nhưng lịch hẹn thực tế lại không tăng."
+    },
+    "features": {
+      "eyebrow": "Tính năng",
+      "title": "Mọi thứ đội ngũ cần để đưa khách tiềm năng tới lịch hẹn",
+      "cards": {
+        "tracking": {
+          "title": "Theo dõi khách tiềm năng",
+          "text": "Gom khách tiềm năng từ Facebook, TikTok, website, giới thiệu và nhập tay trong một nơi."
+        },
+        "followUp": {
+          "title": "Nhắc chăm sóc lại",
+          "text": "Giữ các lượt chăm sóc quá hạn và đến hạn hôm nay luôn hiển thị rõ để khách tiềm năng không bị nguội."
+        },
+        "insights": {
+          "title": "Insight nguồn chiến dịch",
+          "text": "So sánh kênh nào tạo ra nhiều khách tiềm năng nhất và kênh nào mang lại kết quả đặt lịch tốt nhất."
+        },
+        "reports": {
+          "title": "Báo cáo hằng tuần kiểu AI",
+          "text": "Tóm tắt hiệu suất khách tiềm năng bằng ngôn ngữ kinh doanh, sẵn sàng nâng cấp AI trong tương lai."
+        },
+        "conversion": {
+          "title": "Tổng quan chuyển đổi thành lịch hẹn",
+          "text": "Theo dõi hành trình từ nhu cầu ban đầu đến lịch hẹn đã đặt bằng các chỉ số dễ hiểu."
+        },
+        "workflow": {
+          "title": "Quy trình CRM sẵn sàng cho đội ngũ",
+          "text": "Để lại ghi chú, cập nhật trạng thái và bước tiếp theo rõ ràng để nhân sự tiếp quản ngay."
+        }
+      }
+    },
+    "how": {
+      "eyebrow": "Cách hoạt động",
+      "title": "Một quy trình đơn giản cho đội ngũ dịch vụ bận rộn",
+      "steps": {
+        "capture": {
+          "title": "Thu khách tiềm năng",
+          "text": "Đưa nhu cầu từ quảng cáo, form website, giới thiệu hoặc nhập tay vào hệ thống."
+        },
+        "followUp": {
+          "title": "Theo dõi chăm sóc lại",
+          "text": "Gán trạng thái rõ ràng và ngày chăm sóc tiếp theo để không ai quên khách tiềm năng."
+        },
+        "convert": {
+          "title": "Chuyển thành lịch hẹn",
+          "text": "Đưa khách tiềm năng đủ điều kiện thành lịch hẹn đã đặt và giữ ghi chú gọn gàng."
+        },
+        "review": {
+          "title": "Xem hiệu suất hằng tuần",
+          "text": "Thấy rõ nguồn, chiến dịch và hành động đội ngũ nào đang tạo ra kết quả tốt hơn."
+        }
+      }
+    },
+    "useCases": {
+      "eyebrow": "Tình huống sử dụng",
+      "title": "Thiết kế cho doanh nghiệp địa phương sống bằng tốc độ và kỷ luật chăm sóc lại",
+      "cards": {
+        "spa": {
+          "title": "Spa",
+          "text": "Theo dõi nhu cầu liệu trình, đặt lịch tư vấn và cơ hội chăm sóc lại mà không mất bối cảnh."
+        },
+        "dental": {
+          "title": "Nha khoa",
+          "text": "Giữ khách quan tâm tẩy trắng, niềng răng và tư vấn đi đều tới lịch hẹn với kiểm soát trạng thái rõ hơn."
+        },
+        "clinic": {
+          "title": "Phòng khám / trung tâm thẩm mỹ",
+          "text": "Cho đội ngũ một góc nhìn chung về tin nhắn mới, nhu cầu tư vấn và tình hình đặt lịch."
+        },
+        "education": {
+          "title": "Trung tâm giáo dục",
+          "text": "Quản lý nhu cầu khóa học, chăm sóc phụ huynh và chuyển đổi từ khách tiềm năng sang cuộc gọi tư vấn hoặc ghi danh."
+        }
+      }
+    },
+    "pricing": {
+      "eyebrow": "Giá gói",
+      "title": "Khung gói đơn giản cho giai đoạn demo và trao đổi bán hàng ban đầu",
+      "comingSoon": "Sắp có",
+      "starter": {
+        "title": "Starter",
+        "text": "Phù hợp với doanh nghiệp tự vận hành cần thấy rõ khách tiềm năng mới và quy trình chăm sóc cơ bản."
+      },
+      "growth": {
+        "title": "Growth",
+        "text": "Dành cho đội ngũ cần theo dõi chiến dịch mạnh hơn, nhiều người dùng hơn và báo cáo rõ ràng hơn."
+      },
+      "custom": {
+        "title": "Custom",
+        "text": "Dành cho đội ngũ nhiều cơ sở hoặc lượng khách tiềm năng lớn cần onboarding và quy trình tùy chỉnh."
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Câu hỏi thường gặp từ các đội ngũ dịch vụ địa phương",
+      "items": {
+        "crm": {
+          "question": "Đây có phải là CRM không?",
+          "answer": "Có. LeadOps AI là CRM gọn nhẹ tập trung vào khách tiềm năng, kỷ luật chăm sóc lại, hiệu quả chiến dịch và lịch hẹn đã đặt."
+        },
+        "integration": {
+          "question": "Có thể dùng nếu chưa tích hợp Facebook hoặc TikTok không?",
+          "answer": "Có. Bạn vẫn có thể ghi nhận và quản lý khách tiềm năng thủ công, từ form, giới thiệu hoặc bất kỳ nguồn nào khác."
+        },
+        "team": {
+          "question": "Đội ngũ của tôi có thể cùng sử dụng không?",
+          "answer": "Có. Sản phẩm được cấu trúc để chủ doanh nghiệp, lễ tân và quản lý cùng làm việc trên một hàng đợi khách tiềm năng chung."
+        },
+        "language": {
+          "question": "Có hỗ trợ tiếng Việt và tiếng Anh không?",
+          "answer": "Có. Giao diện hỗ trợ cả tiếng Việt và tiếng Anh."
+        },
+        "ai": {
+          "question": "Báo cáo AI đã có sẵn chưa?",
+          "answer": "Bố cục báo cáo đã sẵn sàng ở hiện tại, còn báo cáo do AI tạo nâng cao hơn được lên kế hoạch cho bản phát hành tương lai."
+        }
+      }
+    },
+    "footer": {
+      "description": "LeadOps AI giúp doanh nghiệp dịch vụ địa phương biến những nhu cầu rải rác thành một quy trình đặt lịch rõ ràng hơn.",
+      "demoLink": "Xem demo dashboard",
+      "howItWorksLink": "Cách hoạt động",
+      "faqLink": "FAQ"
+    }
   }
 }

@@ -29,9 +29,9 @@ export function MetricCard({
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-2.5">
-            <p className="text-sm font-medium text-[var(--muted-foreground)]">{title}</p>
-            <p className="text-3xl font-semibold tracking-tight text-slate-950">{value}</p>
-            {description ? <p className="max-w-[28ch] text-sm leading-6 text-[var(--muted-foreground)]">{description}</p> : null}
+            <p className="text-sm font-semibold text-[var(--muted-foreground)]">{title}</p>
+            <p className="type-kpi text-[2.15rem] font-extrabold text-slate-950 md:text-[2.35rem]">{value}</p>
+            {description ? <p className="max-w-[30ch] text-[0.94rem] leading-6 text-[var(--muted-foreground)]">{description}</p> : null}
           </div>
           {icon ? (
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--secondary)] p-3 text-[var(--primary)] shadow-sm">

@@ -1,165 +1,240 @@
 import NextLink from "next/link";
 import { auth } from "@clerk/nextjs/server";
+import { getTranslations } from "next-intl/server";
 import {
   ArrowRight,
+  BadgeCheck,
   BarChart3,
-  CalendarCheck2,
+  CalendarClock,
   CheckCircle2,
-  ChartNoAxesCombined,
+  ChevronRight,
   ClipboardList,
+  LayoutDashboard,
+  MessageSquareMore,
   Sparkles,
+  Target,
   Users,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export async function HomePage() {
   const { userId } = await auth();
+  const tCommon = await getTranslations("Common");
+  const tLanding = await getTranslations("Landing");
+
+  const heroStats = [
+    { value: "142", label: tLanding("hero.mockup.kpi.totalLeads") },
+    { value: "18", label: tLanding("hero.mockup.kpi.bookedAppointments") },
+    { value: "12", label: tLanding("hero.mockup.kpi.followUpNeeded") },
+    { value: "32%", label: tLanding("hero.mockup.kpi.conversionRate") },
+  ];
+
+  const mockupSources = [
+    { label: tLanding("hero.mockup.sources.facebook"), value: "42" },
+    { label: tLanding("hero.mockup.sources.website"), value: "31" },
+    { label: tLanding("hero.mockup.sources.referral"), value: "19" },
+  ];
+
+  const mockupLeads = [
+    { name: "Linh Tran", interest: tLanding("hero.mockup.interests.dental"), status: tLanding("hero.mockup.status.booked"), badge: "success" as const },
+    { name: "Anna Nguyen", interest: tLanding("hero.mockup.interests.beauty"), status: tLanding("hero.mockup.status.followUp"), badge: "warning" as const },
+    { name: "David Pham", interest: tLanding("hero.mockup.interests.education"), status: tLanding("hero.mockup.status.new"), badge: "teal" as const },
+  ];
+
+  const pains = [
+    { title: tLanding("pain.title1"), text: tLanding("pain.text1"), icon: <MessageSquareMore className="h-5 w-5" /> },
+    { title: tLanding("pain.title2"), text: tLanding("pain.text2"), icon: <CalendarClock className="h-5 w-5" /> },
+    { title: tLanding("pain.title3"), text: tLanding("pain.text3"), icon: <BarChart3 className="h-5 w-5" /> },
+    { title: tLanding("pain.title4"), text: tLanding("pain.text4"), icon: <Target className="h-5 w-5" /> },
+  ];
+
+  const features = [
+    { title: tLanding("features.cards.tracking.title"), text: tLanding("features.cards.tracking.text"), icon: <Users className="h-5 w-5 text-[var(--primary)]" /> },
+    { title: tLanding("features.cards.followUp.title"), text: tLanding("features.cards.followUp.text"), icon: <CalendarClock className="h-5 w-5 text-[var(--accent)]" /> },
+    { title: tLanding("features.cards.insights.title"), text: tLanding("features.cards.insights.text"), icon: <BarChart3 className="h-5 w-5 text-emerald-600" /> },
+    { title: tLanding("features.cards.reports.title"), text: tLanding("features.cards.reports.text"), icon: <Sparkles className="h-5 w-5 text-sky-600" /> },
+    { title: tLanding("features.cards.conversion.title"), text: tLanding("features.cards.conversion.text"), icon: <Target className="h-5 w-5 text-indigo-600" /> },
+    { title: tLanding("features.cards.workflow.title"), text: tLanding("features.cards.workflow.text"), icon: <ClipboardList className="h-5 w-5 text-rose-600" /> },
+  ];
+
+  const steps = [
+    { step: "01", title: tLanding("how.steps.capture.title"), text: tLanding("how.steps.capture.text") },
+    { step: "02", title: tLanding("how.steps.followUp.title"), text: tLanding("how.steps.followUp.text") },
+    { step: "03", title: tLanding("how.steps.convert.title"), text: tLanding("how.steps.convert.text") },
+    { step: "04", title: tLanding("how.steps.review.title"), text: tLanding("how.steps.review.text") },
+  ];
+
+  const useCases = [
+    { title: tLanding("useCases.cards.spa.title"), text: tLanding("useCases.cards.spa.text") },
+    { title: tLanding("useCases.cards.dental.title"), text: tLanding("useCases.cards.dental.text") },
+    { title: tLanding("useCases.cards.clinic.title"), text: tLanding("useCases.cards.clinic.text") },
+    { title: tLanding("useCases.cards.education.title"), text: tLanding("useCases.cards.education.text") },
+  ];
+
+  const pricing = [
+    { title: tLanding("pricing.starter.title"), text: tLanding("pricing.starter.text") },
+    { title: tLanding("pricing.growth.title"), text: tLanding("pricing.growth.text") },
+    { title: tLanding("pricing.custom.title"), text: tLanding("pricing.custom.text") },
+  ];
+
+  const faqs = [
+    { question: tLanding("faq.items.crm.question"), answer: tLanding("faq.items.crm.answer") },
+    { question: tLanding("faq.items.integration.question"), answer: tLanding("faq.items.integration.answer") },
+    { question: tLanding("faq.items.team.question"), answer: tLanding("faq.items.team.answer") },
+    { question: tLanding("faq.items.language.question"), answer: tLanding("faq.items.language.answer") },
+    { question: tLanding("faq.items.ai.question"), answer: tLanding("faq.items.ai.answer") },
+  ];
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,#f7fafe_0%,#f5f7fb_100%)]">
-      <main className="mx-auto max-w-7xl px-5 py-6 md:px-8 md:py-8">
-        <header className="surface-panel flex flex-col gap-4 rounded-[28px] border px-5 py-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="text-xs font-semibold tracking-[0.24em] text-[var(--primary)] uppercase">LeadOps AI</p>
-            <p className="text-sm text-slate-600">Lead management for local service businesses</p>
-          </div>
-          <div className="flex items-center gap-3">
-            {userId ? (
-              <Link href="/dashboard">
-                <Button size="sm">Open Dashboard</Button>
-              </Link>
-            ) : (
-              <>
-                <NextLink href="/sign-in" className="text-sm font-medium text-slate-600">
-                  Sign in
-                </NextLink>
-                <NextLink href="/sign-up">
-                  <Button size="sm">Get Started</Button>
-                </NextLink>
-              </>
-            )}
+    <div className="min-h-screen bg-[linear-gradient(180deg,#f8fbff_0%,#f2f6fb_100%)]">
+      <main className="mx-auto max-w-[1240px] px-4 py-4 md:px-6 md:py-6 xl:px-8">
+        <header className="surface-panel rounded-[30px] border border-white/70 px-5 py-4 shadow-[0_24px_60px_-44px_rgba(15,23,42,0.2)]">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center gap-3">
+                <div className="rounded-2xl bg-[var(--secondary)] p-3 text-[var(--primary)]">
+                  <LayoutDashboard className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold tracking-[0.2em] text-[var(--primary)] uppercase">{tCommon("appName")}</p>
+                  <p className="text-[0.95rem] leading-7 text-slate-600">{tLanding("header.tagline")}</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <LanguageSwitcher />
+              {userId ? (
+                <Link href="/dashboard">
+                  <Button size="sm">{tLanding("header.openDashboard")}</Button>
+                </Link>
+              ) : (
+                <>
+                  <NextLink href="/sign-in" className="text-sm font-medium text-slate-600">
+                    {tLanding("header.signIn")}
+                  </NextLink>
+                  <NextLink href="/sign-up">
+                    <Button size="sm">{tLanding("header.getStarted")}</Button>
+                  </NextLink>
+                </>
+              )}
+            </div>
           </div>
         </header>
 
-        <section className="grid gap-10 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-24">
+        <section className="grid gap-10 py-14 md:grid-cols-[1.02fr_0.98fr] md:items-center md:py-20">
           <div className="space-y-8">
-            <div className="inline-flex items-center rounded-full border bg-white px-4 py-2 text-sm font-medium text-slate-700">
-              Built for spas, dental clinics, beauty centers, clinics, and education teams
-            </div>
+            <Badge variant="teal" className="rounded-full px-4 py-2 text-sm">
+              {tLanding("hero.badge")}
+            </Badge>
+
             <div className="space-y-5">
-              <h1 className="text-balance max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 md:text-6xl">
-                Turn social media leads into booked appointments
+              <h1 className="text-balance max-w-4xl text-5xl font-extrabold text-slate-950 md:text-[4.2rem]">
+                {tLanding("hero.title")}
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-slate-600">
-                LeadOps AI helps local service businesses track leads, follow-ups, campaigns, and weekly performance in one clean dashboard.
+              <p className="max-w-2xl text-[1.1rem] leading-8 text-slate-600 md:text-[1.16rem]">
+                {tLanding("hero.subtitle")}
               </p>
             </div>
+
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link href="/dashboard">
                 <Button size="lg" className="gap-2">
-                  View Dashboard Demo
+                  {tLanding("hero.primaryCta")}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
               <NextLink href="#how-it-works">
                 <Button size="lg" variant="outline">
-                  See How It Works
+                  {tLanding("hero.secondaryCta")}
                 </Button>
               </NextLink>
             </div>
+
             <div className="flex flex-wrap gap-2">
-              <Badge variant="teal">Follow-up needed visibility</Badge>
-              <Badge variant="neutral">Campaign performance clarity</Badge>
-              <Badge variant="warning">Demo-ready weekly reporting</Badge>
+              <Badge variant="teal">{tLanding("hero.tags.followUp")}</Badge>
+              <Badge variant="neutral">{tLanding("hero.tags.campaigns")}</Badge>
+              <Badge variant="warning">{tLanding("hero.tags.reports")}</Badge>
             </div>
+
             <div className="grid gap-4 sm:grid-cols-3">
               {[
-                ["All lead sources", "Facebook, TikTok, website forms, referrals, and manual entry in one place."],
-                ["Actionable follow-up", "Staff can see which leads need attention today before they go cold."],
-                ["Simple conversion view", "Owners can track booked appointments without digging through spreadsheets."],
-              ].map(([value, label]) => (
-                <Card key={label} className="surface-panel">
+                { title: tLanding("hero.highlights.sources.title"), text: tLanding("hero.highlights.sources.text") },
+                { title: tLanding("hero.highlights.followUp.title"), text: tLanding("hero.highlights.followUp.text") },
+                { title: tLanding("hero.highlights.conversion.title"), text: tLanding("hero.highlights.conversion.text") },
+              ].map((item) => (
+                <Card key={item.title} className="surface-panel">
                   <CardContent className="p-5">
-                    <p className="text-lg font-semibold text-slate-950">{value}</p>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">{label}</p>
+                    <p className="text-[1.05rem] font-semibold text-slate-950">{item.title}</p>
+                    <p className="mt-2 text-[0.94rem] leading-7 text-slate-600">{item.text}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
           </div>
 
-          <Card className="surface-panel overflow-hidden">
+          <Card className="surface-panel overflow-hidden border-white/60">
             <CardContent className="p-0">
-              <div className="soft-grid grid gap-5 p-6 md:p-8">
-                <div className="rounded-3xl border bg-white p-5">
+              <div className="soft-grid grid gap-5 p-5 md:p-7">
+                <div className="rounded-[30px] border bg-white p-5 shadow-sm">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm text-slate-500">LeadOps dashboard preview</p>
-                    <Badge variant="info">Demo workspace</Badge>
+                    <div>
+                      <p className="text-[0.95rem] font-semibold text-slate-900">{tLanding("hero.mockup.title")}</p>
+                      <p className="mt-1 text-[0.92rem] leading-6 text-slate-500">{tLanding("hero.mockup.subtitle")}</p>
+                    </div>
+                    <Badge variant="info">{tLanding("hero.mockup.demoBadge")}</Badge>
                   </div>
-                  <div className="mt-3 grid grid-cols-2 gap-4">
-                    {[
-                      ["142", "Total leads"],
-                      ["18", "Booked appointments"],
-                      ["12", "Follow-up needed"],
-                      ["32%", "Conversion rate"],
-                    ].map(([value, label]) => (
-                      <div key={label} className="rounded-2xl border bg-[var(--secondary)]/55 p-4">
-                        <p className="text-2xl font-semibold text-slate-950">{value}</p>
-                        <p className="mt-1 text-sm text-slate-500">{label}</p>
+                  <div className="mt-4 grid grid-cols-2 gap-4">
+                    {heroStats.map((item) => (
+                      <div key={item.label} className="rounded-2xl border bg-[var(--secondary)]/55 p-4">
+                        <p className="type-kpi text-[2rem] font-extrabold text-slate-950">{item.value}</p>
+                        <p className="mt-1 text-[0.92rem] text-slate-500">{item.label}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
-                  <div className="rounded-2xl border bg-white p-5">
+                  <div className="rounded-[26px] border bg-white p-5 shadow-sm">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold text-slate-900">What needs attention</p>
+                      <p className="text-[0.95rem] font-semibold text-slate-900">{tLanding("hero.mockup.attentionTitle")}</p>
                       <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                     </div>
-                    <p className="mt-4 text-3xl font-semibold text-slate-950">12</p>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">Leads need follow-up today. Oldest pending: 2 days ago from Facebook.</p>
+                    <p className="type-kpi mt-4 text-[2rem] font-extrabold text-slate-950">12</p>
+                    <p className="mt-2 text-[0.94rem] leading-7 text-slate-600">{tLanding("hero.mockup.attentionText")}</p>
                   </div>
-                  <div className="rounded-2xl border bg-white p-5">
+                  <div className="rounded-[26px] border bg-white p-5 shadow-sm">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold text-slate-900">Top sources</p>
+                      <p className="text-[0.95rem] font-semibold text-slate-900">{tLanding("hero.mockup.sourcesTitle")}</p>
                       <BarChart3 className="h-4 w-4 text-[var(--primary)]" />
                     </div>
                     <div className="mt-4 space-y-3">
-                      {[
-                        ["Facebook Lead Ads", "42 leads"],
-                        ["Website Forms", "31 leads"],
-                        ["Referrals", "19 leads"],
-                      ].map(([label, value]) => (
-                        <div key={label} className="flex items-center justify-between rounded-2xl bg-[var(--secondary)]/55 px-4 py-3">
-                          <span className="text-sm text-slate-700">{label}</span>
-                          <span className="text-sm font-semibold text-slate-950">{value}</span>
+                      {mockupSources.map((item) => (
+                        <div key={item.label} className="flex items-center justify-between rounded-2xl bg-[var(--secondary)]/55 px-4 py-3">
+                          <span className="text-[0.94rem] text-slate-700">{item.label}</span>
+                          <span className="text-[0.94rem] font-semibold text-slate-950">{item.value}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-3xl border bg-white p-5">
+                <div className="rounded-[30px] border bg-white p-5 shadow-sm">
                   <div className="flex items-center justify-between">
-                    <p className="text-sm font-semibold text-slate-900">Recent leads</p>
-                    <Badge variant="neutral">Compact table</Badge>
+                    <p className="text-[0.95rem] font-semibold text-slate-900">{tLanding("hero.mockup.recentLeadsTitle")}</p>
+                    <Badge variant="neutral">{tLanding("hero.mockup.recentLeadsBadge")}</Badge>
                   </div>
                   <div className="mt-4 space-y-3">
-                    {[
-                      ["Linh Tran", "Teeth whitening", "Booked"],
-                      ["Anna Nguyen", "Skin treatment", "Follow-up today"],
-                      ["David Pham", "English course", "New"],
-                    ].map(([name, interest, status]) => (
-                      <div key={name} className="flex items-center justify-between rounded-2xl border px-4 py-3">
+                    {mockupLeads.map((lead) => (
+                      <div key={lead.name} className="flex items-center justify-between gap-4 rounded-2xl border px-4 py-3">
                         <div>
-                          <p className="text-sm font-semibold text-slate-950">{name}</p>
-                          <p className="text-xs text-slate-500">{interest}</p>
+                          <p className="text-[0.94rem] font-semibold text-slate-950">{lead.name}</p>
+                          <p className="text-[0.82rem] text-slate-500">{lead.interest}</p>
                         </div>
-                        <span className="text-xs font-semibold text-[var(--primary)]">{status}</span>
+                        <Badge variant={lead.badge}>{lead.status}</Badge>
                       </div>
                     ))}
                   </div>
@@ -169,80 +244,39 @@ export async function HomePage() {
           </Card>
         </section>
 
-        <section className="grid gap-6 py-6 md:grid-cols-2 xl:grid-cols-4">
-          {[
-            {
-              title: "Leads are scattered",
-              text: "Leads are scattered across inboxes, forms, and spreadsheets, so nobody has one clear view of what came in.",
-            },
-            {
-              title: "Follow-up gets missed",
-              text: "Staff forget to follow up, especially when messages are split across channels or handed off between team members.",
-            },
-            {
-              title: "Campaign visibility is weak",
-              text: "Owners cannot see which campaign works, so ad budget gets spent without clear lead quality tracking.",
-            },
-            {
-              title: "Booking quality is unclear",
-              text: "Without a clean process, new lead volume looks healthy even when appointments are not actually increasing.",
-            },
-          ].map((section) => (
-            <Card key={section.title} className="surface-panel h-full">
-              <CardHeader>
-                <CardTitle>{section.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm leading-7 text-slate-600">
-                <p>{section.text}</p>
-              </CardContent>
-            </Card>
-          ))}
+        <section className="py-8">
+          <div className="mb-6 max-w-2xl">
+            <p className="text-[11px] font-bold tracking-[0.18em] text-[var(--primary)] uppercase">{tLanding("pain.eyebrow")}</p>
+            <h2 className="mt-3 text-[2rem] font-bold text-slate-950 md:text-[2.3rem]">{tLanding("pain.title")}</h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {pains.map((item) => (
+              <Card key={item.title} className="surface-panel h-full">
+                <CardContent className="space-y-4 p-6">
+                  <div className="w-fit rounded-2xl bg-[var(--secondary)] p-3 text-[var(--primary)]">{item.icon}</div>
+                  <div>
+                    <h3 className="text-[1.06rem] font-semibold text-slate-950">{item.title}</h3>
+                    <p className="mt-2 text-[0.94rem] leading-7 text-slate-600">{item.text}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </section>
 
         <section className="py-8">
           <div className="mb-6 max-w-2xl">
-            <p className="text-xs font-semibold tracking-[0.24em] text-[var(--primary)] uppercase">Features</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">Everything your team needs to move leads toward booked appointments</h2>
+            <p className="text-[11px] font-bold tracking-[0.18em] text-[var(--primary)] uppercase">{tLanding("features.eyebrow")}</p>
+            <h2 className="mt-3 text-[2rem] font-bold text-slate-950 md:text-[2.3rem]">{tLanding("features.title")}</h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {[
-              {
-                icon: <Users className="h-5 w-5 text-[var(--primary)]" />,
-                title: "Lead Tracking",
-                text: "Capture Facebook, TikTok, website, referral, and manual leads in one place.",
-              },
-              {
-                icon: <CalendarCheck2 className="h-5 w-5 text-[var(--accent)]" />,
-                title: "Follow-up Reminders",
-                text: "Keep overdue and due-today follow-ups visible so promising leads do not go cold.",
-              },
-              {
-                icon: <ChartNoAxesCombined className="h-5 w-5 text-emerald-600" />,
-                title: "Campaign Source Insights",
-                text: "Compare which channels produce the most leads and the best booking outcomes.",
-              },
-              {
-                icon: <Sparkles className="h-5 w-5 text-sky-600" />,
-                title: "Weekly AI-style Reports",
-                text: "Summarize lead performance with business-friendly reporting that is ready for future AI upgrades.",
-              },
-              {
-                icon: <BarChart3 className="h-5 w-5 text-indigo-600" />,
-                title: "Appointment Conversion Overview",
-                text: "Watch the path from inquiry to booked appointment with simple performance metrics.",
-              },
-              {
-                icon: <ClipboardList className="h-5 w-5 text-rose-600" />,
-                title: "Team-ready CRM Workflow",
-                text: "Leave clear notes, status updates, and next steps so staff can pick up where others left off.",
-              },
-            ].map((item) => (
-              <Card key={item.title} className="surface-panel bg-white/80">
+            {features.map((item) => (
+              <Card key={item.title} className="surface-panel bg-white/85">
                 <CardContent className="space-y-4 p-6">
                   <div className="w-fit rounded-2xl bg-[var(--secondary)] p-3">{item.icon}</div>
                   <div>
-                    <h3 className="text-lg font-semibold">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">{item.text}</p>
+                    <h3 className="text-[1.06rem] font-semibold text-slate-950">{item.title}</h3>
+                    <p className="mt-2 text-[0.94rem] leading-7 text-slate-600">{item.text}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -252,21 +286,35 @@ export async function HomePage() {
 
         <section id="how-it-works" className="py-8">
           <div className="mb-6 max-w-2xl">
-            <p className="text-xs font-semibold tracking-[0.24em] text-[var(--primary)] uppercase">How It Works</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">A simple workflow for busy local service teams</h2>
+            <p className="text-[11px] font-bold tracking-[0.18em] text-[var(--primary)] uppercase">{tLanding("how.eyebrow")}</p>
+            <h2 className="mt-3 text-[2rem] font-bold text-slate-950 md:text-[2.3rem]">{tLanding("how.title")}</h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              ["01", "Capture leads", "Bring in inquiries from ads, website forms, referrals, or manual entry."],
-              ["02", "Track follow-up", "Assign a clear status and next follow-up date so nobody forgets the lead."],
-              ["03", "Convert to bookings", "Move qualified leads into booked appointments and keep notes organized."],
-              ["04", "Review weekly performance", "See what sources, campaigns, and staff actions are driving better results."],
-            ].map(([step, title, text]) => (
-              <Card key={step} className="surface-panel">
+            {steps.map((item) => (
+              <Card key={item.step} className="surface-panel h-full">
                 <CardContent className="p-6">
-                  <p className="text-sm font-semibold text-[var(--primary)]">{step}</p>
-                  <h3 className="mt-4 text-xl font-semibold text-slate-950">{title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{text}</p>
+                  <p className="text-[0.82rem] font-bold tracking-[0.08em] text-[var(--primary)]">{item.step}</p>
+                  <h3 className="mt-4 text-[1.18rem] font-semibold text-slate-950">{item.title}</h3>
+                  <p className="mt-3 text-[0.94rem] leading-7 text-slate-600">{item.text}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section id="faq" className="py-8">
+          <div className="mb-6 max-w-2xl">
+            <p className="text-[11px] font-bold tracking-[0.18em] text-[var(--primary)] uppercase">{tLanding("useCases.eyebrow")}</p>
+            <h2 className="mt-3 text-[2rem] font-bold text-slate-950 md:text-[2.3rem]">{tLanding("useCases.title")}</h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {useCases.map((item) => (
+              <Card key={item.title} className="surface-panel h-full">
+                <CardHeader>
+                  <CardTitle>{item.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm leading-7 text-slate-600">
+                  <p>{item.text}</p>
                 </CardContent>
               </Card>
             ))}
@@ -275,34 +323,64 @@ export async function HomePage() {
 
         <section className="py-8">
           <div className="mb-6 max-w-2xl">
-            <p className="text-xs font-semibold tracking-[0.24em] text-[var(--primary)] uppercase">Pricing</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">Simple plan structure for demo conversations</h2>
+            <p className="text-[11px] font-bold tracking-[0.18em] text-[var(--primary)] uppercase">{tLanding("pricing.eyebrow")}</p>
+            <h2 className="mt-3 text-[2rem] font-bold text-slate-950 md:text-[2.3rem]">{tLanding("pricing.title")}</h2>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
-            {[
-              ["Starter", "For owner-operated businesses getting visibility on new leads and follow-up basics."],
-              ["Growth", "For teams that need stronger campaign tracking, more users, and reporting clarity."],
-              ["Custom", "For multi-location or higher-volume teams that need tailored onboarding and workflows."],
-            ].map(([title, text]) => (
-              <Card key={title} className="surface-panel h-full">
+            {pricing.map((item) => (
+              <Card key={item.title} className="surface-panel h-full">
                 <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle>{title}</CardTitle>
-                    <Badge variant="warning">Coming soon</Badge>
+                  <div className="flex items-center justify-between gap-3">
+                    <CardTitle>{item.title}</CardTitle>
+                    <Badge variant="warning">{tLanding("pricing.comingSoon")}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm leading-7 text-slate-600">{text}</p>
+                  <p className="text-[0.94rem] leading-7 text-slate-600">{item.text}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
         </section>
 
-        <footer className="border-t border-[var(--border)] py-8 text-sm text-slate-500">
-          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-            <p>LeadOps AI helps local service businesses turn scattered inquiries into a cleaner booking workflow.</p>
-            <p>Built for lead tracking, follow-up control, and appointment conversion visibility.</p>
+        <section className="py-8">
+          <div className="mb-6 max-w-2xl">
+            <p className="text-[11px] font-bold tracking-[0.18em] text-[var(--primary)] uppercase">{tLanding("faq.eyebrow")}</p>
+            <h2 className="mt-3 text-[2rem] font-bold text-slate-950 md:text-[2.3rem]">{tLanding("faq.title")}</h2>
+          </div>
+          <div className="grid gap-4">
+            {faqs.map((item) => (
+              <Card key={item.question} className="surface-panel">
+                <CardContent className="flex flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
+                  <div className="max-w-3xl">
+                    <h3 className="text-[1.06rem] font-semibold text-slate-950">{item.question}</h3>
+                    <p className="mt-2 text-[0.94rem] leading-7 text-slate-600">{item.answer}</p>
+                  </div>
+                  <BadgeCheck className="h-5 w-5 shrink-0 text-[var(--primary)]" />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <footer className="mt-6 border-t border-[var(--border)] py-8 text-sm text-slate-500">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-2">
+              <p className="text-[0.95rem] font-semibold text-slate-900">{tCommon("appName")}</p>
+              <p className="max-w-xl text-[0.94rem] leading-7">{tLanding("footer.description")}</p>
+            </div>
+            <div className="flex flex-wrap gap-4 text-sm font-medium text-slate-600">
+              <Link href="/dashboard" className="inline-flex items-center gap-1 hover:text-slate-950">
+                {tLanding("footer.demoLink")}
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+              <NextLink href="#how-it-works" className="hover:text-slate-950">
+                {tLanding("footer.howItWorksLink")}
+              </NextLink>
+              <NextLink href="#faq" className="hover:text-slate-950">
+                {tLanding("footer.faqLink")}
+              </NextLink>
+            </div>
           </div>
         </footer>
       </main>

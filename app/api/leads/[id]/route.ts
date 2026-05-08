@@ -19,7 +19,7 @@ export async function PATCH(
     });
 
     if (!existingLead) {
-      return NextResponse.json({ error: "Lead not found." }, { status: 404 });
+      return NextResponse.json({ error: "validation.leadNotFound" }, { status: 404 });
     }
 
     const activities = [];
@@ -58,7 +58,7 @@ export async function PATCH(
     return NextResponse.json({ ok: true });
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unable to update lead." },
+      { error: error instanceof Error ? error.message : "validation.updateLeadFailed" },
       { status: 400 },
     );
   }

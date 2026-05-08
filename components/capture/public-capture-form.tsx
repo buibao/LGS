@@ -2,10 +2,12 @@
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { CaptureFormState } from "@/app/capture/[orgSlug]/actions";
+import { translateFormMessage } from "@/lib/form-messages";
 import { sourceTypeLabels } from "@/types";
 
 const initialState: CaptureFormState = {};
@@ -23,6 +25,7 @@ export function PublicCaptureForm({
   campaignId?: string;
   campaignName?: string;
 }) {
+  const tValidation = useTranslations("Validation");
   const [state, formAction] = useActionState(action, initialState);
   const values = state.values ?? {};
 
@@ -47,16 +50,16 @@ export function PublicCaptureForm({
 
       <div className="rounded-3xl border bg-white p-5 shadow-[0_20px_60px_-36px_rgba(15,23,42,0.2)] sm:p-6">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Full name" error={state.fieldErrors?.fullName?.[0]}>
+          <Field label="Full name" error={translateFormMessage(state.fieldErrors?.fullName?.[0], tValidation)}>
             <Input name="fullName" defaultValue={values.fullName ?? ""} placeholder="Nguyen Thi Lan" required />
           </Field>
-          <Field label="Phone" error={state.fieldErrors?.phone?.[0]}>
+          <Field label="Phone" error={translateFormMessage(state.fieldErrors?.phone?.[0], tValidation)}>
             <Input name="phone" defaultValue={values.phone ?? ""} placeholder="+84 90 123 4567" required />
           </Field>
-          <Field label="Email" error={state.fieldErrors?.email?.[0]}>
+          <Field label="Email" error={translateFormMessage(state.fieldErrors?.email?.[0], tValidation)}>
             <Input name="email" defaultValue={values.email ?? ""} placeholder="name@example.com" type="email" />
           </Field>
-          <Field label="Service interest" error={state.fieldErrors?.serviceInterest?.[0]}>
+          <Field label="Service interest" error={translateFormMessage(state.fieldErrors?.serviceInterest?.[0], tValidation)}>
             <Input
               name="serviceInterest"
               defaultValue={values.serviceInterest ?? ""}
@@ -65,7 +68,7 @@ export function PublicCaptureForm({
           </Field>
           <Field
             label="Preferred contact time"
-            error={state.fieldErrors?.preferredContactTime?.[0]}
+            error={translateFormMessage(state.fieldErrors?.preferredContactTime?.[0], tValidation)}
             className="sm:col-span-2"
           >
             <Input
@@ -74,7 +77,7 @@ export function PublicCaptureForm({
               placeholder="This afternoon, after 6pm, Saturday morning..."
             />
           </Field>
-          <Field label="Notes" error={state.fieldErrors?.notes?.[0]} className="sm:col-span-2">
+          <Field label="Notes" error={translateFormMessage(state.fieldErrors?.notes?.[0], tValidation)} className="sm:col-span-2">
             <Textarea
               name="notes"
               defaultValue={values.notes ?? ""}
@@ -88,7 +91,7 @@ export function PublicCaptureForm({
           <input id="website" name="honey" autoComplete="off" tabIndex={-1} defaultValue="" />
         </div>
 
-        {state.formError ? <p className="mt-4 text-sm text-rose-600">{state.formError}</p> : null}
+        {state.formError ? <p className="mt-4 text-sm text-rose-600">{translateFormMessage(state.formError, tValidation) ?? state.formError}</p> : null}
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs leading-6 text-slate-500">

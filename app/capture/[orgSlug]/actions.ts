@@ -61,7 +61,7 @@ export async function submitPublicLeadCapture(
 
     if (!campaign) {
       return {
-        formError: "That campaign link is no longer valid for this capture form.",
+        formError: "validation.invalidCampaign",
         values: rawValues,
       };
     }

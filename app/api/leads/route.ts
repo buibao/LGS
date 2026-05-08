@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ id: lead.id });
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unable to create lead." },
+      { error: error instanceof Error ? error.message : "validation.saveLeadFailed" },
       { status: 400 },
     );
   }

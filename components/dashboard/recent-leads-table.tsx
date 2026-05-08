@@ -1,11 +1,14 @@
+import { Clock3 } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { LeadStatus, SourceType } from "@prisma/client";
 import { Link } from "@/i18n/navigation";
+import { EmptyState } from "@/components/design-system/empty-state";
 import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
 import { SectionCard } from "@/components/ui/section-card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDate, formatRelativeDate } from "@/lib/utils";
 
-export function RecentLeadsTable({
+export async function RecentLeadsTable({
   leads,
 }: {
   leads: Array<{
@@ -19,26 +22,32 @@ export function RecentLeadsTable({
     campaign: { name: string } | null;
   }>;
 }) {
+  const tDashboard = await getTranslations("Dashboard");
+  const tLabels = await getTranslations("Labels");
+  const tLeadTable = await getTranslations("LeadTable");
+  const tEmpty = await getTranslations("EmptyStates");
+
   return (
     <SectionCard
-      title="Recent leads"
-      description="The latest leads entering the pipeline, with just enough context to know who needs follow-up next."
+      title={tDashboard("recentLeadsTitle")}
+      description={tDashboard("recentLeadsDescription")}
       action={
         <Link href="/leads" className="text-sm font-semibold text-[var(--primary)]">
-          View all leads
+          {tDashboard("viewAllLeads")}
         </Link>
       }
       contentClassName="p-0"
     >
+      {leads.length ? (
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Source</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Interest</TableHead>
-              <TableHead>Follow-up date</TableHead>
-              <TableHead>Created</TableHead>
+              <TableHead>{tLabels("name")}</TableHead>
+              <TableHead>{tLabels("source")}</TableHead>
+              <TableHead>{tLabels("status")}</TableHead>
+              <TableHead>{tLabels("interest")}</TableHead>
+              <TableHead>{tLeadTable("followUpDate")}</TableHead>
+              <TableHead>{tLabels("created")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -55,13 +64,22 @@ export function RecentLeadsTable({
                 <TableCell>
                   <LeadStatusBadge status={lead.status} />
                 </TableCell>
-                <TableCell>{lead.serviceInterest ?? lead.campaign?.name ?? "General inquiry"}</TableCell>
-                <TableCell>{lead.followUpAt ? formatRelativeDate(lead.followUpAt) : "Not scheduled"}</TableCell>
+                <TableCell>{lead.serviceInterest ?? lead.campaign?.name ?? tLeadTable("generalInquiry")}</TableCell>
+                <TableCell>{lead.followUpAt ? formatRelativeDate(lead.followUpAt) : tDashboard("notScheduled")}</TableCell>
                 <TableCell>{formatDate(lead.createdAt)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+      ) : (
+        <div className="p-6">
+          <EmptyState
+            icon={Clock3}
+            title={tEmpty("noRecentLeadsTitle")}
+            description={tEmpty("noRecentLeadsDescription")}
+          />
+        </div>
+      )}
     </SectionCard>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { RotateCcw, Search, SlidersHorizontal } from "lucide-react";
+import { RotateCcw, Search, SlidersHorizontal, Users } from "lucide-react";
 import {
   ColumnDef,
   flexRender,
@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-table";
 import { LeadStatus, SourceType } from "@prisma/client";
 import { Link } from "@/i18n/navigation";
+import { EmptyState } from "@/components/design-system/empty-state";
 import { Button } from "@/components/ui/button";
 import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
 import { Input } from "@/components/ui/input";
@@ -19,7 +20,7 @@ import { SectionCard } from "@/components/ui/section-card";
 import { Select } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDate } from "@/lib/utils";
-import { leadStatusLabels, sourceTypeLabels } from "@/types";
+import { leadStatusValues, sourceTypeValues } from "@/types";
 
 type LeadRow = {
   id: string;
@@ -37,6 +38,11 @@ type LeadRow = {
 export function LeadsTable({ rows }: { rows: LeadRow[] }) {
   const tActions = useTranslations("Actions");
   const tFilters = useTranslations("Filters");
+  const tLabels = useTranslations("Labels");
+  const tLeadTable = useTranslations("LeadTable");
+  const tEmpty = useTranslations("EmptyStates");
+  const tStatus = useTranslations("LeadStatus");
+  const tSource = useTranslations("LeadSource");
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [sourceFilter, setSourceFilter] = useState("ALL");
@@ -64,7 +70,7 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
     () => [
       {
         accessorKey: "fullName",
-        header: "Name",
+        header: tLabels("name"),
         cell: ({ row }) => (
           <div className="space-y-1">
             <Link href={`/leads/${row.original.id}`} className="font-medium text-slate-900 hover:text-[var(--primary)]">
@@ -77,39 +83,39 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
       },
       {
         accessorKey: "sourceType",
-        header: "Source",
+        header: tLabels("source"),
         cell: ({ row }) => <SourceTypeBadge sourceType={row.original.sourceType} />,
       },
       {
         accessorKey: "status",
-        header: "Status",
+        header: tLabels("status"),
         cell: ({ row }) => <LeadStatusBadge status={row.original.status} />,
       },
       {
         accessorKey: "serviceInterest",
-        header: "Interest",
+        header: tLabels("interest"),
         cell: ({ row }) => (
           <span className={row.original.serviceInterest || row.original.campaignName ? "text-slate-700" : "text-slate-400"}>
-            {row.original.serviceInterest ?? row.original.campaignName ?? "General inquiry"}
+            {row.original.serviceInterest ?? row.original.campaignName ?? tLeadTable("generalInquiry")}
           </span>
         ),
       },
       {
         accessorKey: "followUpAt",
-        header: "Follow-up date",
+        header: tLeadTable("followUpDate"),
         cell: ({ row }) => (
           <span className={row.original.followUpAt ? "text-slate-700" : "text-slate-400"}>
-            {row.original.followUpAt ? formatDate(row.original.followUpAt) : "Not set"}
+            {row.original.followUpAt ? formatDate(row.original.followUpAt) : tLeadTable("notSet")}
           </span>
         ),
       },
       {
         accessorKey: "createdAt",
-        header: "Created",
+        header: tLabels("created"),
         cell: ({ row }) => formatDate(row.original.createdAt),
       },
     ],
-    [],
+    [tLabels, tLeadTable],
   );
 
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -120,27 +126,24 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
+  const resetFilters = () => {
+    setSearch("");
+    setStatusFilter("ALL");
+    setSourceFilter("ALL");
+    setDateRange("ALL");
+  };
+
   return (
     <SectionCard
-      title="Lead workspace"
-      description="Search, filter, and open lead records quickly so staff can take action without losing context."
+      title={tLeadTable("workspaceTitle")}
+      description={tLeadTable("workspaceDescription")}
       className="overflow-hidden"
       contentClassName="p-0"
       action={
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button
-            variant="outline"
-            size="sm"
-            type="button"
-            onClick={() => {
-              setSearch("");
-              setStatusFilter("ALL");
-              setSourceFilter("ALL");
-              setDateRange("ALL");
-            }}
-          >
+          <Button variant="outline" size="sm" type="button" onClick={resetFilters}>
             <RotateCcw className="mr-2 h-4 w-4" />
-            Reset filters
+            {tActions("clearFilters")}
           </Button>
           <Link href="/leads/new">
             <Button size="sm">{tActions("addLead")}</Button>
@@ -152,10 +155,10 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm text-[var(--muted-foreground)]">
-              {filteredData.length} of {rows.length} leads visible
+              {tLeadTable("resultsSummary", { visible: filteredData.length, total: rows.length })}
             </p>
           </div>
-          <p className="text-sm text-slate-500">Open any row to review contact details, follow-up timing, and notes.</p>
+          <p className="text-sm text-slate-500">{tLeadTable("reviewHint")}</p>
         </div>
 
         <div className="grid gap-3 rounded-[24px] border bg-[var(--secondary)]/35 p-4 md:grid-cols-[1.6fr_repeat(3,minmax(0,1fr))]">
@@ -163,24 +166,24 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <Input
               className="pl-9"
-              placeholder={`${tActions("search")} name, phone, email, interest`}
+              placeholder={tLeadTable("searchPlaceholder")}
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
           </label>
           <Select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)}>
             <option value="ALL">{tFilters("allStatuses")}</option>
-            {Object.entries(leadStatusLabels).map(([value, label]) => (
+            {leadStatusValues.map((value) => (
               <option key={value} value={value}>
-                {label}
+                {tStatus(value)}
               </option>
             ))}
           </Select>
           <Select value={sourceFilter} onChange={(event) => setSourceFilter(event.target.value)}>
             <option value="ALL">{tFilters("allSources")}</option>
-            {Object.entries(sourceTypeLabels).map(([value, label]) => (
+            {sourceTypeValues.map((value) => (
               <option key={value} value={value}>
-                {label}
+                {tSource(value)}
               </option>
             ))}
           </Select>
@@ -188,43 +191,50 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
             <SlidersHorizontal className="h-4 w-4 text-slate-400" />
             <Select value={dateRange} onChange={(event) => setDateRange(event.target.value)}>
               <option value="ALL">{tFilters("allDates")}</option>
-              <option value="7">Last 7 days</option>
-              <option value="30">Last 30 days</option>
+              <option value="7">{tLeadTable("last7Days")}</option>
+              <option value="30">{tLeadTable("last30Days")}</option>
             </Select>
           </div>
         </div>
       </div>
 
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.length ? (
-            table.getRowModel().rows.map((row) => (
+      {table.getRowModel().rows.length ? (
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.map((row) => (
               <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                 ))}
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="py-14 text-center text-sm text-[var(--muted-foreground)]">
-                No leads match your current filters. Reset the filters or add a new lead.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+            ))}
+          </TableBody>
+        </Table>
+      ) : (
+        <div className="px-6 py-8">
+          <EmptyState
+            icon={Users}
+            title={tEmpty("noFilteredLeadsTitle")}
+            description={tEmpty("noFilteredLeadsDescription")}
+            action={
+              <Button variant="outline" type="button" onClick={resetFilters}>
+                {tActions("clearFilters")}
+              </Button>
+            }
+          />
+        </div>
+      )}
     </SectionCard>
   );
 }

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { CalendarClock, CalendarRange, CheckCircle2, Target, TrendingUp, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { DashboardCharts } from "@/components/dashboard/charts";
@@ -18,9 +19,11 @@ import {
 import { getCurrentWorkspace } from "@/lib/auth";
 import { getAttentionSummary, getDashboardRecentLeads } from "@/lib/data";
 import { formatPercent, timeAgo } from "@/lib/utils";
-import { leadStatusLabels, sourceTypeLabels } from "@/types";
 
 export default async function DashboardPage() {
+  const tDashboard = await getTranslations("Dashboard");
+  const tStatus = await getTranslations("LeadStatus");
+  const tSource = await getTranslations("LeadSource");
   const { organization } = await getCurrentWorkspace();
   const [totalLeads, newLeads, followUpNeeded, bookedAppointments, conversionRate, leadsByDay, leadsBySource, leadsByStatus, recentLeads, attentionSummary] =
     await Promise.all([
@@ -39,84 +42,90 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-8">
       <PageHeader
-        eyebrow="Overview"
-        title="Today’s Lead Overview"
-        description="Track new leads, follow-ups, and booked appointments in one place."
+        eyebrow={tDashboard("eyebrow")}
+        title={tDashboard("pageTitle")}
+        description={tDashboard("pageDescription")}
       />
 
       <OverviewCards
         items={[
           {
-            label: "Total leads",
+            label: tDashboard("metrics.totalLeads.label"),
             value: totalLeads.toString(),
-            hint: "All inquiries currently tracked in this workspace.",
+            hint: tDashboard("metrics.totalLeads.hint"),
             icon: <Users className="h-5 w-5" />,
-            trend: { label: "Pipeline visibility", direction: "neutral" },
+            trend: { label: tDashboard("metrics.totalLeads.trend"), direction: "neutral" },
           },
           {
-            label: "New leads",
+            label: tDashboard("metrics.newLeads.label"),
             value: newLeads.toString(),
-            hint: "Fresh opportunities that should be contacted quickly.",
+            hint: tDashboard("metrics.newLeads.hint"),
             icon: <CalendarRange className="h-5 w-5" />,
-            trend: { label: "Protect first response", direction: "up" },
+            trend: { label: tDashboard("metrics.newLeads.trend"), direction: "up" },
           },
           {
-            label: "Follow-up needed",
+            label: tDashboard("metrics.followUpNeeded.label"),
             value: followUpNeeded.toString(),
-            hint: "Leads due today or already overdue for follow-up.",
+            hint: tDashboard("metrics.followUpNeeded.hint"),
             icon: <CalendarClock className="h-5 w-5" />,
-            trend: { label: followUpNeeded > 0 ? "Needs attention" : "Under control", direction: followUpNeeded > 0 ? "down" : "up" },
+            trend: {
+              label: followUpNeeded > 0 ? tDashboard("metrics.followUpNeeded.alertTrend") : tDashboard("metrics.followUpNeeded.healthyTrend"),
+              direction: followUpNeeded > 0 ? "down" : "up",
+            },
           },
           {
-            label: "Booked appointments",
+            label: tDashboard("metrics.bookedAppointments.label"),
             value: bookedAppointments.toString(),
-            hint: "Leads already converted into confirmed bookings.",
+            hint: tDashboard("metrics.bookedAppointments.hint"),
             icon: <Target className="h-5 w-5" />,
-            trend: { label: "Booking progress", direction: "up" },
+            trend: { label: tDashboard("metrics.bookedAppointments.trend"), direction: "up" },
           },
           {
-            label: "Conversion rate",
+            label: tDashboard("metrics.conversionRate.label"),
             value: formatPercent(conversionRate),
-            hint: "Booked appointments as a share of total tracked leads.",
+            hint: tDashboard("metrics.conversionRate.hint"),
             icon: <TrendingUp className="h-5 w-5" />,
-            trend: { label: "Sales efficiency", direction: "up" },
+            trend: { label: tDashboard("metrics.conversionRate.trend"), direction: "up" },
           },
         ]}
       />
 
       <SectionCard
-        title="What needs attention"
-        description="A short action summary so staff know what to do next without digging through the full lead list."
+        title={tDashboard("attentionTitle")}
+        description={tDashboard("attentionDescription")}
         action={
           <Link href="/leads" className="text-sm font-semibold text-[var(--primary)]">
-            Review lead queue
+            {tDashboard("reviewLeadQueue")}
           </Link>
         }
       >
         <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr_1fr]">
           <AttentionTile
-            label="Leads needing follow-up"
+            label={tDashboard("attention.followUpNeededLabel")}
             value={attentionSummary.followUpNeeded.toString()}
-            text="Any lead waiting too long risks a missed appointment or a cold conversation."
+            text={tDashboard("attention.followUpNeededText")}
           />
           <AttentionTile
-            label="Oldest pending follow-up"
-            value={attentionSummary.oldestPendingLead?.fullName ?? "None due"}
+            label={tDashboard("attention.oldestPendingLabel")}
+            value={attentionSummary.oldestPendingLead?.fullName ?? tDashboard("attention.noneDue")}
             text={
               attentionSummary.oldestPendingLead?.followUpAt
-                ? `${timeAgo(attentionSummary.oldestPendingLead.followUpAt)} via ${sourceTypeLabels[attentionSummary.oldestPendingLead.sourceType]}`
-                : "No overdue follow-up is currently in the queue."
+                ? tDashboard("attention.oldestPendingText", {
+                    age: timeAgo(attentionSummary.oldestPendingLead.followUpAt),
+                    source: tSource(attentionSummary.oldestPendingLead.sourceType),
+                  })
+                : tDashboard("attention.noOverdueText")
             }
           />
           <div className="rounded-[24px] border bg-slate-950 p-5 text-white">
             <div className="flex items-center gap-2 text-sm font-semibold text-white/80">
               <CheckCircle2 className="h-4 w-4 text-emerald-300" />
-              Suggested next action
+              {tDashboard("attention.suggestedAction")}
             </div>
             <p className="mt-3 text-sm leading-7 text-white/85">
               {attentionSummary.followUpNeeded > 0
-                ? "Call or message the oldest due lead first, then clear the rest of the overdue follow-up queue before new inquiries pile up."
-                : "The follow-up queue looks healthy. Focus on moving new and interested leads toward booked appointments."}
+                ? tDashboard("attention.suggestedActionAlert")
+                : tDashboard("attention.suggestedActionHealthy")}
             </p>
           </div>
         </div>
@@ -126,11 +135,11 @@ export default async function DashboardPage() {
         leadsByDay={leadsByDay}
         leadsBySource={leadsBySource.map((item) => ({
           ...item,
-          source: sourceTypeLabels[item.source],
+          source: tSource(item.source),
         }))}
         leadsByStatus={leadsByStatus.map((item) => ({
           ...item,
-          status: leadStatusLabels[item.status],
+          status: tStatus(item.status),
         }))}
       />
 

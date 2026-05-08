@@ -2,13 +2,20 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { LeadStatus } from "@prisma/client";
+import { useForm } from "react-hook-form";
 import { useRouter } from "@/i18n/navigation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { leadStatusLabels } from "@/types";
+import { ErrorState } from "@/components/design-system/error-state";
+import {
+  DateTimeField,
+  SelectField,
+  SubmitButton,
+  TextareaField,
+} from "@/components/design-system/form-fields";
+import { leadUpdateSchema, type LeadUpdateInput } from "@/lib/validators";
+import { translateFormMessage } from "@/lib/form-messages";
+import { leadStatusValues } from "@/types";
 
 export function LeadDetailForm({
   leadId,
@@ -22,60 +29,83 @@ export function LeadDetailForm({
   defaultNotes: string;
 }) {
   const tActions = useTranslations("Actions");
+  const tDetail = useTranslations("LeadDetailForm");
+  const tValidation = useTranslations("Validation");
+  const tStatus = useTranslations("LeadStatus");
   const router = useRouter();
-  const [status, setStatus] = useState(defaultStatus);
-  const [followUpAt, setFollowUpAt] = useState(defaultFollowUpAt);
-  const [notes, setNotes] = useState(defaultNotes);
-  const [saving, setSaving] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const form = useForm<LeadUpdateInput>({
+    resolver: zodResolver(leadUpdateSchema),
+    defaultValues: {
+      status: defaultStatus,
+      followUpAt: defaultFollowUpAt,
+      notes: defaultNotes,
+    },
+  });
 
-  const save = async () => {
-    setSaving(true);
+  const save = form.handleSubmit(async (values) => {
     setMessage(null);
+    setServerError(null);
 
     const response = await fetch(`/api/leads/${leadId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status, followUpAt, notes }),
+      body: JSON.stringify(values),
     });
 
-    setSaving(false);
-
     if (!response.ok) {
-      setMessage("Unable to update lead.");
+      const payload = (await response.json()) as { error?: string };
+      setServerError(
+        translateFormMessage(
+          payload.error ?? "validation.updateLeadFailed",
+          tValidation,
+        ) ?? tValidation("validation.updateLeadFailed"),
+      );
       return;
     }
 
-    setMessage("Lead updated.");
+    setMessage(tDetail("success"));
     router.refresh();
-  };
+  });
 
   return (
-    <div className="space-y-4">
-      <label className="space-y-2">
-        <span className="text-sm font-medium text-slate-700">Lead status</span>
-        <Select value={status} onChange={(event) => setStatus(event.target.value as LeadStatus)}>
-          {Object.entries(leadStatusLabels).map(([value, label]) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </Select>
-      </label>
-      <label className="space-y-2">
-        <span className="text-sm font-medium text-slate-700">Next follow-up</span>
-        <Input type="datetime-local" value={followUpAt} onChange={(event) => setFollowUpAt(event.target.value)} />
-        <span className="text-xs leading-6 text-slate-500">Set the next promised contact so it shows up in the follow-up queue.</span>
-      </label>
-      <label className="space-y-2">
-        <span className="text-sm font-medium text-slate-700">Notes</span>
-        <Textarea value={notes} onChange={(event) => setNotes(event.target.value)} />
-        <span className="text-xs leading-6 text-slate-500">Keep notes practical: customer intent, timing, objections, and what to do next.</span>
-      </label>
+    <form className="space-y-4" onSubmit={save}>
+      <SelectField
+        {...form.register("status")}
+        label={tDetail("statusLabel")}
+        required
+        error={translateFormMessage(form.formState.errors.status?.message, tValidation)}
+      >
+        {leadStatusValues.map((value) => (
+          <option key={value} value={value}>
+            {tStatus(value)}
+          </option>
+        ))}
+      </SelectField>
+      <DateTimeField
+        {...form.register("followUpAt")}
+        label={tDetail("followUpLabel")}
+        helperText={tDetail("followUpHelp")}
+        error={translateFormMessage(form.formState.errors.followUpAt?.message, tValidation)}
+      />
+      <TextareaField
+        {...form.register("notes")}
+        label={tDetail("notesLabel")}
+        helperText={tDetail("notesHelp")}
+        error={translateFormMessage(form.formState.errors.notes?.message, tValidation)}
+      />
+      {serverError ? (
+        <ErrorState title={tValidation("validation.updateLeadFailed")} description={serverError} />
+      ) : null}
       {message ? <p className="text-sm text-[var(--primary)]">{message}</p> : null}
-      <Button className="w-full sm:w-auto" onClick={save} disabled={saving}>
-        {saving ? "Updating..." : tActions("save")}
-      </Button>
-    </div>
+      <SubmitButton
+        className="w-full sm:w-auto"
+        isSubmitting={form.formState.isSubmitting}
+        type="submit"
+        idleLabel={tActions("updateLead")}
+        submittingLabel={tDetail("updating")}
+      />
+    </form>
   );
 }

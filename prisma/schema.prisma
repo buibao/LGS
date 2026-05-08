@@ -80,6 +80,7 @@ model Lead {
   phone           String
   email           String?
   serviceInterest String?
+  preferredContactTime String?
   sourceType      SourceType
   campaignId      String?
   status          LeadStatus     @default(NEW)

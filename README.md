@@ -74,6 +74,29 @@ Safe templates are included in the repo:
 
 Use `.env.local.example` for local development and `.env.vercel.example` as the copy source for Vercel project settings.
 
+## Public Capture Flow
+
+Each organization now has a public lead capture URL:
+
+- `/capture/[orgSlug]`
+- `/capture/[orgSlug]/success`
+
+This route does not require login and is intended for Facebook, TikTok, Zalo, website, or landing-page traffic.
+
+Supported query params:
+
+- `source=FACEBOOK|TIKTOK|ORGANIC|REFERRAL|WEBSITE|OTHER`
+- `campaignId=<campaignId>`
+
+Behavior:
+
+- Leads are created under the organization identified by `orgSlug`
+- New submissions default to `LeadStatus.NEW`
+- A `LeadActivity` of type `CREATED` is added automatically
+- A honeypot field is included for basic spam protection
+
+Workspace owners can copy the shareable public capture URL from the Settings page.
+
 ## App URL Resolution
 
 The app now resolves its base URL from a centralized utility in [lib/app-url.ts](/d:/LGS/lib/app-url.ts).

@@ -70,6 +70,11 @@ export default async function LeadDetailPage({
             <ContactTile icon={<ClipboardList className="h-4 w-4" />} label="Campaign" value={lead.campaign?.name ?? "No linked campaign"} />
             <ContactTile
               icon={<CalendarClock className="h-4 w-4" />}
+              label="Preferred contact time"
+              value={lead.preferredContactTime ?? "No preference shared"}
+            />
+            <ContactTile
+              icon={<CalendarClock className="h-4 w-4" />}
               label="Next follow-up"
               value={lead.followUpAt ? formatRelativeDate(lead.followUpAt) : "No follow-up scheduled"}
             />

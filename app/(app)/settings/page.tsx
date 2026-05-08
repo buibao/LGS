@@ -2,9 +2,12 @@ import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionCard } from "@/components/ui/section-card";
 import { getCurrentWorkspace } from "@/lib/auth";
+import { getAppUrl } from "@/lib/app-url";
+import { CaptureUrlCopy } from "@/components/settings/capture-url-copy";
 
 export default async function SettingsPage() {
   const { organization, membership } = await getCurrentWorkspace();
+  const captureUrl = `${getAppUrl()}/capture/${organization.slug}`;
 
   return (
     <div className="space-y-8">
@@ -47,6 +50,13 @@ export default async function SettingsPage() {
             <p>Starter, Growth, and Custom plans will be managed here once billing is introduced.</p>
             <Badge variant="warning">Coming soon</Badge>
           </div>
+        </SectionCard>
+
+        <SectionCard
+          title="Public capture link"
+          description="Use this no-login form link anywhere you collect demand so new inquiries land directly in the shared lead queue."
+        >
+          <CaptureUrlCopy url={captureUrl} />
         </SectionCard>
       </div>
 

@@ -29,6 +29,7 @@ export function LeadForm({
       phone: "",
       email: "",
       serviceInterest: "",
+      preferredContactTime: "",
       sourceType: SourceType.FACEBOOK,
       campaignId: "",
       status: LeadStatus.NEW,
@@ -77,6 +78,13 @@ export function LeadForm({
               </Field>
               <Field label="Service interest" hint="What does the customer want to book or learn more about?" error={form.formState.errors.serviceInterest?.message}>
                 <Input {...form.register("serviceInterest")} placeholder="Teeth whitening, skin treatment, English class..." />
+              </Field>
+              <Field
+                label="Preferred contact time"
+                hint="Optional timing preference from the customer."
+                error={form.formState.errors.preferredContactTime?.message}
+              >
+                <Input {...form.register("preferredContactTime")} placeholder="Weekday afternoons, after 6pm, this weekend..." />
               </Field>
             </div>
           </section>

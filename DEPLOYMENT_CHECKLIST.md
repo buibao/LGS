@@ -31,6 +31,9 @@
 
 - Publishable key set
 - Secret key set
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up`
+- Fallback redirect URLs point to a locale-aware app route such as `/vi/dashboard`
 - Allowed redirect URLs and domain configured in Clerk dashboard
 
 ## Post-deploy smoke test

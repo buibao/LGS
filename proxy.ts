@@ -5,34 +5,54 @@ import { routing } from "@/i18n/routing";
 
 const handleI18nRouting = createMiddleware(routing);
 
-const isPublicRoute = createRouteMatcher([
-  "/",
-  "/(vi|en)",
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-  "/capture/(.*)",
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/leads(.*)",
+  "/campaigns(.*)",
+  "/reports(.*)",
+  "/settings(.*)",
+  "/vi/dashboard(.*)",
+  "/vi/leads(.*)",
+  "/vi/campaigns(.*)",
+  "/vi/reports(.*)",
+  "/vi/settings(.*)",
+  "/en/dashboard(.*)",
+  "/en/leads(.*)",
+  "/en/campaigns(.*)",
+  "/en/reports(.*)",
+  "/en/settings(.*)",
 ]);
 
-export default clerkMiddleware(async (auth, req) => {
-  const pathname = req.nextUrl.pathname;
+export default clerkMiddleware(
+  async (auth, req) => {
+    const pathname = req.nextUrl.pathname;
 
-  if (!isPublicRoute(req)) {
-    await auth.protect();
-  }
+    if (isProtectedRoute(req)) {
+      await auth.protect();
+    }
 
-  if (
-    pathname === "/sign-in" ||
-    pathname === "/sign-up" ||
-    pathname.startsWith("/sign-in/") ||
-    pathname.startsWith("/sign-up/") ||
-    pathname.startsWith("/capture/")
-  ) {
-    return NextResponse.next();
-  }
+    if (pathname.startsWith("/api/") || pathname.startsWith("/trpc/")) {
+      return NextResponse.next();
+    }
 
-  return handleI18nRouting(req);
-});
+    if (
+      pathname === "/sign-in" ||
+      pathname === "/sign-up" ||
+      pathname.startsWith("/sign-in/") ||
+      pathname.startsWith("/sign-up/") ||
+      pathname.startsWith("/capture/")
+    ) {
+      return NextResponse.next();
+    }
+
+    return handleI18nRouting(req);
+  },
+  {
+    signInUrl: "/sign-in",
+    signUpUrl: "/sign-up",
+  },
+);
 
 export const config = {
-  matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)"],
+  matcher: ["/((?!_next|_vercel|.*\\..*).*)", "/(api|trpc)(.*)"],
 };

@@ -1,14 +1,13 @@
 import { MembershipRole } from "@prisma/client";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { slugify } from "@/lib/utils";
 
 export async function requireSession() {
-  const { userId } = await auth();
+  const { userId, redirectToSignIn } = await auth();
 
   if (!userId) {
-    redirect("/sign-in");
+    return redirectToSignIn();
   }
 
   return userId;

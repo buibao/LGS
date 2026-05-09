@@ -34,12 +34,19 @@ Required variables:
 - `DATABASE_URL_UNPOOLED`
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 - `CLERK_SECRET_KEY`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL`
 - `NEXT_PUBLIC_APP_URL`
 
 Notes:
 
 - `DATABASE_URL` is the pooled Neon/Vercel Postgres connection string used by the running app.
 - `DATABASE_URL_UNPOOLED` is the direct or unpooled connection string used for Prisma migrations.
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL` should stay `/sign-in`.
+- `NEXT_PUBLIC_CLERK_SIGN_UP_URL` should stay `/sign-up`.
+- Fallback redirect URLs should point to a locale-aware protected page such as `/vi/dashboard` or `/en/dashboard`.
 - `NEXT_PUBLIC_APP_URL` should be `http://localhost:3000` in local development.
 - Do not commit `.env.local`, `.env.production`, or any file containing real credentials.
 
@@ -172,6 +179,10 @@ Add these variables in Vercel for both Preview and Production:
 - `DATABASE_URL_UNPOOLED`
 - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 - `CLERK_SECRET_KEY`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL`
 
 `NEXT_PUBLIC_APP_URL` handling:
 
@@ -257,9 +268,12 @@ npx prisma migrate deploy
 Current public routes:
 
 - `/`
+- `/vi`
+- `/en`
 - `/sign-in`
 - `/sign-up`
-- `/capture/[orgSlug]` and `/capture/[orgSlug]/success` if those routes are added later
+- `/capture/[orgSlug]`
+- `/capture/[orgSlug]/success`
 
 Current protected routes:
 
@@ -268,5 +282,15 @@ Current protected routes:
 - `/campaigns`
 - `/reports`
 - `/settings`
+- `/vi/dashboard`
+- `/vi/leads`
+- `/vi/campaigns`
+- `/vi/reports`
+- `/vi/settings`
+- `/en/dashboard`
+- `/en/leads`
+- `/en/campaigns`
+- `/en/reports`
+- `/en/settings`
 
-No `/capture/[orgSlug]` route currently exists in this repo, but the Clerk middleware is configured so capture routes remain public if introduced.
+Clerk middleware now protects only the explicit app areas above. Locale marketing routes remain public, and unauthenticated users are redirected through Clerk with a return URL that preserves the originating localized path.

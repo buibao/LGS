@@ -26,15 +26,15 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "inline-flex min-w-[11rem] items-center gap-3 rounded-2xl border border-border/70 bg-white px-3 py-2.5 shadow-sm",
+        "inline-flex min-w-[9.5rem] items-center gap-2.5 rounded-xl border border-border/70 bg-white px-2.5 py-2 shadow-sm",
         className,
       )}
     >
-      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--secondary)] text-[var(--primary)]">
-        <Languages className="h-4 w-4" />
+      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--secondary)] text-[var(--primary)]">
+        <Languages className="h-3.5 w-3.5" />
       </div>
       <div className="grid min-w-0 flex-1 gap-1">
-        <span className="text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
+        <span className="text-[10px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
           {t("language")}
         </span>
         <Select
@@ -51,7 +51,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             });
           }}
         >
-          <SelectTrigger className="h-9 rounded-xl border-0 bg-transparent px-0 py-0 text-sm font-medium shadow-none focus-visible:ring-0 focus-visible:ring-offset-0">
+          <SelectTrigger className="h-7 rounded-lg border-0 bg-transparent px-0 py-0 text-sm font-medium shadow-none focus-visible:ring-0 focus-visible:ring-offset-0">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

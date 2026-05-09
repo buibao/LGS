@@ -33,9 +33,11 @@ export function MetricCard({
     >
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-4">
-          <div className="grid min-w-0 gap-3">
+          <div className="grid min-w-0 flex-1 gap-3">
             <p className="text-sm font-semibold text-[var(--muted-foreground)]">{title}</p>
-            <p className="type-kpi text-[2.1rem] font-extrabold text-slate-950 md:text-[2.3rem]">{value}</p>
+            <p className="type-kpi min-w-0 break-words text-[1.55rem] leading-tight font-extrabold text-slate-950 sm:text-[1.8rem] md:text-[2rem]">
+              {value}
+            </p>
             {description ? (
               <p className="max-w-[28ch] text-[0.92rem] leading-6 text-[var(--muted-foreground)]">
                 {description}

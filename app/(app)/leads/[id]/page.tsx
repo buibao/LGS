@@ -61,7 +61,7 @@ export default async function LeadDetailPage({
             <MetricCard title={tPage("serviceInterest")} value={lead.serviceInterest ?? tPage("generalInquiry")} description={tPage("serviceHint")} />
           </div>
 
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-2">
             <DetailTile label={tLabels("campaign")} value={lead.campaign?.name ?? tPage("noCampaign")} />
             <DetailTile label={tLabels("created")} value={formatDateTime(lead.createdAt)} />
             <DetailTile label={tPage("updatedLabel")} value={timeAgo(lead.updatedAt)} />
@@ -128,9 +128,9 @@ export default async function LeadDetailPage({
 
 function DetailTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[22px] border bg-[var(--secondary)]/45 p-4">
+    <div className="min-w-0 rounded-[22px] border bg-[var(--secondary)]/45 p-4">
       <p className="text-sm font-medium text-slate-500">{label}</p>
-      <p className="mt-2 text-sm leading-7 text-slate-900">{value}</p>
+      <p className="mt-2 break-words text-sm leading-7 text-slate-900">{value}</p>
     </div>
   );
 }

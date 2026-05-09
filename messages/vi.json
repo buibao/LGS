@@ -61,16 +61,16 @@
   },
   "AppShell": {
     "demoReady": "Sẵn sàng demo",
-    "sidebarDescription": "Giữ mọi nhu cầu tư vấn, lời hẹn chăm sóc lại và lịch hẹn đã đặt hiển thị rõ ràng cho toàn bộ đội ngũ lễ tân.",
+    "sidebarDescription": "Giữ lead mới, lịch chăm sóc lại và lịch hẹn trong một workspace chung rõ ràng.",
     "focusLabel": "Trọng tâm",
     "focusValue": "Từ khách tiềm năng đến lịch hẹn",
     "priorityLabel": "Ưu tiên",
     "priorityValue": "Tốc độ phản hồi",
     "navigationTitle": "Điều hướng",
     "weeklyFocusTitle": "Trọng tâm tuần này",
-    "weeklyFocusDescription": "Mỗi khách tiềm năng chờ quá một ngày đều có nguy cơ mất lịch hẹn. Hãy xử lý hàng đợi trước khi nhu cầu nguội dần.",
+    "weeklyFocusDescription": "Chăm sóc lại trước khi lead nguội.",
     "automationTitle": "Lớp quy trình AI",
-    "automationDescription": "Workspace này đã được cấu trúc sẵn cho các tự động hóa, tóm tắt và gợi ý hành động tiếp theo trong tương lai mà không làm thay đổi quy trình hiện tại của đội ngũ.",
+    "automationDescription": "Workspace sẵn sàng cho tự động hóa.",
     "livePipeline": "Pipeline đang hoạt động",
     "topbarDescription": "Theo dõi lượng khách tiềm năng mới, áp lực chăm sóc lại và đà đặt lịch từ một màn hình vận hành rõ ràng.",
     "dailySnapshot": "Tổng quan vận hành trong ngày",
@@ -262,14 +262,14 @@
     "leadsBySourceDescription": "Xem kênh nào đang đưa nhiều khách tiềm năng nhất vào workspace.",
     "statusDistributionTitle": "Phân bổ trạng thái khách tiềm năng",
     "statusDistributionDescription": "Hiểu pipeline đang có bao nhiêu khách mới, đang xử lý, đã đặt lịch hoặc có nguy cơ mất.",
-    "statusDescriptions": {
-      "Mới": "Nhu cầu mới đang chờ phản hồi đầu tiên.",
-      "Đã liên hệ": "Đội ngũ đã liên hệ các khách này.",
-      "Đang quan tâm": "Những khách đủ điều kiện và đang có ý định thật.",
-      "Đã đặt lịch": "Các khách đã chuyển thành lịch hẹn.",
-      "Không phản hồi": "Các khách chưa phản hồi lại.",
-      "Đã mất": "Các khách không còn tiếp tục trong pipeline."
-    },
+      "statusDescriptions": {
+        "Mới": "Nhu cầu mới đang chờ phản hồi đầu tiên.",
+        "Đã liên hệ": "Khách đã được đội ngũ liên hệ.",
+        "Đang quan tâm": "Khách có nhu cầu rõ ràng và cần chăm sóc tiếp.",
+        "Đã đặt lịch": "Các khách đã chuyển thành lịch hẹn.",
+        "Không phản hồi": "Khách chưa phản hồi sau khi liên hệ.",
+        "Đã mất": "Khách không còn tiếp tục quy trình."
+      },
     "notScheduled": "Chưa lên lịch",
     "attention": {
       "followUpNeededLabel": "Khách tiềm năng cần chăm sóc lại",
@@ -327,9 +327,19 @@
       "bestCampaignHint": "Tỷ lệ chuyển đổi cao nhất hiện tại: {rate}",
       "bestCampaignEmpty": "Chưa có chiến dịch nào đủ dữ liệu để nổi bật."
     },
-    "snapshotDescription": "Tổng quan hiệu suất nhanh",
-    "budgetValue": "Ngân sách tạm tính: ${value}",
-    "budgetEmpty": "Ngân sách tạm tính: chưa nhập.",
+    "snapshotDescription": "Tóm tắt nhanh hiệu suất",
+    "filterTitle": "Khoảng báo cáo",
+    "filterDescription": "Các mốc thời gian này là phần xem trước giao diện lọc báo cáo.",
+    "filters": {
+      "thisWeek": "Tuần này",
+      "last30Days": "30 ngày qua",
+      "allTime": "Tất cả thời gian",
+      "customComingSoon": "Tùy chỉnh sắp có"
+    },
+    "cardLeadsDescription": "Số lead được ghi nhận cho chiến dịch này.",
+    "cardBookedDescription": "Số lịch hẹn đến từ chiến dịch này.",
+    "budgetValue": "Ngân sách: ${value}",
+    "budgetEmpty": "Chưa có ngân sách.",
     "tableTitle": "Hiệu suất nguồn chiến dịch",
     "tableDescription": "Rà soát toàn bộ chiến dịch, so sánh tỷ lệ chuyển đổi và quyết định nên chuyển nỗ lực hoặc ngân sách về đâu.",
     "notAvailable": "Chưa có",
@@ -348,11 +358,11 @@
   "Reports": {
     "pageEyebrow": "Báo cáo",
     "pageTitle": "Báo cáo hiệu suất khách tiềm năng hằng tuần",
-    "pageDescription": "Báo cáo kinh doanh rõ ràng về lượng khách tiềm năng, rủi ro chăm sóc lại và hiệu suất đặt lịch, ngay cả trước khi bật insight do AI tạo.",
+    "pageDescription": "Tóm tắt rõ ràng về lượng lead, rủi ro chăm sóc lại và hiệu quả đặt lịch trong tuần.",
     "summaryTitle": "Tóm tắt điều hành",
     "summaryDescription": "Tóm tắt vận hành nhanh cho chủ doanh nghiệp muốn nắm hướng đi của luồng khách tiềm năng, hiệu suất đặt lịch và rủi ro chăm sóc lại.",
     "fullReportTitle": "Báo cáo hiệu suất khách tiềm năng hằng tuần",
-    "fullReportDescription": "Báo cáo theo quy tắc rõ ràng để dùng demo hiện tại, được thiết kế để trở thành báo cáo do AI tạo trong bản phát hành tương lai.",
+    "fullReportDescription": "Tập hợp insight chính, hành động đề xuất và bản đọc đầy đủ theo tuần.",
     "businessSummary": "Tóm tắt kinh doanh",
     "suggestedAction": "Hành động đề xuất",
     "bestSource": "Nguồn tốt nhất",
@@ -360,7 +370,7 @@
     "followUpRisk": "Rủi ro chăm sóc lại",
     "fullReport": "Báo cáo đầy đủ",
     "readout": "Tổng kết LeadOps AI",
-    "futureAi": "Báo cáo do AI tạo sẽ có trong phiên bản tương lai.",
+    "futureAi": "Gợi ý AI nâng cao sẽ được bổ sung trong phiên bản sau.",
     "notAvailable": "Chưa có",
     "fallbackBestSource": "Chưa có nguồn dẫn đầu rõ ràng. Hãy tiếp tục thử nghiệm các kênh mang về nhu cầu đủ chất lượng.",
     "fallbackFollowUpRisk": "Tuần này chưa phát hiện rủi ro chăm sóc lại đáng chú ý.",
@@ -383,6 +393,9 @@
     "placeholder": "Phần giữ chỗ",
     "comingSoon": "Sắp có",
     "planned": "Đã lên kế hoạch",
+    "readOnly": "Chỉ xem",
+    "roadmapTitle": "Lộ trình",
+    "roadmapDescription": "Những phần sắp có được gom tại đây để khu cài đặt hiện tại gọn và dễ dùng hơn.",
     "businessProfile": {
       "title": "Hồ sơ doanh nghiệp",
       "description": "Thông tin cốt lõi giúp định danh workspace này cho nhân sự và báo cáo trong tương lai.",
@@ -434,6 +447,7 @@
   "SettingsCapture": {
     "copy": "Sao chép link form công khai",
     "copied": "Đã sao chép",
+    "open": "Mở form",
     "helper": "Chia sẻ link này trên Facebook, TikTok, Zalo, website hoặc landing page."
   },
   "PublicCapture": {
@@ -523,6 +537,14 @@
           "followUp": "Chăm sóc lại hôm nay",
           "new": "Mới"
         }
+      },
+      "socialProof": {
+        "eyebrow": "Được thiết kế cho đội ngũ dịch vụ địa phương",
+        "title": "Một workspace gọn gàng cho đội ngũ cần phản hồi nhanh và chăm sóc lead nhất quán.",
+        "spa": "Spa",
+        "dental": "Nha khoa",
+        "clinic": "Phòng khám / Thẩm mỹ",
+        "education": "Trung tâm giáo dục"
       }
     },
     "pain": {

@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-table";
 import { LeadStatus, SourceType } from "@prisma/client";
 import { Link } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { EmptyState } from "@/components/design-system/empty-state";
 import { Button } from "@/components/ui/button";
 import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
@@ -26,6 +27,7 @@ import {
 } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDate } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { leadStatusValues, sourceTypeValues } from "@/types";
 
 type LeadRow = {
@@ -49,6 +51,7 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
   const tEmpty = useTranslations("EmptyStates");
   const tStatus = useTranslations("LeadStatus");
   const tSource = useTranslations("LeadSource");
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [sourceFilter, setSourceFilter] = useState("ALL");
@@ -78,12 +81,12 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         accessorKey: "fullName",
         header: tLabels("name"),
         cell: ({ row }) => (
-          <div className="space-y-1">
-            <Link href={`/leads/${row.original.id}`} className="font-medium text-slate-900 hover:text-[var(--primary)]">
+          <div className="min-w-0 space-y-0.5">
+            <Link href={`/leads/${row.original.id}`} className="block truncate font-medium text-slate-900 hover:text-[var(--primary)]">
               {row.original.fullName}
             </Link>
-            <div className="text-xs text-slate-500">{row.original.phone}</div>
-            {row.original.email ? <div className="text-xs text-slate-400">{row.original.email}</div> : null}
+            <div className="text-[0.8rem] leading-5 text-slate-500">{row.original.phone}</div>
+            {row.original.email ? <div className="truncate text-[0.76rem] leading-5 text-slate-400">{row.original.email}</div> : null}
           </div>
         ),
       },
@@ -101,7 +104,7 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         accessorKey: "serviceInterest",
         header: tLabels("interest"),
         cell: ({ row }) => (
-          <span className={row.original.serviceInterest || row.original.campaignName ? "text-slate-700" : "text-slate-400"}>
+          <span className={cn("block max-w-[20rem] break-words text-sm", row.original.serviceInterest || row.original.campaignName ? "text-slate-700" : "text-slate-400")}>
             {row.original.serviceInterest ?? row.original.campaignName ?? tLeadTable("generalInquiry")}
           </span>
         ),
@@ -120,21 +123,8 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         header: tLabels("created"),
         cell: ({ row }) => formatDate(row.original.createdAt),
       },
-      {
-        id: "actions",
-        header: "",
-        cell: ({ row }) => (
-          <div className="flex justify-end">
-            <Link href={`/leads/${row.original.id}`}>
-              <Button size="sm" variant="outline">
-                {tLeadTable("openLead")}
-              </Button>
-            </Link>
-          </div>
-        ),
-      },
     ],
-    [tLabels, tLeadTable],
+    [tLabels, tLeadTable, tSource, tStatus],
   );
 
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -154,8 +144,6 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
 
   return (
     <SectionCard
-      title={tLeadTable("workspaceTitle")}
-      description={tLeadTable("workspaceDescription")}
       className="overflow-hidden"
       contentClassName="p-0"
       action={
@@ -164,9 +152,6 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
             <RotateCcw className="mr-2 h-4 w-4" />
             {tActions("clearFilters")}
           </Button>
-          <Link href="/leads/new">
-            <Button size="sm">{tActions("addLead")}</Button>
-          </Link>
         </div>
       }
     >
@@ -248,7 +233,19 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  className="cursor-pointer"
+                  onClick={() => router.push(`/leads/${row.original.id}`)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      router.push(`/leads/${row.original.id}`);
+                    }
+                  }}
+                  tabIndex={0}
+                  aria-label={`${tLeadTable("openLead")} ${row.original.fullName}`}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}

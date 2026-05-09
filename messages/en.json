@@ -61,16 +61,16 @@
   },
   "AppShell": {
     "demoReady": "Demo ready",
-    "sidebarDescription": "Keep every inquiry, follow-up promise, and booked appointment visible for the whole front-desk team.",
+    "sidebarDescription": "Keep inquiries, follow-ups, and booked appointments visible in one shared workspace.",
     "focusLabel": "Focus",
     "focusValue": "Leads to bookings",
     "priorityLabel": "Priority",
     "priorityValue": "Response speed",
     "navigationTitle": "Navigation",
     "weeklyFocusTitle": "Weekly focus",
-    "weeklyFocusDescription": "Any lead waiting longer than one day risks a missed appointment. Protect the queue before it cools off.",
+    "weeklyFocusDescription": "Follow up before leads go cold.",
     "automationTitle": "AI workflow layer",
-    "automationDescription": "This workspace is structured for future automations, summaries, and suggested next actions without changing your team's current process.",
+    "automationDescription": "Automation-ready workspace.",
     "livePipeline": "Live pipeline",
     "topbarDescription": "Track lead intake, follow-up pressure, and booking momentum from one clear operating view.",
     "dailySnapshot": "Daily operating snapshot",
@@ -328,8 +328,18 @@
       "bestCampaignEmpty": "No campaign has enough data to stand out yet."
     },
     "snapshotDescription": "Quick performance snapshot",
-    "budgetValue": "Budget placeholder: ${value}",
-    "budgetEmpty": "Budget placeholder: not entered yet.",
+    "filterTitle": "Reporting range",
+    "filterDescription": "Use these ranges as a reporting view placeholder while deeper filtering is prepared.",
+    "filters": {
+      "thisWeek": "This week",
+      "last30Days": "Last 30 days",
+      "allTime": "All time",
+      "customComingSoon": "Custom coming soon"
+    },
+    "cardLeadsDescription": "Leads attributed to this campaign.",
+    "cardBookedDescription": "Booked appointments from this campaign.",
+    "budgetValue": "Budget: ${value}",
+    "budgetEmpty": "Budget not set yet.",
     "tableTitle": "Campaign source performance",
     "tableDescription": "Review all tracked campaigns, compare conversion rates, and decide where to shift effort or budget.",
     "notAvailable": "N/A",
@@ -348,11 +358,11 @@
   "Reports": {
     "pageEyebrow": "Reports",
     "pageTitle": "Weekly Lead Performance Report",
-    "pageDescription": "Clear business reporting for lead volume, follow-up risk, and booking performance, even before AI-generated insights are enabled.",
+    "pageDescription": "A business-friendly summary of lead volume, follow-up risk, and booking performance for the week.",
     "summaryTitle": "Executive summary",
     "summaryDescription": "A quick operating summary for owners who want direction on lead flow, booking performance, and follow-up risk.",
     "fullReportTitle": "Weekly Lead Performance Report",
-    "fullReportDescription": "Deterministic reporting for demo use today, designed to become AI-generated in a future release.",
+    "fullReportDescription": "Key insights, recommended actions, and the full weekly readout in one place.",
     "businessSummary": "Business summary",
     "suggestedAction": "Suggested next action",
     "bestSource": "Best source",
@@ -360,7 +370,7 @@
     "followUpRisk": "Follow-up risk",
     "fullReport": "Full report",
     "readout": "LeadOps AI readout",
-    "futureAi": "AI-generated reporting will be available in a future version.",
+    "futureAi": "Advanced AI recommendations will be available in a future version.",
     "notAvailable": "N/A",
     "fallbackBestSource": "No clear leader yet. Keep testing the channels that bring qualified inquiries.",
     "fallbackFollowUpRisk": "No follow-up risk detected this week.",
@@ -383,6 +393,9 @@
     "placeholder": "Placeholder",
     "comingSoon": "Coming soon",
     "planned": "Planned",
+    "readOnly": "Read-only",
+    "roadmapTitle": "Roadmap",
+    "roadmapDescription": "Upcoming controls and integrations are grouped here so the active settings stay clear.",
     "businessProfile": {
       "title": "Business profile",
       "description": "The core information that identifies this workspace for staff and future reporting.",
@@ -434,6 +447,7 @@
   "SettingsCapture": {
     "copy": "Copy public capture URL",
     "copied": "Copied",
+    "open": "Open form",
     "helper": "Share this link in Facebook, TikTok, Zalo, websites, or landing pages."
   },
   "PublicCapture": {
@@ -523,7 +537,23 @@
           "followUp": "Follow-up today",
           "new": "New"
         }
+      },
+      "socialProof": {
+        "eyebrow": "Built for local service teams",
+        "title": "A calm workspace for service teams that rely on fast follow-up.",
+        "spa": "Spa",
+        "dental": "Dental clinic",
+        "clinic": "Clinic / Beauty center",
+        "education": "Education center"
       }
+    },
+    "socialProof": {
+      "eyebrow": "Built for local service teams",
+      "title": "A calm workspace for service teams that rely on fast follow-up.",
+      "spa": "Spa",
+      "dental": "Dental clinic",
+      "clinic": "Clinic / Beauty center",
+      "education": "Education center"
     },
     "pain": {
       "eyebrow": "Pain points",

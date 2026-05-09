@@ -106,20 +106,23 @@ export async function HomePage() {
               </div>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <LanguageSwitcher />
               {userId ? (
-                <Link href="/dashboard">
-                  <Button size="sm">{tLanding("header.openDashboard")}</Button>
-                </Link>
+                <div className="flex items-center gap-3">
+                  <Link href="/dashboard">
+                    <Button size="sm" className="px-4">{tLanding("header.openDashboard")}</Button>
+                  </Link>
+                  <LanguageSwitcher className="sm:min-w-[8.75rem]" />
+                </div>
               ) : (
-                <>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <NextLink href="/sign-in" className="text-sm font-medium text-slate-600">
                     {tLanding("header.signIn")}
                   </NextLink>
                   <NextLink href="/sign-up">
-                    <Button size="sm">{tLanding("header.getStarted")}</Button>
+                    <Button size="lg" className="px-5 shadow-[0_18px_34px_-20px_rgba(15,95,115,0.58)]">{tLanding("header.getStarted")}</Button>
                   </NextLink>
-                </>
+                  <LanguageSwitcher className="sm:min-w-[8.75rem]" />
+                </div>
               )}
             </div>
           </div>
@@ -176,7 +179,7 @@ export async function HomePage() {
             </div>
           </div>
 
-          <Card className="surface-panel overflow-hidden border-white/60">
+          <Card className="surface-panel overflow-hidden border-white/60 shadow-[0_34px_70px_-42px_rgba(15,23,42,0.28)]">
             <CardContent className="p-0">
               <div className="soft-grid grid gap-5 p-5 md:p-7">
                 <div className="rounded-[30px] border bg-white p-5 shadow-sm">
@@ -242,6 +245,23 @@ export async function HomePage() {
               </div>
             </CardContent>
           </Card>
+        </section>
+
+        <section className="py-2">
+          <div className="rounded-[28px] border border-white/70 bg-white/80 px-5 py-5 shadow-[0_20px_50px_-42px_rgba(15,23,42,0.18)]">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-[11px] font-bold tracking-[0.18em] text-[var(--primary)] uppercase">{tLanding("socialProof.eyebrow")}</p>
+                <p className="mt-2 text-[1rem] font-semibold text-slate-900">{tLanding("socialProof.title")}</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="neutral">{tLanding("socialProof.spa")}</Badge>
+                <Badge variant="neutral">{tLanding("socialProof.dental")}</Badge>
+                <Badge variant="neutral">{tLanding("socialProof.clinic")}</Badge>
+                <Badge variant="neutral">{tLanding("socialProof.education")}</Badge>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="py-8">

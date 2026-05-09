@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { ArrowUpRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { appNavigationItems } from "@/components/navigation-items";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,7 @@ export function SidebarNav() {
             key={item.href}
             href={item.href}
             className={cn(
-              "group flex items-center justify-between rounded-[22px] border px-4 py-3.5 text-[0.95rem] font-medium transition",
+              "group flex items-center justify-between rounded-[22px] border px-4 py-3 text-[0.95rem] font-medium transition",
               active
                 ? "border-[var(--primary)]/20 bg-[linear-gradient(135deg,#0f5f73,#146f85)] text-white shadow-[0_16px_28px_-20px_rgba(15,95,115,0.78)]"
                 : "border-transparent bg-white/70 text-slate-700 hover:border-[var(--border)] hover:bg-white hover:text-slate-950",
@@ -31,7 +31,7 @@ export function SidebarNav() {
               <Icon className="h-4 w-4" />
               {tNav(item.label)}
             </div>
-            <ArrowUpRight className={cn("h-4 w-4 transition", active ? "opacity-100" : "opacity-0 group-hover:opacity-60")} />
+            <ChevronRight className={cn("h-4 w-4 transition", active ? "opacity-100" : "opacity-0 group-hover:opacity-60")} />
           </Link>
         );
       })}

@@ -1,0 +1,13 @@
+.env
+.env.local
+.env.development
+.env.preview
+.env.production
+.env.vercel
+.env*.local
+.vercel-env-production
+.vercel-env-preview
+.vercel-env-check
+.vercel-env-production.txt
+.vercel-env-preview.txt
+.npm-tmp-cache

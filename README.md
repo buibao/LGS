@@ -38,6 +38,8 @@ Required variables:
 - `NEXT_PUBLIC_CLERK_SIGN_UP_URL`
 - `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL`
 - `NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL`
 - `NEXT_PUBLIC_APP_URL`
 
 Notes:
@@ -47,6 +49,7 @@ Notes:
 - `NEXT_PUBLIC_CLERK_SIGN_IN_URL` should stay `/sign-in`.
 - `NEXT_PUBLIC_CLERK_SIGN_UP_URL` should stay `/sign-up`.
 - Fallback redirect URLs should point to a locale-aware protected page such as `/vi/dashboard` or `/en/dashboard`.
+- Force redirect URLs should point to the same locale-aware protected page unless you intentionally need a different post-auth landing route.
 - `NEXT_PUBLIC_APP_URL` should be `http://localhost:3000` in local development.
 - Do not commit `.env.local`, `.env.production`, or any file containing real credentials.
 
@@ -183,6 +186,8 @@ Add these variables in Vercel for both Preview and Production:
 - `NEXT_PUBLIC_CLERK_SIGN_UP_URL`
 - `NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL`
 - `NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL`
+- `NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL`
 
 `NEXT_PUBLIC_APP_URL` handling:
 

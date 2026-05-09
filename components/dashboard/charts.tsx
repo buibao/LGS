@@ -96,7 +96,7 @@ export function DashboardCharts({
           title={tDashboard("statusDistributionTitle")}
           description={tDashboard("statusDistributionDescription")}
           icon={<BarChart3 className="h-4 w-4" />}
-          contentClassName="space-y-3"
+          contentClassName="space-y-3 p-4 md:p-5"
         >
           {statusData.length ? (
             statusData.map((item, index) => (
@@ -104,10 +104,9 @@ export function DashboardCharts({
                 key={item.status}
                 title={item.status}
                 value={item.leads.toString()}
-                description={tDashboard("statusDistributionDescription")}
+                description={tDashboard(`statusDescriptions.${item.status}`)}
                 tone="default"
                 icon={<span className="h-3.5 w-3.5 rounded-full" style={{ backgroundColor: statusColors[index % statusColors.length] }} />}
-                className="p-0"
               />
             ))
           ) : (

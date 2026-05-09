@@ -2,15 +2,52 @@
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { CaptureFormState } from "@/app/capture/[orgSlug]/actions";
-import { translateFormMessage } from "@/lib/form-messages";
-import { sourceTypeLabels } from "@/types";
 
 const initialState: CaptureFormState = {};
+
+type PublicCaptureCopy = {
+  eyebrow: string;
+  titleDescription: string;
+  backToApp: string;
+  sourceLabel: string;
+  campaignLabel: string;
+  notLinked: string;
+  fullNameLabel: string;
+  phoneLabel: string;
+  emailLabel: string;
+  serviceInterestLabel: string;
+  preferredContactTimeLabel: string;
+  notesLabel: string;
+  fullNamePlaceholder: string;
+  phonePlaceholder: string;
+  emailPlaceholder: string;
+  serviceInterestPlaceholder: string;
+  preferredContactTimePlaceholder: string;
+  notesPlaceholder: string;
+  submissionHelp: string;
+  sending: string;
+  sendInquiry: string;
+  sourceValue: string;
+  campaignValue: string;
+  leaveEmpty: string;
+};
+
+type ValidationCopy = Record<string, string>;
+
+function translateValidationMessage(
+  message: string | undefined,
+  validationMessages: ValidationCopy,
+) {
+  if (!message) {
+    return undefined;
+  }
+
+  return validationMessages[message] ?? message;
+}
 
 export function PublicCaptureForm({
   action,
@@ -18,14 +55,17 @@ export function PublicCaptureForm({
   defaultSource,
   campaignId,
   campaignName,
+  copy,
+  validationMessages,
 }: {
   action: (state: CaptureFormState, formData: FormData) => Promise<CaptureFormState>;
   organizationName: string;
   defaultSource: "FACEBOOK" | "TIKTOK" | "ORGANIC" | "REFERRAL" | "WEBSITE" | "OTHER";
   campaignId?: string;
   campaignName?: string;
+  copy: PublicCaptureCopy;
+  validationMessages: ValidationCopy;
 }) {
-  const tValidation = useTranslations("Validation");
   const [state, formAction] = useActionState(action, initialState);
   const values = state.values ?? {};
 
@@ -35,81 +75,83 @@ export function PublicCaptureForm({
       <input type="hidden" name="campaignId" value={campaignId ?? ""} />
       <div className="rounded-3xl border bg-white p-5 shadow-[0_20px_60px_-36px_rgba(15,23,42,0.2)] sm:p-6">
         <div className="space-y-2">
-          <p className="text-sm font-semibold text-[var(--primary)]">Public lead capture</p>
+          <p className="text-sm font-semibold text-[var(--primary)]">{copy.eyebrow}</p>
           <h1 className="text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">{organizationName}</h1>
-          <p className="text-sm leading-7 text-slate-600">
-            Share this form in ads, chats, or landing pages so new inquiries go straight into the LeadOps pipeline.
-          </p>
+          <p className="text-sm leading-7 text-slate-600">{copy.titleDescription}</p>
         </div>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <InfoTile label="Source" value={sourceTypeLabels[defaultSource]} />
-          <InfoTile label="Campaign" value={campaignName ?? "Not linked"} />
+          <InfoTile label={copy.sourceLabel} value={copy.sourceValue} />
+          <InfoTile label={copy.campaignLabel} value={campaignName ?? copy.notLinked} />
         </div>
       </div>
 
       <div className="rounded-3xl border bg-white p-5 shadow-[0_20px_60px_-36px_rgba(15,23,42,0.2)] sm:p-6">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Full name" error={translateFormMessage(state.fieldErrors?.fullName?.[0], tValidation)}>
-            <Input name="fullName" defaultValue={values.fullName ?? ""} placeholder="Nguyen Thi Lan" required />
+          <Field label={copy.fullNameLabel} error={translateValidationMessage(state.fieldErrors?.fullName?.[0], validationMessages)}>
+            <Input name="fullName" defaultValue={values.fullName ?? ""} placeholder={copy.fullNamePlaceholder} required />
           </Field>
-          <Field label="Phone" error={translateFormMessage(state.fieldErrors?.phone?.[0], tValidation)}>
-            <Input name="phone" defaultValue={values.phone ?? ""} placeholder="+84 90 123 4567" required />
+          <Field label={copy.phoneLabel} error={translateValidationMessage(state.fieldErrors?.phone?.[0], validationMessages)}>
+            <Input name="phone" defaultValue={values.phone ?? ""} placeholder={copy.phonePlaceholder} required />
           </Field>
-          <Field label="Email" error={translateFormMessage(state.fieldErrors?.email?.[0], tValidation)}>
-            <Input name="email" defaultValue={values.email ?? ""} placeholder="name@example.com" type="email" />
+          <Field label={copy.emailLabel} error={translateValidationMessage(state.fieldErrors?.email?.[0], validationMessages)}>
+            <Input name="email" defaultValue={values.email ?? ""} placeholder={copy.emailPlaceholder} type="email" />
           </Field>
-          <Field label="Service interest" error={translateFormMessage(state.fieldErrors?.serviceInterest?.[0], tValidation)}>
+          <Field label={copy.serviceInterestLabel} error={translateValidationMessage(state.fieldErrors?.serviceInterest?.[0], validationMessages)}>
             <Input
               name="serviceInterest"
               defaultValue={values.serviceInterest ?? ""}
-              placeholder="Facial treatment, whitening package, consultation..."
+              placeholder={copy.serviceInterestPlaceholder}
             />
           </Field>
           <Field
-            label="Preferred contact time"
-            error={translateFormMessage(state.fieldErrors?.preferredContactTime?.[0], tValidation)}
+            label={copy.preferredContactTimeLabel}
+            error={translateValidationMessage(state.fieldErrors?.preferredContactTime?.[0], validationMessages)}
             className="sm:col-span-2"
           >
             <Input
               name="preferredContactTime"
               defaultValue={values.preferredContactTime ?? ""}
-              placeholder="This afternoon, after 6pm, Saturday morning..."
+              placeholder={copy.preferredContactTimePlaceholder}
             />
           </Field>
-          <Field label="Notes" error={translateFormMessage(state.fieldErrors?.notes?.[0], tValidation)} className="sm:col-span-2">
+          <Field label={copy.notesLabel} error={translateValidationMessage(state.fieldErrors?.notes?.[0], validationMessages)} className="sm:col-span-2">
             <Textarea
               name="notes"
               defaultValue={values.notes ?? ""}
-              placeholder="Anything helpful for the team to know before they reach out."
+              placeholder={copy.notesPlaceholder}
             />
           </Field>
         </div>
 
         <div className="hidden" aria-hidden="true">
-          <label htmlFor="website">Leave this field empty</label>
+          <label htmlFor="website">{copy.leaveEmpty}</label>
           <input id="website" name="honey" autoComplete="off" tabIndex={-1} defaultValue="" />
         </div>
 
-        {state.formError ? <p className="mt-4 text-sm text-rose-600">{translateFormMessage(state.formError, tValidation) ?? state.formError}</p> : null}
+        {state.formError ? <p className="mt-4 text-sm text-rose-600">{translateValidationMessage(state.formError, validationMessages) ?? state.formError}</p> : null}
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs leading-6 text-slate-500">
-            By submitting, your inquiry will be sent directly to the business so they can follow up.
-          </p>
-          <SubmitButton />
+          <p className="text-xs leading-6 text-slate-500">{copy.submissionHelp}</p>
+          <SubmitButton sendingLabel={copy.sending} idleLabel={copy.sendInquiry} />
         </div>
       </div>
     </form>
   );
 }
 
-function SubmitButton() {
+function SubmitButton({
+  sendingLabel,
+  idleLabel,
+}: {
+  sendingLabel: string;
+  idleLabel: string;
+}) {
   const { pending } = useFormStatus();
 
   return (
     <Button className="w-full sm:w-auto" size="lg" disabled={pending} type="submit">
-      {pending ? "Sending..." : "Send inquiry"}
+      {pending ? sendingLabel : idleLabel}
     </Button>
   );
 }

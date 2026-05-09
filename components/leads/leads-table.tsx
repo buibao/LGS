@@ -17,7 +17,13 @@ import { Button } from "@/components/ui/button";
 import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
 import { Input } from "@/components/ui/input";
 import { SectionCard } from "@/components/ui/section-card";
-import { Select } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatDate } from "@/lib/utils";
 import { leadStatusValues, sourceTypeValues } from "@/types";
@@ -174,7 +180,7 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
           <p className="text-sm text-slate-500">{tLeadTable("reviewHint")}</p>
         </div>
 
-        <div className="grid gap-3 rounded-[24px] border bg-[var(--secondary)]/35 p-4 md:grid-cols-[1.6fr_repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-3 rounded-[24px] border border-border/70 bg-[var(--secondary)]/35 p-4 md:grid-cols-[1.6fr_repeat(3,minmax(0,1fr))]">
           <label className="relative">
             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <Input
@@ -184,56 +190,73 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
               onChange={(event) => setSearch(event.target.value)}
             />
           </label>
-          <Select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)}>
-            <option value="ALL">{tFilters("allStatuses")}</option>
-            {leadStatusValues.map((value) => (
-              <option key={value} value={value}>
-                {tStatus(value)}
-              </option>
-            ))}
+          <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <SelectTrigger>
+              <SelectValue placeholder={tFilters("allStatuses")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="ALL">{tFilters("allStatuses")}</SelectItem>
+              {leadStatusValues.map((value) => (
+                <SelectItem key={value} value={value}>
+                  {tStatus(value)}
+                </SelectItem>
+              ))}
+            </SelectContent>
           </Select>
-          <Select value={sourceFilter} onChange={(event) => setSourceFilter(event.target.value)}>
-            <option value="ALL">{tFilters("allSources")}</option>
-            {sourceTypeValues.map((value) => (
-              <option key={value} value={value}>
-                {tSource(value)}
-              </option>
-            ))}
+          <Select value={sourceFilter} onValueChange={setSourceFilter}>
+            <SelectTrigger>
+              <SelectValue placeholder={tFilters("allSources")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="ALL">{tFilters("allSources")}</SelectItem>
+              {sourceTypeValues.map((value) => (
+                <SelectItem key={value} value={value}>
+                  {tSource(value)}
+                </SelectItem>
+              ))}
+            </SelectContent>
           </Select>
-          <div className="flex items-center gap-2">
+          <div className="flex min-w-0 items-center gap-2">
             <SlidersHorizontal className="h-4 w-4 text-slate-400" />
-            <Select value={dateRange} onChange={(event) => setDateRange(event.target.value)}>
-              <option value="ALL">{tFilters("allDates")}</option>
-              <option value="7">{tLeadTable("last7Days")}</option>
-              <option value="30">{tLeadTable("last30Days")}</option>
+            <Select value={dateRange} onValueChange={setDateRange}>
+              <SelectTrigger>
+                <SelectValue placeholder={tFilters("allDates")} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ALL">{tFilters("allDates")}</SelectItem>
+                <SelectItem value="7">{tLeadTable("last7Days")}</SelectItem>
+                <SelectItem value="30">{tLeadTable("last30Days")}</SelectItem>
+              </SelectContent>
             </Select>
           </div>
         </div>
       </div>
 
       {table.getRowModel().rows.length ? (
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                    </TableHead>
+                  ))}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       ) : (
         <div className="px-6 py-8">
           <EmptyState

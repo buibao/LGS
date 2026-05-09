@@ -95,9 +95,9 @@ export async function ReportCard({
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-[var(--secondary)]/60 p-4">
-      <p className="text-sm text-[var(--muted-foreground)]">{label}</p>
-      <p className="mt-2 text-2xl font-semibold">{value}</p>
+    <div className="rounded-2xl border border-border/70 bg-[var(--secondary)]/55 p-5">
+      <p className="text-sm font-semibold text-[var(--muted-foreground)]">{label}</p>
+      <p className="mt-3 text-2xl font-bold text-slate-950">{value}</p>
     </div>
   );
 }

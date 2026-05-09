@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LeadStatus, SourceType } from "@prisma/client";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Link, useRouter } from "@/i18n/navigation";
 import { FormSection } from "@/components/design-system/form-section";
 import {
@@ -28,13 +28,15 @@ export function LeadForm({
 }: {
   campaigns: Array<{ id: string; name: string }>;
 }) {
-  const tForm = useTranslations("LeadForm");
+const tForm = useTranslations("LeadForm");
   const tActions = useTranslations("Actions");
   const tValidation = useTranslations("Validation");
   const tStatus = useTranslations("LeadStatus");
   const tSource = useTranslations("LeadSource");
+  const tLabels = useTranslations("Labels");
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
+  const noCampaignValue = "__none";
   const form = useForm<LeadInput>({
     resolver: zodResolver(leadSchema),
     defaultValues: {
@@ -129,53 +131,86 @@ export function LeadForm({
 
           <FormSection title={tForm("sourceSectionTitle")} description={tForm("sourceSectionDescription")}>
             <div className="grid gap-5 md:grid-cols-2">
-              <SelectField
-                {...form.register("sourceType")}
-                label={tForm("sourceLabel")}
-                helperText={tForm("sourceHelp")}
-                required
-                error={translateFormMessage(form.formState.errors.sourceType?.message, tValidation)}
-              >
-                {sourceTypeValues.map((value) => (
-                  <option key={value} value={value}>
-                    {tSource(value)}
-                  </option>
-                ))}
-              </SelectField>
-              <SelectField
-                {...form.register("campaignId")}
-                label={tForm("campaignLabel")}
-                helperText={tForm("campaignHelp")}
-              >
-                <option value="">{tForm("noCampaign")}</option>
-                {campaigns.map((campaign) => (
-                  <option key={campaign.id} value={campaign.id}>
-                    {campaign.name}
-                  </option>
-                ))}
-              </SelectField>
+              <Controller
+                control={form.control}
+                name="sourceType"
+                render={({ field }) => (
+                  <SelectField
+                    label={tForm("sourceLabel")}
+                    helperText={tForm("sourceHelp")}
+                    required
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={translateFormMessage(form.formState.errors.sourceType?.message, tValidation)}
+                    options={sourceTypeValues.map((value) => ({
+                      value,
+                      label: tSource(value),
+                    }))}
+                  />
+                )}
+              />
+              <Controller
+                control={form.control}
+                name="campaignId"
+                render={({ field }) => (
+                  <SelectField
+                    label={tForm("campaignLabel")}
+                    helperText={tForm("campaignHelp")}
+                    value={field.value || noCampaignValue}
+                    onChange={(nextValue) =>
+                      field.onChange(nextValue === noCampaignValue ? "" : nextValue)
+                    }
+                    options={[
+                      { value: noCampaignValue, label: tForm("noCampaign") },
+                      ...campaigns.map((campaign) => ({
+                        value: campaign.id,
+                        label: campaign.name,
+                      })),
+                    ]}
+                  />
+                )}
+              />
             </div>
           </FormSection>
 
           <FormSection title={tForm("followUpSectionTitle")} description={tForm("followUpSectionDescription")}>
             <div className="grid gap-5 md:grid-cols-2">
-              <SelectField
-                {...form.register("status")}
-                label={tForm("statusLabel")}
-                helperText={tForm("statusHelp")}
-                required
-                error={translateFormMessage(form.formState.errors.status?.message, tValidation)}
-              >
-                {leadStatusValues.map((value) => (
-                  <option key={value} value={value}>
-                    {tStatus(value)}
-                  </option>
-                ))}
-              </SelectField>
-              <DateTimeField
-                {...form.register("followUpAt")}
-                label={tForm("followUpLabel")}
-                helperText={tForm("followUpHelp")}
+              <Controller
+                control={form.control}
+                name="status"
+                render={({ field }) => (
+                  <SelectField
+                    label={tForm("statusLabel")}
+                    helperText={tForm("statusHelp")}
+                    required
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={translateFormMessage(form.formState.errors.status?.message, tValidation)}
+                    options={leadStatusValues.map((value) => ({
+                      value,
+                      label: tStatus(value),
+                    }))}
+                  />
+                )}
+              />
+              <Controller
+                control={form.control}
+                name="followUpAt"
+                render={({ field }) => (
+                  <DateTimeField
+                    label={tForm("followUpLabel")}
+                    helperText={tForm("followUpHelp")}
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder={tForm("followUpPlaceholder")}
+                    dateLabel={tLabels("followUp")}
+                    timeLabel={tForm("followUpTimeLabel")}
+                    clearLabel={tForm("clearFollowUp")}
+                    todayLabel={tForm("today")}
+                    noValueLabel={tForm("noFollowUp")}
+                    error={translateFormMessage(form.formState.errors.followUpAt?.message, tValidation)}
+                  />
+                )}
               />
             </div>
           </FormSection>

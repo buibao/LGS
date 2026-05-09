@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LeadStatus } from "@prisma/client";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "@/i18n/navigation";
 import { ErrorState } from "@/components/design-system/error-state";
 import {
@@ -32,6 +32,7 @@ export function LeadDetailForm({
   const tDetail = useTranslations("LeadDetailForm");
   const tValidation = useTranslations("Validation");
   const tStatus = useTranslations("LeadStatus");
+  const tLabels = useTranslations("Labels");
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -71,23 +72,41 @@ export function LeadDetailForm({
 
   return (
     <form className="space-y-4" onSubmit={save}>
-      <SelectField
-        {...form.register("status")}
-        label={tDetail("statusLabel")}
-        required
-        error={translateFormMessage(form.formState.errors.status?.message, tValidation)}
-      >
-        {leadStatusValues.map((value) => (
-          <option key={value} value={value}>
-            {tStatus(value)}
-          </option>
-        ))}
-      </SelectField>
-      <DateTimeField
-        {...form.register("followUpAt")}
-        label={tDetail("followUpLabel")}
-        helperText={tDetail("followUpHelp")}
-        error={translateFormMessage(form.formState.errors.followUpAt?.message, tValidation)}
+      <Controller
+        control={form.control}
+        name="status"
+        render={({ field }) => (
+          <SelectField
+            label={tDetail("statusLabel")}
+            required
+            value={field.value}
+            onChange={field.onChange}
+            error={translateFormMessage(form.formState.errors.status?.message, tValidation)}
+            options={leadStatusValues.map((value) => ({
+              value,
+              label: tStatus(value),
+            }))}
+          />
+        )}
+      />
+      <Controller
+        control={form.control}
+        name="followUpAt"
+        render={({ field }) => (
+          <DateTimeField
+            label={tDetail("followUpLabel")}
+            helperText={tDetail("followUpHelp")}
+            value={field.value}
+            onChange={field.onChange}
+            placeholder={tDetail("followUpPlaceholder")}
+            dateLabel={tLabels("followUp")}
+            timeLabel={tDetail("followUpTimeLabel")}
+            clearLabel={tDetail("clearFollowUp")}
+            todayLabel={tDetail("today")}
+            noValueLabel={tDetail("noFollowUp")}
+            error={translateFormMessage(form.formState.errors.followUpAt?.message, tValidation)}
+          />
+        )}
       />
       <TextareaField
         {...form.register("notes")}

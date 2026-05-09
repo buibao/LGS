@@ -24,15 +24,15 @@ export function InsightCard({
   className?: string;
 }) {
   return (
-    <div className={cn("rounded-[24px] border p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]", toneClasses[tone], className)}>
+    <div className={cn("rounded-2xl border border-border/70 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]", toneClasses[tone], className)}>
       <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
+        <div className="grid min-w-0 gap-2">
           <p className="text-[0.98rem] font-semibold text-slate-950">{title}</p>
-          {value ? <p className="type-kpi mt-2 text-[1.6rem] font-extrabold text-slate-950">{value}</p> : null}
+          {value ? <p className="type-kpi text-[1.65rem] font-extrabold text-slate-950">{value}</p> : null}
         </div>
         {icon ? <div className="rounded-2xl bg-white/80 p-2 text-[var(--primary)] shadow-sm">{icon}</div> : null}
       </div>
-      <p className="mt-2.5 text-[0.92rem] leading-7 text-slate-600">{description}</p>
+      <p className="mt-3 text-[0.92rem] leading-6 text-slate-600">{description}</p>
     </div>
   );
 }

@@ -3,10 +3,17 @@
 import { useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { Check, Languages } from "lucide-react";
+import { Languages } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function LanguageSwitcher({ className }: { className?: string }) {
   const t = useTranslations("Navigation");
@@ -17,32 +24,41 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const [isPending, startTransition] = useTransition();
 
   return (
-    <div className={cn("inline-flex items-center gap-2 rounded-2xl border border-[var(--border)] bg-white px-3 py-2 text-sm shadow-sm", className)}>
-      <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[var(--secondary)] text-[var(--primary)]">
+    <div
+      className={cn(
+        "inline-flex min-w-[11rem] items-center gap-3 rounded-2xl border border-border/70 bg-white px-3 py-2.5 shadow-sm",
+        className,
+      )}
+    >
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--secondary)] text-[var(--primary)]">
         <Languages className="h-4 w-4" />
       </div>
-      <div className="flex min-w-0 flex-col">
-        <span className="text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase">{t("language")}</span>
-        <div className="relative">
-          <select
-            className="pr-8 text-sm font-medium text-slate-700 outline-none"
-            value={locale}
-            disabled={isPending}
-            onChange={(event) => {
-              const nextLocale = event.target.value;
-              const query = searchParams.toString();
-              const href = query ? `${pathname}?${query}` : pathname;
+      <div className="grid min-w-0 flex-1 gap-1">
+        <span className="text-[11px] font-semibold tracking-[0.18em] text-slate-500 uppercase">
+          {t("language")}
+        </span>
+        <Select
+          value={locale}
+          disabled={isPending}
+          onValueChange={(nextLocale) => {
+            const query = searchParams.toString();
+            const href = query ? `${pathname}?${query}` : pathname;
 
-              startTransition(() => {
-                router.replace(href, { locale: nextLocale as (typeof routing.locales)[number] });
+            startTransition(() => {
+              router.replace(href, {
+                locale: nextLocale as (typeof routing.locales)[number],
               });
-            }}
-          >
-            <option value="vi">{t("vietnamese")}</option>
-            <option value="en">{t("english")}</option>
-          </select>
-          <Check className="pointer-events-none absolute top-1/2 right-0 h-4 w-4 -translate-y-1/2 text-slate-400" />
-        </div>
+            });
+          }}
+        >
+          <SelectTrigger className="h-9 rounded-xl border-0 bg-transparent px-0 py-0 text-sm font-medium shadow-none focus-visible:ring-0 focus-visible:ring-offset-0">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="vi">{t("vietnamese")}</SelectItem>
+            <SelectItem value="en">{t("english")}</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

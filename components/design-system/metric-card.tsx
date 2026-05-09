@@ -25,16 +25,25 @@ export function MetricCard({
   const TrendIcon = trend?.direction === "down" ? TrendingDown : TrendingUp;
 
   return (
-    <Card className={cn("rounded-[28px] border border-[var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(249,251,255,0.94))]", className)}>
+    <Card
+      className={cn(
+        "rounded-[28px] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(249,251,255,0.94))]",
+        className,
+      )}
+    >
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-4">
-          <div className="space-y-2.5">
+          <div className="grid min-w-0 gap-3">
             <p className="text-sm font-semibold text-[var(--muted-foreground)]">{title}</p>
-            <p className="type-kpi text-[2.15rem] font-extrabold text-slate-950 md:text-[2.35rem]">{value}</p>
-            {description ? <p className="max-w-[30ch] text-[0.94rem] leading-6 text-[var(--muted-foreground)]">{description}</p> : null}
+            <p className="type-kpi text-[2.1rem] font-extrabold text-slate-950 md:text-[2.3rem]">{value}</p>
+            {description ? (
+              <p className="max-w-[28ch] text-[0.92rem] leading-6 text-[var(--muted-foreground)]">
+                {description}
+              </p>
+            ) : null}
           </div>
           {icon ? (
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--secondary)] p-3 text-[var(--primary)] shadow-sm">
+            <div className="rounded-2xl border border-border/70 bg-[var(--secondary)] p-3 text-[var(--primary)] shadow-sm">
               {icon}
             </div>
           ) : null}

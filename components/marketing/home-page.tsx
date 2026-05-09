@@ -371,12 +371,12 @@ export async function HomePage() {
           <div className="grid gap-4">
             {faqs.map((item) => (
               <Card key={item.question} className="surface-panel">
-                <CardContent className="flex flex-col gap-3 p-6 md:flex-row md:items-start md:justify-between">
-                  <div className="max-w-3xl">
-                    <h3 className="text-[1.06rem] font-semibold text-slate-950">{item.question}</h3>
-                    <p className="mt-2 text-[0.94rem] leading-7 text-slate-600">{item.answer}</p>
+                <CardContent className="flex flex-col gap-4 px-5 py-5 md:flex-row md:items-start md:justify-between md:px-6 md:py-6">
+                  <div className="min-w-0 flex-1 max-w-3xl pt-0.5">
+                    <h3 className="text-[1.06rem] font-semibold leading-snug text-slate-950">{item.question}</h3>
+                    <p className="mt-3 text-[0.94rem] leading-7 text-slate-600">{item.answer}</p>
                   </div>
-                  <BadgeCheck className="h-5 w-5 shrink-0 text-[var(--primary)]" />
+                  <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-[var(--primary)]" />
                 </CardContent>
               </Card>
             ))}

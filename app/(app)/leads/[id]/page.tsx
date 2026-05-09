@@ -55,7 +55,7 @@ export default async function LeadDetailPage({
           title={tPage("summaryTitle")}
           description={tPage("summaryDescription", { date: formatDate(lead.createdAt) })}
         >
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
             <MetricCard title={tLabels("status")} value={tStatus(lead.status)} description={tPage("statusHint")} />
             <MetricCard title={tLabels("source")} value={tSource(lead.sourceType)} description={tPage("sourceHint")} />
             <MetricCard title={tPage("serviceInterest")} value={lead.serviceInterest ?? tPage("generalInquiry")} description={tPage("serviceHint")} />
@@ -130,7 +130,7 @@ function DetailTile({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0 rounded-[22px] border bg-[var(--secondary)]/45 p-4">
       <p className="text-sm font-medium text-slate-500">{label}</p>
-      <p className="mt-2 break-words text-sm leading-7 text-slate-900">{value}</p>
+      <p className="mt-2 min-w-0 break-words text-sm leading-7 text-slate-900">{value}</p>
     </div>
   );
 }

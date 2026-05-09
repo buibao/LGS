@@ -31,7 +31,7 @@ export default async function CampaignsPage() {
 
       {campaigns.length ? (
         <div className="space-y-4">
-          <div className="grid gap-4 xl:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
             <MetricCard title={tPage("summary.totalLeads")} value={totalLeads.toString()} description={tPage("summary.totalLeadsHint")} icon={<BarChart3 className="h-5 w-5" />} />
             <MetricCard title={tPage("summary.bookedLeads")} value={totalBooked.toString()} description={tPage("summary.bookedLeadsHint")} icon={<Trophy className="h-5 w-5" />} />
             <MetricCard
@@ -53,7 +53,7 @@ export default async function CampaignsPage() {
             <Badge variant="warning">{tPage("filters.customComingSoon")}</Badge>
           </SectionCard>
 
-          <div className="grid gap-4 xl:grid-cols-3">
+          <div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
             {campaigns.slice(0, 3).map((campaign) => (
               <SectionCard
                 key={campaign.id}

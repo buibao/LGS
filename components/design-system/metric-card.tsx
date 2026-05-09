@@ -31,21 +31,23 @@ export function MetricCard({
         className,
       )}
     >
-      <CardContent className="p-5">
+      <CardContent className="p-5 md:p-6">
         <div className="flex items-start justify-between gap-4">
-          <div className="grid min-w-0 flex-1 gap-3">
-            <p className="text-sm font-semibold text-[var(--muted-foreground)]">{title}</p>
-            <p className="type-kpi min-w-0 break-words text-[1.55rem] leading-tight font-extrabold text-slate-950 sm:text-[1.8rem] md:text-[2rem]">
+          <div className="grid min-w-0 flex-1 content-start gap-3">
+            <p className="min-w-0 text-sm font-semibold leading-snug text-[var(--muted-foreground)]">
+              {title}
+            </p>
+            <p className="type-kpi min-w-0 break-words text-[1.45rem] leading-tight font-extrabold text-slate-950 sm:text-[1.7rem] md:text-[1.95rem]">
               {value}
             </p>
             {description ? (
-              <p className="max-w-[28ch] text-[0.92rem] leading-6 text-[var(--muted-foreground)]">
+              <p className="min-w-0 max-w-[34ch] text-[0.92rem] leading-6 text-[var(--muted-foreground)]">
                 {description}
               </p>
             ) : null}
           </div>
           {icon ? (
-            <div className="rounded-2xl border border-border/70 bg-[var(--secondary)] p-3 text-[var(--primary)] shadow-sm">
+            <div className="shrink-0 rounded-2xl border border-border/70 bg-[var(--secondary)] p-3 text-[var(--primary)] shadow-sm">
               {icon}
             </div>
           ) : null}

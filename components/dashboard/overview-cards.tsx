@@ -16,7 +16,7 @@ export function OverviewCards({
   }>;
 }) {
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+    <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-5 xl:grid-cols-3">
       {items.map((item) => <MetricCard key={item.label} {...item} />)}
     </div>
   );

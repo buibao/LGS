@@ -537,15 +537,15 @@
           "followUp": "Chăm sóc lại hôm nay",
           "new": "Mới"
         }
-      },
-      "socialProof": {
-        "eyebrow": "Được thiết kế cho đội ngũ dịch vụ địa phương",
-        "title": "Một workspace gọn gàng cho đội ngũ cần phản hồi nhanh và chăm sóc lead nhất quán.",
-        "spa": "Spa",
-        "dental": "Nha khoa",
-        "clinic": "Phòng khám / Thẩm mỹ",
-        "education": "Trung tâm giáo dục"
       }
+    },
+    "socialProof": {
+      "eyebrow": "Được thiết kế cho đội ngũ dịch vụ địa phương",
+      "title": "Một workspace gọn gàng cho đội ngũ cần phản hồi nhanh và chăm sóc lead nhất quán.",
+      "spa": "Spa",
+      "dental": "Nha khoa",
+      "clinic": "Phòng khám / Thẩm mỹ",
+      "education": "Trung tâm giáo dục"
     },
     "pain": {
       "eyebrow": "Vấn đề thường gặp",

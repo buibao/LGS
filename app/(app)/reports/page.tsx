@@ -10,7 +10,7 @@ export default async function ReportsPage() {
   const reportData = await generateWeeklyLeadReport(organization.id);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 xl:space-y-8">
       <PageHeader
         eyebrow={tReports("pageEyebrow")}
         title={tReports("pageTitle")}

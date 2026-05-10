@@ -20,14 +20,14 @@ export function CaptureUrlCopy({ url }: { url: string }) {
       <div className="overflow-x-auto rounded-2xl border border-border/70 bg-[var(--secondary)]/45 px-4 py-3">
         <code className="block min-w-max text-sm text-slate-700">{url}</code>
       </div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button className="w-full sm:w-auto" onClick={copy} type="button" variant={copied ? "secondary" : "default"}>
+      <div className="space-y-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <Button className="w-full justify-center sm:min-w-[10rem] sm:w-auto" onClick={copy} type="button" variant={copied ? "secondary" : "default"}>
             {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
             {copied ? t("copied") : t("copy")}
           </Button>
           <a href={url} target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-            <Button className="w-full sm:w-auto" type="button" variant="outline">
+            <Button className="w-full justify-center sm:min-w-[8rem] sm:w-auto" type="button" variant="outline">
               <ExternalLink className="mr-2 h-4 w-4" />
               {t("open")}
             </Button>

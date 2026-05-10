@@ -18,6 +18,7 @@ import { enUS, vi as viLocale } from "date-fns/locale";
 import { CalendarDays, ChevronLeft, ChevronRight, Clock3, RotateCcw, X } from "lucide-react";
 import { useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { OverflowTooltip } from "@/components/design-system/overflow-tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Select,
@@ -176,7 +177,13 @@ export function DateTimePicker({
         >
           <span className="flex min-w-0 items-center gap-2 overflow-hidden">
             <CalendarDays className="h-4 w-4 shrink-0 text-slate-400" />
-            <span className="truncate">{selectedDate || selectedTime ? displayValue : placeholder}</span>
+            <OverflowTooltip
+              content={selectedDate || selectedTime ? displayValue : placeholder}
+              className="min-w-0 flex-1"
+              contentClassName="max-w-[min(24rem,calc(100vw-2rem))]"
+            >
+              <span className="truncate">{selectedDate || selectedTime ? displayValue : placeholder}</span>
+            </OverflowTooltip>
           </span>
           {(selectedDate || selectedTime) && !disabled ? (
             <span

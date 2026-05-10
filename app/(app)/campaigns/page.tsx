@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { BarChart3, Coins, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { CardHeaderRow } from "@/components/design-system/card-header-row";
 import { InsightCard } from "@/components/design-system/insight-card";
 import { MetricCard } from "@/components/design-system/metric-card";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -22,7 +23,7 @@ export default async function CampaignsPage() {
   const bestCampaign = [...campaigns].sort((a, b) => b.conversionRate - a.conversionRate)[0];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 xl:space-y-8">
       <PageHeader
         eyebrow={tPage("eyebrow")}
         title={tPage("title")}
@@ -31,7 +32,7 @@ export default async function CampaignsPage() {
 
       {campaigns.length ? (
         <div className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             <MetricCard title={tPage("summary.totalLeads")} value={totalLeads.toString()} description={tPage("summary.totalLeadsHint")} icon={<BarChart3 className="h-5 w-5" />} />
             <MetricCard title={tPage("summary.bookedLeads")} value={totalBooked.toString()} description={tPage("summary.bookedLeadsHint")} icon={<Trophy className="h-5 w-5" />} />
             <MetricCard
@@ -47,10 +48,10 @@ export default async function CampaignsPage() {
             description={tPage("filterDescription")}
             contentClassName="flex flex-wrap gap-2"
           >
-            <Badge variant="teal">{tPage("filters.thisWeek")}</Badge>
-            <Badge variant="neutral">{tPage("filters.last30Days")}</Badge>
-            <Badge variant="neutral">{tPage("filters.allTime")}</Badge>
-            <Badge variant="warning">{tPage("filters.customComingSoon")}</Badge>
+            <Badge variant="teal" size="sm">{tPage("filters.thisWeek")}</Badge>
+            <Badge variant="neutral" size="sm">{tPage("filters.last30Days")}</Badge>
+            <Badge variant="neutral" size="sm">{tPage("filters.allTime")}</Badge>
+            <Badge variant="warning" size="sm">{tPage("filters.customComingSoon")}</Badge>
           </SectionCard>
 
           <div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
@@ -62,10 +63,10 @@ export default async function CampaignsPage() {
                 className="h-full"
                 contentClassName="space-y-4"
               >
-                <div className="flex items-center justify-between">
-                  <SourceTypeBadge sourceType={campaign.sourceType} />
-                  <span className="text-sm font-semibold text-slate-500">{formatPercent(campaign.conversionRate)}</span>
-                </div>
+                <CardHeaderRow
+                  title={<SourceTypeBadge sourceType={campaign.sourceType} />}
+                  badge={<Badge variant="outline" size="sm">{formatPercent(campaign.conversionRate)}</Badge>}
+                />
                 <div className="grid grid-cols-2 gap-3">
                   <InsightCard title={tPage("table.leads")} value={campaign.leadCount.toString()} description={tPage("cardLeadsDescription")} />
                   <InsightCard title={tPage("table.booked")} value={campaign.bookedLeads.toString()} description={tPage("cardBookedDescription")} />
@@ -82,37 +83,65 @@ export default async function CampaignsPage() {
             description={tPage("tableDescription")}
             contentClassName="p-0"
           >
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{tPage("table.campaign")}</TableHead>
-                  <TableHead>{tPage("table.sourceType")}</TableHead>
-                  <TableHead className="text-right">{tPage("table.leads")}</TableHead>
-                  <TableHead className="text-right">{tPage("table.booked")}</TableHead>
-                  <TableHead className="text-right">{tPage("table.conversionRate")}</TableHead>
-                  <TableHead className="text-right">{tPage("table.budget")}</TableHead>
-                  <TableHead>{tPage("table.activeDates")}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+            <div>
+              <div className="grid gap-3 p-4 sm:p-5 md:hidden">
                 {campaigns.map((campaign) => (
-                  <TableRow key={campaign.id}>
-                    <TableCell className="font-medium text-slate-900">{campaign.name}</TableCell>
-                    <TableCell>
+                  <div key={campaign.id} className="rounded-[24px] border border-border/70 bg-white p-4 shadow-[0_16px_36px_-30px_rgba(15,23,42,0.18)]">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-base font-semibold text-slate-950">{campaign.name}</p>
+                        <p className="mt-1 text-sm text-slate-500">
+                          {campaign.startedAt ? formatDate(campaign.startedAt) : tPage("startTbd")}
+                          {campaign.endedAt ? ` - ${formatDate(campaign.endedAt)}` : ""}
+                        </p>
+                      </div>
                       <SourceTypeBadge sourceType={campaign.sourceType} />
-                    </TableCell>
-                    <TableCell className="text-right">{campaign.leadCount}</TableCell>
-                    <TableCell className="text-right">{campaign.bookedLeads}</TableCell>
-                    <TableCell className="text-right">{formatPercent(campaign.conversionRate)}</TableCell>
-                    <TableCell className="text-right">{campaign.budget ? `$${campaign.budget.toFixed(2)}` : tPage("notSet")}</TableCell>
-                    <TableCell>
-                      {campaign.startedAt ? formatDate(campaign.startedAt) : tPage("startTbd")}
-                      {campaign.endedAt ? ` - ${formatDate(campaign.endedAt)}` : ""}
-                    </TableCell>
-                  </TableRow>
+                    </div>
+
+                    <div className="mt-4 grid grid-cols-2 gap-3">
+                      <CampaignField label={tPage("table.leads")} value={campaign.leadCount.toString()} />
+                      <CampaignField label={tPage("table.booked")} value={campaign.bookedLeads.toString()} />
+                      <CampaignField label={tPage("table.conversionRate")} value={formatPercent(campaign.conversionRate)} />
+                      <CampaignField label={tPage("table.budget")} value={campaign.budget ? `$${campaign.budget.toFixed(2)}` : tPage("notSet")} />
+                    </div>
+                  </div>
                 ))}
-              </TableBody>
-            </Table>
+              </div>
+
+              <div className="hidden overflow-x-auto md:block">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{tPage("table.campaign")}</TableHead>
+                      <TableHead>{tPage("table.sourceType")}</TableHead>
+                      <TableHead className="text-right">{tPage("table.leads")}</TableHead>
+                      <TableHead className="text-right">{tPage("table.booked")}</TableHead>
+                      <TableHead className="text-right">{tPage("table.conversionRate")}</TableHead>
+                      <TableHead className="text-right">{tPage("table.budget")}</TableHead>
+                      <TableHead>{tPage("table.activeDates")}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {campaigns.map((campaign) => (
+                      <TableRow key={campaign.id}>
+                        <TableCell className="font-medium text-slate-900">{campaign.name}</TableCell>
+                        <TableCell>
+                          <SourceTypeBadge sourceType={campaign.sourceType} />
+                        </TableCell>
+                        <TableCell className="text-right">{campaign.leadCount}</TableCell>
+                        <TableCell className="text-right">{campaign.bookedLeads}</TableCell>
+                        <TableCell className="text-right">{formatPercent(campaign.conversionRate)}</TableCell>
+                        <TableCell className="text-right">{campaign.budget ? `$${campaign.budget.toFixed(2)}` : tPage("notSet")}</TableCell>
+                        <TableCell>
+                          {campaign.startedAt ? formatDate(campaign.startedAt) : tPage("startTbd")}
+                          {campaign.endedAt ? ` - ${formatDate(campaign.endedAt)}` : ""}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
           </SectionCard>
         </div>
       ) : (
@@ -122,6 +151,21 @@ export default async function CampaignsPage() {
           description={tEmpty("noCampaignsDescription")}
         />
       )}
+    </div>
+  );
+}
+
+function CampaignField({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-border/70 bg-[var(--secondary)]/35 p-3">
+      <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-500">{label}</p>
+      <p className="mt-1 text-sm leading-6 text-slate-700">{value}</p>
     </div>
   );
 }

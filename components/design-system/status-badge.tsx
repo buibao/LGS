@@ -24,5 +24,5 @@ function getStatusVariant(status: LeadStatus) {
 export function StatusBadge({ status }: { status: LeadStatus }) {
   const t = useTranslations("LeadStatus");
 
-  return <Badge variant={getStatusVariant(status)}>{t(status)}</Badge>;
+  return <Badge variant={getStatusVariant(status)} size="sm">{t(status)}</Badge>;
 }

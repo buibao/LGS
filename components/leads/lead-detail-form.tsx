@@ -72,42 +72,44 @@ export function LeadDetailForm({
 
   return (
     <form className="space-y-4" onSubmit={save}>
-      <Controller
-        control={form.control}
-        name="status"
-        render={({ field }) => (
-          <SelectField
-            label={tDetail("statusLabel")}
-            required
-            value={field.value}
-            onChange={field.onChange}
-            error={translateFormMessage(form.formState.errors.status?.message, tValidation)}
-            options={leadStatusValues.map((value) => ({
-              value,
-              label: tStatus(value),
-            }))}
-          />
-        )}
-      />
-      <Controller
-        control={form.control}
-        name="followUpAt"
-        render={({ field }) => (
-          <DateTimeField
-            label={tDetail("followUpLabel")}
-            helperText={tDetail("followUpHelp")}
-            value={field.value}
-            onChange={field.onChange}
-            placeholder={tDetail("followUpPlaceholder")}
-            dateLabel={tLabels("followUp")}
-            timeLabel={tDetail("followUpTimeLabel")}
-            clearLabel={tDetail("clearFollowUp")}
-            todayLabel={tDetail("today")}
-            noValueLabel={tDetail("noFollowUp")}
-            error={translateFormMessage(form.formState.errors.followUpAt?.message, tValidation)}
-          />
-        )}
-      />
+      <div className="space-y-4">
+        <Controller
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <SelectField
+              label={tDetail("statusLabel")}
+              required
+              value={field.value}
+              onChange={field.onChange}
+              error={translateFormMessage(form.formState.errors.status?.message, tValidation)}
+              options={leadStatusValues.map((value) => ({
+                value,
+                label: tStatus(value),
+              }))}
+            />
+          )}
+        />
+        <Controller
+          control={form.control}
+          name="followUpAt"
+          render={({ field }) => (
+            <DateTimeField
+              label={tDetail("followUpLabel")}
+              helperText={tDetail("followUpHelp")}
+              value={field.value}
+              onChange={field.onChange}
+              placeholder={tDetail("followUpPlaceholder")}
+              dateLabel={tLabels("followUp")}
+              timeLabel={tDetail("followUpTimeLabel")}
+              clearLabel={tDetail("clearFollowUp")}
+              todayLabel={tDetail("today")}
+              noValueLabel={tDetail("noFollowUp")}
+              error={translateFormMessage(form.formState.errors.followUpAt?.message, tValidation)}
+            />
+          )}
+        />
+      </div>
       <TextareaField
         {...form.register("notes")}
         label={tDetail("notesLabel")}

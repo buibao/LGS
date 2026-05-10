@@ -25,7 +25,7 @@ export function InsightCard({
 }) {
   return (
     <div className={cn("rounded-2xl border border-border/70 p-5 md:p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]", toneClasses[tone], className)}>
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex min-w-0 items-start justify-between gap-3">
         <div className="grid min-w-0 flex-1 gap-2">
           <p className="min-w-0 text-[0.98rem] font-semibold leading-snug text-slate-950">{title}</p>
           {value ? (
@@ -34,7 +34,11 @@ export function InsightCard({
             </p>
           ) : null}
         </div>
-        {icon ? <div className="shrink-0 rounded-2xl bg-white/80 p-2 text-[var(--primary)] shadow-sm">{icon}</div> : null}
+        {icon ? (
+          <div className="shrink-0 rounded-full border border-border/70 bg-white/95 p-2 text-[var(--primary)] shadow-[0_10px_20px_-16px_rgba(15,23,42,0.28)]">
+            {icon}
+          </div>
+        ) : null}
       </div>
       <p className="mt-3 min-w-0 max-w-[36ch] break-words text-[0.92rem] leading-6 text-slate-600">{description}</p>
     </div>

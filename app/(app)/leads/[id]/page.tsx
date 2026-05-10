@@ -37,7 +37,7 @@ export default async function LeadDetailPage({
         : tPage("suggestedActionGeneral");
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 xl:space-y-8">
       <PageHeader
         eyebrow={tPage("eyebrow")}
         title={lead.fullName}
@@ -50,18 +50,18 @@ export default async function LeadDetailPage({
         }
       />
 
-      <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
         <SectionCard
           title={tPage("summaryTitle")}
           description={tPage("summaryDescription", { date: formatDate(lead.createdAt) })}
         >
-          <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 2xl:grid-cols-3">
             <MetricCard title={tLabels("status")} value={tStatus(lead.status)} description={tPage("statusHint")} />
             <MetricCard title={tLabels("source")} value={tSource(lead.sourceType)} description={tPage("sourceHint")} />
             <MetricCard title={tPage("serviceInterest")} value={lead.serviceInterest ?? tPage("generalInquiry")} description={tPage("serviceHint")} />
           </div>
 
-          <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-2">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <DetailTile label={tLabels("campaign")} value={lead.campaign?.name ?? tPage("noCampaign")} />
             <DetailTile label={tLabels("created")} value={formatDateTime(lead.createdAt)} />
             <DetailTile label={tPage("updatedLabel")} value={timeAgo(lead.updatedAt)} />
@@ -75,6 +75,7 @@ export default async function LeadDetailPage({
               label={tPage("nextBestMove")}
               description={suggestedAction}
               icon={<Sparkles className="h-4 w-4" />}
+              labelVariant="info"
               tone="accent"
             />
             <LeadDetailForm
@@ -87,9 +88,9 @@ export default async function LeadDetailPage({
         </SectionCard>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
+      <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
         <SectionCard title={tPage("contactTitle")} description={tPage("contactDescription")}>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             <ContactTile icon={<PhoneCall className="h-4 w-4" />} label={tLabels("phone")} value={lead.phone} />
             <ContactTile icon={<FileText className="h-4 w-4" />} label={tLabels("email")} value={lead.email ?? tPage("notProvided")} />
             <ContactTile icon={<ClipboardList className="h-4 w-4" />} label={tLabels("campaign")} value={lead.campaign?.name ?? tPage("noCampaign")} />
@@ -144,5 +145,5 @@ function ContactTile({
   label: string;
   value: string;
 }) {
-  return <InsightCard title={label} description={value} icon={icon} />;
+  return <InsightCard title={label} description={value} icon={icon} className="h-full" />;
 }

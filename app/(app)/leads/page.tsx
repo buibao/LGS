@@ -19,7 +19,7 @@ export default async function LeadsPage() {
   const followUpNeeded = leads.filter((lead) => lead.followUpAt && lead.followUpAt <= new Date()).length;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 xl:space-y-8">
       <PageHeader
         eyebrow={tPage("eyebrow")}
         title={tPage("title")}
@@ -33,7 +33,7 @@ export default async function LeadsPage() {
 
       {leads.length ? (
         <div className="space-y-5">
-          <div className="grid gap-4 xl:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2">
             <MetricCard
               title={tPage("stats.activePipeline")}
               value={activeLeads.toString()}

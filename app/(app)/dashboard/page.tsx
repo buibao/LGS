@@ -42,7 +42,7 @@ export default async function DashboardPage() {
     ]);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 xl:space-y-8">
       <PageHeader
         eyebrow={tDashboard("eyebrow")}
         title={tDashboard("pageTitle")}
@@ -101,7 +101,7 @@ export default async function DashboardPage() {
           </Link>
         }
       >
-        <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr_1fr]">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1.2fr_0.8fr_1fr]">
           <InsightCard
             title={tDashboard("attention.followUpNeededLabel")}
             value={attentionSummary.followUpNeeded.toString()}
@@ -132,6 +132,7 @@ export default async function DashboardPage() {
                 : tDashboard("attention.suggestedActionHealthy")
             }
             icon={<CheckCircle2 className="h-4 w-4" />}
+            labelVariant={attentionSummary.followUpNeeded > 0 ? "warning" : "success"}
             tone="dark"
           />
         </div>

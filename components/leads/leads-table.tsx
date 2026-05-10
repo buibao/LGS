@@ -14,8 +14,9 @@ import { LeadStatus, SourceType } from "@prisma/client";
 import { Link } from "@/i18n/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { EmptyState } from "@/components/design-system/empty-state";
+import { OverflowTooltip } from "@/components/design-system/overflow-tooltip";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LeadStatusBadge, SourceTypeBadge } from "@/components/ui/entity-badges";
 import { Input } from "@/components/ui/input";
 import { SectionCard } from "@/components/ui/section-card";
 import {
@@ -42,6 +43,44 @@ type LeadRow = {
   campaignName: string | null;
   serviceInterest: string | null;
 };
+
+function getStatusTextClass(status: LeadStatus) {
+  switch (status) {
+    case LeadStatus.BOOKED:
+      return "text-emerald-700";
+    case LeadStatus.NEW:
+      return "text-teal-700";
+    case LeadStatus.INTERESTED:
+      return "text-amber-700";
+    case LeadStatus.CONTACTED:
+      return "text-cyan-700";
+    case LeadStatus.NO_RESPONSE:
+      return "text-orange-700";
+    case LeadStatus.LOST:
+      return "text-rose-700";
+    default:
+      return "text-slate-600";
+  }
+}
+
+function getSourceTextClass(sourceType: SourceType) {
+  switch (sourceType) {
+    case SourceType.FACEBOOK:
+      return "text-cyan-700";
+    case SourceType.TIKTOK:
+      return "text-rose-700";
+    case SourceType.ORGANIC:
+      return "text-emerald-700";
+    case SourceType.REFERRAL:
+      return "text-amber-700";
+    case SourceType.WEBSITE:
+      return "text-teal-700";
+    case SourceType.MANUAL:
+      return "text-slate-600";
+    default:
+      return "text-orange-700";
+  }
+}
 
 export function LeadsTable({ rows }: { rows: LeadRow[] }) {
   const tActions = useTranslations("Actions");
@@ -82,23 +121,29 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         header: tLabels("name"),
         cell: ({ row }) => (
           <div className="min-w-0 space-y-0.5">
-            <Link href={`/leads/${row.original.id}`} className="block truncate font-medium text-slate-900 hover:text-[var(--primary)]">
-              {row.original.fullName}
-            </Link>
+            <OverflowTooltip content={row.original.fullName}>
+              <Link href={`/leads/${row.original.id}`} className="block truncate font-medium text-slate-900 hover:text-[var(--primary)]">
+                {row.original.fullName}
+              </Link>
+            </OverflowTooltip>
             <div className="text-[0.8rem] leading-5 text-slate-500">{row.original.phone}</div>
-            {row.original.email ? <div className="truncate text-[0.76rem] leading-5 text-slate-400">{row.original.email}</div> : null}
+            {row.original.email ? (
+              <OverflowTooltip content={row.original.email}>
+                <div className="truncate text-[0.76rem] leading-5 text-slate-400">{row.original.email}</div>
+              </OverflowTooltip>
+            ) : null}
           </div>
         ),
       },
       {
         accessorKey: "sourceType",
         header: tLabels("source"),
-        cell: ({ row }) => <SourceTypeBadge sourceType={row.original.sourceType} />,
+        cell: ({ row }) => <span className={cn("text-sm font-medium", getSourceTextClass(row.original.sourceType))}>{tSource(row.original.sourceType)}</span>,
       },
       {
         accessorKey: "status",
         header: tLabels("status"),
-        cell: ({ row }) => <LeadStatusBadge status={row.original.status} />,
+        cell: ({ row }) => <span className={cn("text-sm font-medium", getStatusTextClass(row.original.status))}>{tStatus(row.original.status)}</span>,
       },
       {
         accessorKey: "serviceInterest",
@@ -155,8 +200,8 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         </div>
       }
     >
-      <div className="space-y-4 border-b border-[var(--border)]/70 px-6 py-6">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+      <div className="space-y-4 border-b border-[var(--border)]/70 px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
           <div>
             <p className="text-sm text-[var(--muted-foreground)]">
               {tLeadTable("resultsSummary", { visible: filteredData.length, total: rows.length })}
@@ -165,7 +210,7 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
           <p className="text-sm text-slate-500">{tLeadTable("reviewHint")}</p>
         </div>
 
-        <div className="grid gap-3 rounded-[24px] border border-border/70 bg-[var(--secondary)]/35 p-4 md:grid-cols-[1.6fr_repeat(3,minmax(0,1fr))]">
+        <div className="grid gap-3 rounded-[24px] border border-border/70 bg-[var(--secondary)]/35 p-3 sm:p-4 md:grid-cols-2 xl:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))]">
           <label className="relative">
             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <Input
@@ -218,44 +263,89 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
       </div>
 
       {table.getRowModel().rows.length ? (
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  className="cursor-pointer"
-                  onClick={() => router.push(`/leads/${row.original.id}`)}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      router.push(`/leads/${row.original.id}`);
-                    }
-                  }}
-                  tabIndex={0}
-                  aria-label={`${tLeadTable("openLead")} ${row.original.fullName}`}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+        <div>
+          <div className="grid gap-3 p-4 sm:p-5 md:hidden">
+            {table.getRowModel().rows.map((row) => (
+              <button
+                key={row.id}
+                type="button"
+                className="rounded-[24px] border border-border/70 bg-white p-4 text-left shadow-[0_16px_36px_-30px_rgba(15,23,42,0.18)] transition hover:bg-[var(--secondary)]/35"
+                onClick={() => router.push(`/leads/${row.original.id}`)}
+                aria-label={`${tLeadTable("openLead")} ${row.original.fullName}`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <OverflowTooltip content={row.original.fullName}>
+                      <p className="truncate text-base font-semibold text-slate-950">{row.original.fullName}</p>
+                    </OverflowTooltip>
+                    <p className="mt-1 text-sm text-slate-600">{row.original.phone}</p>
+                    {row.original.email ? (
+                      <OverflowTooltip content={row.original.email}>
+                        <p className="truncate text-xs text-slate-400">{row.original.email}</p>
+                      </OverflowTooltip>
+                    ) : null}
+                  </div>
+                  <span className={cn("text-sm font-medium", getStatusTextClass(row.original.status))}>{tStatus(row.original.status)}</span>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-3 text-sm">
+                  <span className={cn("font-medium", getSourceTextClass(row.original.sourceType))}>{tSource(row.original.sourceType)}</span>
+                  <Badge variant="outline" size="sm" className="text-slate-600">
+                    {row.original.followUpAt ? formatDate(row.original.followUpAt) : tLeadTable("notSet")}
+                  </Badge>
+                </div>
+
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  <MobileField
+                    label={tLabels("interest")}
+                    value={row.original.serviceInterest ?? row.original.campaignName ?? tLeadTable("generalInquiry")}
+                  />
+                  <MobileField label={tLeadTable("followUpDate")} value={row.original.followUpAt ? formatDate(row.original.followUpAt) : tLeadTable("notSet")} />
+                  <MobileField label={tLabels("created")} value={formatDate(row.original.createdAt)} />
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="hidden overflow-x-auto md:block">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      </TableHead>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    className="cursor-pointer"
+                    onClick={() => router.push(`/leads/${row.original.id}`)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        router.push(`/leads/${row.original.id}`);
+                      }
+                    }}
+                    tabIndex={0}
+                    aria-label={`${tLeadTable("openLead")} ${row.original.fullName}`}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       ) : (
-        <div className="px-6 py-8">
+        <div className="px-4 py-8 sm:px-5 md:px-6">
           <EmptyState
             icon={Users}
             title={tEmpty("noFilteredLeadsTitle")}
@@ -269,5 +359,20 @@ export function LeadsTable({ rows }: { rows: LeadRow[] }) {
         </div>
       )}
     </SectionCard>
+  );
+}
+
+function MobileField({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-border/70 bg-[var(--secondary)]/35 p-3">
+      <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-500">{label}</p>
+      <p className="mt-1 text-sm leading-6 text-slate-700">{value}</p>
+    </div>
   );
 }

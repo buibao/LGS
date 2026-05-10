@@ -31,7 +31,7 @@ export async function ReportCard({
   const bookingLine = reportLines.find((line) => line.startsWith("Booked leads this week:"))?.replace("Booked leads this week: ", "");
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[0.85fr_1.15fr]">
+    <div className="grid gap-4 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
       <SectionCard title={tReports("summaryTitle")} description={tReports("summaryDescription")}>
         <div className="space-y-4">
           <Metric label={tReports("metrics.totalLeads")} value={weeklyLeads.toString()} />
@@ -42,6 +42,7 @@ export async function ReportCard({
             label={tReports("suggestedAction")}
             description={suggestedActionsLine ?? tReports("fallbackSuggestedAction")}
             icon={<AlertCircle className="h-4 w-4" />}
+            labelVariant="warning"
             tone="accent"
           />
         </div>
@@ -50,7 +51,7 @@ export async function ReportCard({
       <SectionCard
         title={tReports("fullReportTitle")}
         description={tReports("fullReportDescription")}
-        action={<Badge variant="neutral">{tReports("businessSummary")}</Badge>}
+        action={<Badge variant="neutral" size="sm">{tReports("businessSummary")}</Badge>}
       >
         <div className="space-y-5">
           {weeklyLeads > 0 ? (
@@ -72,15 +73,16 @@ export async function ReportCard({
             label={tReports("readout")}
             description={suggestedActionsLine ?? tReports("fallbackReadout")}
             icon={<TrendingUp className="h-4 w-4" />}
+            labelVariant="info"
             tone="dark"
           />
 
-          <div className="rounded-2xl border bg-white p-5">
+          <div className="overflow-hidden rounded-2xl border bg-white p-4 sm:p-5">
             <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900">
               <ArrowRight className="h-4 w-4 text-[var(--primary)]" />
               {tReports("fullReport")}
             </div>
-            <pre className="whitespace-pre-wrap text-sm leading-7 text-slate-700">{report}</pre>
+            <pre className="overflow-x-auto whitespace-pre-wrap break-words text-sm leading-7 text-slate-700">{report}</pre>
           </div>
 
           <div className="flex items-center gap-2 rounded-2xl bg-[var(--secondary)] px-4 py-3 text-sm text-slate-600">

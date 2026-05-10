@@ -37,12 +37,12 @@ export function DashboardCharts({
   const statusData = leadsByStatus.filter((item) => item.leads > 0);
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[1.4fr_1fr]">
+    <div className="grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,1fr)]">
       <ChartCard
         title={tDashboard("leadsByDayTitle")}
         description={tDashboard("leadsByDayDescription")}
         icon={<BarChart3 className="h-4 w-4" />}
-        contentClassName="h-80 p-4 md:p-6"
+        contentClassName="h-72 p-3 sm:p-4 md:h-80 md:p-6"
       >
         {hasTrendData ? (
           <ResponsiveContainer width="100%" height="100%">
@@ -69,7 +69,7 @@ export function DashboardCharts({
           title={tDashboard("leadsBySourceTitle")}
           description={tDashboard("leadsBySourceDescription")}
           icon={<PieChartIcon className="h-4 w-4" />}
-          contentClassName="h-72 p-4 md:p-6"
+          contentClassName="h-64 p-3 sm:p-4 md:h-72 md:p-6"
         >
           {sourceData.length ? (
             <ResponsiveContainer width="100%" height="100%">
@@ -96,7 +96,7 @@ export function DashboardCharts({
           title={tDashboard("statusDistributionTitle")}
           description={tDashboard("statusDistributionDescription")}
           icon={<BarChart3 className="h-4 w-4" />}
-          contentClassName="space-y-3 p-4 md:p-5"
+          contentClassName="space-y-3 p-3 sm:p-4 md:p-5"
         >
           {statusData.length ? (
             statusData.map((item, index) => (

@@ -130,7 +130,7 @@ export async function HomePage() {
 
         <section className="grid gap-10 py-14 md:grid-cols-[1.02fr_0.98fr] md:items-center md:py-20">
           <div className="space-y-8">
-            <Badge variant="teal" className="rounded-full px-4 py-2 text-sm">
+            <Badge variant="teal">
               {tLanding("hero.badge")}
             </Badge>
 
@@ -158,9 +158,9 @@ export async function HomePage() {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <Badge variant="teal">{tLanding("hero.tags.followUp")}</Badge>
-              <Badge variant="neutral">{tLanding("hero.tags.campaigns")}</Badge>
-              <Badge variant="warning">{tLanding("hero.tags.reports")}</Badge>
+              <Badge variant="teal" size="sm">{tLanding("hero.tags.followUp")}</Badge>
+              <Badge variant="neutral" size="sm">{tLanding("hero.tags.campaigns")}</Badge>
+              <Badge variant="warning" size="sm">{tLanding("hero.tags.reports")}</Badge>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-3">
@@ -170,7 +170,7 @@ export async function HomePage() {
                 { title: tLanding("hero.highlights.conversion.title"), text: tLanding("hero.highlights.conversion.text") },
               ].map((item) => (
                 <Card key={item.title} className="surface-panel">
-                  <CardContent className="p-5">
+                  <CardContent className="p-5 pt-6 md:p-5 md:pt-7">
                     <p className="text-[1.05rem] font-semibold text-slate-950">{item.title}</p>
                     <p className="mt-2 text-[0.94rem] leading-7 text-slate-600">{item.text}</p>
                   </CardContent>
@@ -188,7 +188,7 @@ export async function HomePage() {
                       <p className="text-[0.95rem] font-semibold text-slate-900">{tLanding("hero.mockup.title")}</p>
                       <p className="mt-1 text-[0.92rem] leading-6 text-slate-500">{tLanding("hero.mockup.subtitle")}</p>
                     </div>
-                    <Badge variant="info">{tLanding("hero.mockup.demoBadge")}</Badge>
+                    <Badge variant="info" size="sm">{tLanding("hero.mockup.demoBadge")}</Badge>
                   </div>
                   <div className="mt-4 grid grid-cols-2 gap-4">
                     {heroStats.map((item) => (
@@ -228,7 +228,7 @@ export async function HomePage() {
                 <div className="rounded-[30px] border bg-white p-5 shadow-sm">
                   <div className="flex items-center justify-between">
                     <p className="text-[0.95rem] font-semibold text-slate-900">{tLanding("hero.mockup.recentLeadsTitle")}</p>
-                    <Badge variant="neutral">{tLanding("hero.mockup.recentLeadsBadge")}</Badge>
+                    <Badge variant="neutral" size="sm">{tLanding("hero.mockup.recentLeadsBadge")}</Badge>
                   </div>
                   <div className="mt-4 space-y-3">
                     {mockupLeads.map((lead) => (
@@ -237,7 +237,7 @@ export async function HomePage() {
                           <p className="text-[0.94rem] font-semibold text-slate-950">{lead.name}</p>
                           <p className="text-[0.82rem] text-slate-500">{lead.interest}</p>
                         </div>
-                        <Badge variant={lead.badge}>{lead.status}</Badge>
+                        <Badge variant={lead.badge} size="sm">{lead.status}</Badge>
                       </div>
                     ))}
                   </div>
@@ -255,10 +255,10 @@ export async function HomePage() {
                 <p className="mt-2 text-[1rem] font-semibold text-slate-900">{tLanding("socialProof.title")}</p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="neutral">{tLanding("socialProof.spa")}</Badge>
-                <Badge variant="neutral">{tLanding("socialProof.dental")}</Badge>
-                <Badge variant="neutral">{tLanding("socialProof.clinic")}</Badge>
-                <Badge variant="neutral">{tLanding("socialProof.education")}</Badge>
+                <Badge variant="neutral" size="sm">{tLanding("socialProof.spa")}</Badge>
+                <Badge variant="neutral" size="sm">{tLanding("socialProof.dental")}</Badge>
+                <Badge variant="neutral" size="sm">{tLanding("socialProof.clinic")}</Badge>
+                <Badge variant="neutral" size="sm">{tLanding("socialProof.education")}</Badge>
               </div>
             </div>
           </div>
@@ -272,7 +272,7 @@ export async function HomePage() {
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {pains.map((item) => (
               <Card key={item.title} className="surface-panel h-full">
-                <CardContent className="space-y-4 p-6">
+                <CardContent className="space-y-4 p-6 pt-7 md:p-6 md:pt-8">
                   <div className="w-fit rounded-2xl bg-[var(--secondary)] p-3 text-[var(--primary)]">{item.icon}</div>
                   <div>
                     <h3 className="text-[1.06rem] font-semibold text-slate-950">{item.title}</h3>
@@ -292,7 +292,7 @@ export async function HomePage() {
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {features.map((item) => (
               <Card key={item.title} className="surface-panel bg-white/85">
-                <CardContent className="space-y-4 p-6">
+                <CardContent className="space-y-4 p-6 pt-7 md:p-6 md:pt-8">
                   <div className="w-fit rounded-2xl bg-[var(--secondary)] p-3">{item.icon}</div>
                   <div>
                     <h3 className="text-[1.06rem] font-semibold text-slate-950">{item.title}</h3>
@@ -312,7 +312,7 @@ export async function HomePage() {
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {steps.map((item) => (
               <Card key={item.step} className="surface-panel h-full">
-                <CardContent className="p-6">
+                <CardContent className="p-6 pt-7 md:p-6 md:pt-8">
                   <p className="text-[0.82rem] font-bold tracking-[0.08em] text-[var(--primary)]">{item.step}</p>
                   <h3 className="mt-4 text-[1.18rem] font-semibold text-slate-950">{item.title}</h3>
                   <p className="mt-3 text-[0.94rem] leading-7 text-slate-600">{item.text}</p>
@@ -352,7 +352,7 @@ export async function HomePage() {
                 <CardHeader>
                   <div className="flex items-center justify-between gap-3">
                     <CardTitle>{item.title}</CardTitle>
-                    <Badge variant="warning">{tLanding("pricing.comingSoon")}</Badge>
+                    <Badge variant="warning" size="sm">{tLanding("pricing.comingSoon")}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>

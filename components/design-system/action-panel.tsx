@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Badge, type BadgeProps } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 export function ActionPanel({
@@ -8,6 +9,7 @@ export function ActionPanel({
   icon,
   tone = "dark",
   footer,
+  labelVariant,
   className,
 }: {
   label: string;
@@ -16,6 +18,7 @@ export function ActionPanel({
   icon?: ReactNode;
   tone?: "dark" | "accent" | "neutral";
   footer?: ReactNode;
+  labelVariant?: BadgeProps["variant"];
   className?: string;
 }) {
   const toneClassName =
@@ -26,8 +29,9 @@ export function ActionPanel({
         : "border-slate-900/5 bg-slate-950 text-white";
 
   const bodyClassName = tone === "dark" ? "text-white/84" : "text-slate-600";
-  const labelClassName = tone === "dark" ? "text-white/72" : "text-slate-700";
   const titleClassName = tone === "dark" ? "text-white" : "text-slate-950";
+  const resolvedLabelVariant =
+    labelVariant ?? (tone === "dark" ? "info" : tone === "accent" ? "warning" : "neutral");
 
   return (
     <div className={cn("rounded-[26px] border p-5 shadow-[0_18px_40px_-32px_rgba(15,23,42,0.18)]", toneClassName, className)}>
@@ -38,7 +42,9 @@ export function ActionPanel({
           </div>
         ) : null}
         <div className="min-w-0 space-y-2">
-          <p className={cn("text-[0.8rem] font-bold tracking-[0.14em] uppercase", labelClassName)}>{label}</p>
+          <Badge variant={resolvedLabelVariant} size="sm">
+            {label}
+          </Badge>
           {title ? <h3 className={cn("text-[1.12rem] font-semibold", titleClassName)}>{title}</h3> : null}
           <p className={cn("text-[0.95rem] leading-7", bodyClassName)}>{description}</p>
         </div>

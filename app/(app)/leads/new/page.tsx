@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/ui/page-header";
 import { LeadForm } from "@/components/leads/lead-form";
 import { getCurrentWorkspace } from "@/lib/auth";
@@ -11,12 +12,12 @@ export default async function NewLeadPage() {
   const campaigns = await getCampaignsForOrganization(organization.id);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 xl:space-y-8">
       <PageHeader
         eyebrow={tPage("eyebrow")}
         title={tPage("title")}
         description={tPage("description")}
-        action={<div className="rounded-full border bg-white px-4 py-2 text-sm font-medium text-slate-600">{tActions("createLead")}</div>}
+        action={<Badge variant="outline" size="sm">{tActions("createLead")}</Badge>}
       />
       <LeadForm campaigns={campaigns.map((campaign) => ({ id: campaign.id, name: campaign.name }))} />
     </div>

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import { OverflowTooltip } from "@/components/design-system/overflow-tooltip";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -27,11 +28,11 @@ export function MetricCard({
   return (
     <Card
       className={cn(
-        "rounded-[28px] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(249,251,255,0.94))]",
+        "h-full rounded-[28px] border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(249,251,255,0.94))]",
         className,
       )}
     >
-      <CardContent className="p-5 md:p-6">
+      <CardContent className="flex h-full flex-col p-5 md:p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="grid min-w-0 flex-1 content-start gap-3">
             <p className="min-w-0 text-sm font-semibold leading-snug text-[var(--muted-foreground)]">
@@ -53,14 +54,17 @@ export function MetricCard({
           ) : null}
         </div>
         {trend ? (
-          <div className="mt-4">
-            <Badge
-              variant={trend.direction === "down" ? "warning" : trend.direction === "neutral" ? "neutral" : "teal"}
-              className="gap-1.5"
-            >
-              <TrendIcon className="h-3.5 w-3.5" />
-              {trend.label}
-            </Badge>
+          <div className="mt-auto min-w-0 pt-5">
+            <OverflowTooltip content={trend.label}>
+              <Badge
+                variant={trend.direction === "down" ? "warning" : trend.direction === "neutral" ? "neutral" : "teal"}
+                size="sm"
+                className="flex max-w-full items-center gap-1.5 overflow-hidden"
+              >
+                <TrendIcon className="h-3.5 w-3.5" />
+                <span className="min-w-0 truncate">{trend.label}</span>
+              </Badge>
+            </OverflowTooltip>
           </div>
         ) : null}
       </CardContent>

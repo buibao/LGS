@@ -24,5 +24,5 @@ function getSourceVariant(sourceType: SourceType) {
 export function SourceBadge({ sourceType }: { sourceType: SourceType }) {
   const t = useTranslations("LeadSource");
 
-  return <Badge variant={getSourceVariant(sourceType)}>{t(sourceType)}</Badge>;
+  return <Badge variant={getSourceVariant(sourceType)} size="sm">{t(sourceType)}</Badge>;
 }

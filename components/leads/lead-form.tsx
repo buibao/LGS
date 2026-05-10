@@ -78,7 +78,7 @@ const tForm = useTranslations("LeadForm");
   });
 
   return (
-    <form className="grid gap-5 xl:grid-cols-[1.25fr_0.75fr]" onSubmit={onSubmit}>
+    <form className="grid gap-5 xl:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]" onSubmit={onSubmit}>
       <SectionCard
         title={tForm("detailsTitle")}
         description={tForm("detailsDescription")}
@@ -242,7 +242,7 @@ const tForm = useTranslations("LeadForm");
               description={serverError}
             />
           ) : null}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row xl:flex-col">
             <SubmitButton
               className="w-full"
               isSubmitting={form.formState.isSubmitting}
@@ -250,7 +250,7 @@ const tForm = useTranslations("LeadForm");
               idleLabel={tActions("createLead")}
               submittingLabel={tForm("saving")}
             />
-            <Link href="/leads">
+            <Link href="/leads" className="w-full sm:w-auto xl:w-full">
               <Button className="w-full" variant="outline" type="button">
                 {tActions("cancel")}
               </Button>
